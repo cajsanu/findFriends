@@ -12,12 +12,12 @@ namespace FindFriends.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var user1 = new User("caj", "num", "espoo");
+            var user1 = new User("Ron", "Hummings", "Espoo");
             var ownerid1 = user1.Id;
-            user1.Dogs.Add(new Dog(ownerid1, "hano", "babm", "male"));
-            var user2 = new User("mu", "shu", "helsinki");
+            user1.Dogs.Add(new Dog(ownerid1, "Samuel", "Shiba inu", "male"));
+            var user2 = new User("Tony", "Stark", "Helsinki");
             var ownerid2 = user2.Id;
-            user2.Dogs.Add(new Dog(ownerid2, "bab", "dahl", "female"));
+            user2.Dogs.Add(new Dog(ownerid2, "Carl", "Dalmatian", "female"));
 
             List<User> users = [user1, user2];
 
