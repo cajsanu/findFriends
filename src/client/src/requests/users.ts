@@ -4,5 +4,5 @@ const URL = "/api/users";
 
 export const getAll = async () => {
   const res = await axios.get<User[]>(URL);
-  return res.data;
+  return res;
 };

@@ -1,22 +1,20 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
+import { User } from "./types";
+
+import { useNavigate } from "react-router-dom";
 import "./App.css";
 
 function App() {
-  const [res, setRes] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const ping = async () => {
-      const res = await axios.get<string>("http://localhost:5053/api/ping");
-      setRes(res.data);
-    };
-    ping();
-  }, []);
+  const handleClick = () => {
+    navigate("/users");
+  };
 
   return (
     <>
       <h1>Find Friends</h1>
-      <p>{res}</p>
+      <button onClick={handleClick}>See users</button>
     </>
   );
 }
