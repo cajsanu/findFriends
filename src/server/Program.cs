@@ -32,6 +32,7 @@ app.UseCors("AllowSpecificOrigin");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.CreateDbIfNotExists();
 
 
 app.MapGet("/", () =>
