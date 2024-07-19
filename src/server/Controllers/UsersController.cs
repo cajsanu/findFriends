@@ -1,19 +1,22 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using FindFriends.Models;
+using FindFriends.Services;
 
 namespace FindFriends.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    public class UsersController(UserService userService) : ControllerBase
     {
+        private readonly UserService _userService = userService;
 
         [HttpGet]
-        public IActionResult Get()
+        public ActionResult<List<User>> GetAll()
         {
-          
-            return Ok();
+            var users = _userService.GetAll();
+            return Ok(users);
         }
+         
     }
 }
