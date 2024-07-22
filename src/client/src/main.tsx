@@ -1,15 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "./App.tsx";
-import { UsersPage } from "./routes";
+import { SignInPage, UsersPage, HomePage } from "./routes";
 
 import "./input.css";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <SignInPage />,
+    errorElement: <div>"Not found"</div>
+  },
+  {
+    path: "/home",
+    element: <HomePage />,
     errorElement: <div>"Not found"</div>
   },
   {
