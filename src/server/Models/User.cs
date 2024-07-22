@@ -1,13 +1,14 @@
 using System; 
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace FindFriends.Models;
 
-public class User(string firstName, string lastName, string city)
+public class User(string firstName, string lastName, string city) : IdentityUser
 {
-    [Required]
-    [MaxLength(100)]
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    // [Required]
+    // [MaxLength(100)]
+    // public string Id { get; set; } = Guid.NewGuid().ToString();
     [Required]
     public string FirstName { get; set; } = firstName;
     [Required]
