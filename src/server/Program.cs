@@ -1,14 +1,21 @@
 using FindFriends.Data;
 using FindFriends.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using FindFriends.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddAuthorization();
 
 builder.Services.AddDbContext<FindFriendsContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<FindFriendsContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<UserService>();
 
@@ -35,6 +42,7 @@ app.UseCors("AllowSpecificOrigin");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+// app.MapIdentityApi<IdentityUser>();
 app.CreateDbIfNotExists();
 
 

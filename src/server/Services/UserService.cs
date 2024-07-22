@@ -13,7 +13,7 @@ public class UserService(FindFriendsContext context)
 
         return [.. _context.Users
             .AsNoTracking()
-            .Include(p => p.Dogs)];
+            .Include(u => u.Dogs)];
 
     }
 
