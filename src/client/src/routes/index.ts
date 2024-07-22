@@ -1,5 +1,9 @@
-import { UsersPage } from "./UsersPage";
+import { UsersPage } from "./UsersPage"
+import { SignInPage } from "./SignInPage"
+import { HomePage } from "./HomePage"
 
 export {
-    UsersPage
+    UsersPage,
+    SignInPage,
+    HomePage
 }
