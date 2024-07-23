@@ -1,34 +1,41 @@
-import { useState } from 'react';
-import axios from 'axios';
+import { useState } from "react";
+import axios from "axios";
 
 export const SignupForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     if (password !== confirmPassword) {
-        console.log('Passwords do not match');
-        return;
-      }
+      console.log("Passwords do not match");
+      return;
+    }
     try {
-      const response = await axios.post('http://localhost:5053/register', {
+      const response = await axios.post("http://localhost:5053/register", {
         email,
-        password
+        password,
       });
-      console.log(response)
+      console.log(response);
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
   return (
     <div>
-      <h2>Register</h2>
+      <h2 className="text-2xl font-bold tracking-tight text-white">
+        Create an account
+      </h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Email:</label>
+          <label className="block text-sm font-medium leading-6 text-white flex justify-right">
+            Email:
+          </label>
           <input
             type="email"
             value={email}
@@ -38,7 +45,9 @@ export const SignupForm = () => {
           />
         </div>
         <div>
-          <label>Password:</label>
+          <label className="block text-sm font-medium leading-6 text-white flex justify-right">
+            Password:
+          </label>
           <input
             type="password"
             value={password}
@@ -48,7 +57,9 @@ export const SignupForm = () => {
           />
         </div>
         <div>
-          <label>Confirm Password:</label>
+          <label className="block text-sm font-medium leading-6 text-white flex justify-right">
+            Confirm Password:
+          </label>
           <input
             type="password"
             value={confirmPassword}
@@ -57,9 +68,10 @@ export const SignupForm = () => {
             className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
           />
         </div>
-        <button type="submit">Register</button>
+        <button className="bg-pink-200 p-1 rounded text-pink-600" type="submit">
+          Register
+        </button>
       </form>
     </div>
   );
 };
-

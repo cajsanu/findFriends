@@ -13,6 +13,8 @@ export const LoginForm = () => {
         password,
       });
       console.log(response);
+      setEmail("");
+      setPassword("");
     } catch (error) {
       console.log(error);
     }
@@ -20,13 +22,13 @@ export const LoginForm = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold tracking-tight text-pink-300">
+      <h2 className="text-2xl font-bold tracking-tight text-white">
         Sign in to your account
       </h2>
       <div>
         <form onSubmit={handleSubmit}>
           <div>
-            <label className="block text-sm font-medium leading-6 text-pink-300 flex justify-right">
+            <label className="block text-sm font-medium leading-6 text-white flex justify-right">
               Email:
             </label>
             <input
@@ -38,7 +40,7 @@ export const LoginForm = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium leading-6 text-pink-300 flex justify-right">
+            <label className="block text-sm font-medium leading-6 text-white flex justify-right">
               Password:
             </label>
             <input
@@ -50,7 +52,7 @@ export const LoginForm = () => {
             />
           </div>
           <button
-            className="transition delay-150 flex w-full justify-center rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-pink-300 hover:text-pink-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
+            className="transition delay-150 flex w-full justify-center rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-pink-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
             type="submit"
           >
             Log in
