@@ -11,7 +11,8 @@ namespace FindFriends.Controllers
     {
         private readonly UserService _userService = userService;
 
-        [HttpGet] 
+        [HttpGet]
+        [Authorize] 
         public ActionResult<List<User>> GetAll()
         {
             var users = _userService.GetAll();
