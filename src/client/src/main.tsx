@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { SignInPage, UsersPage, HomePage, SignUpPage } from "./routes";
+import { UsersPage, HomePage, SignUpPage, LoginPage } from "./routes";
 
 import "./input.css";
 
 const router = createBrowserRouter([
-  // {
-  //   path: "/login",
-  //   element: <SignInPage />,
-  //   errorElement: <div>"Not found"</div>
-  // },
+  {
+    path: "/",
+    element: <LoginPage />,
+    errorElement: <div>"Not found"</div>
+  },
   {
     path: "/signup",
     element: <SignUpPage />,

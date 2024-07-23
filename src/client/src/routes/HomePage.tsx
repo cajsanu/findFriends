@@ -14,7 +14,7 @@ export const HomePage = () => {
     getDogFact();
   }, []);
 
-  const handleClick = () => {
+  const handleClickUsers = () => {
     navigate("/users");
   };
 
@@ -24,13 +24,13 @@ export const HomePage = () => {
         <h1 className="text-sky-700">Welcome user</h1>
         <button
           className="rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 hover:text-pink-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
-          onClick={handleClick}
+          onClick={handleClickUsers}
         >
           See users
         </button>
         <button
           className="rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 hover:text-pink-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
-          onClick={handleClick}
+         
         >
           Start new chat
         </button>
