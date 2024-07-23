@@ -34,6 +34,7 @@ export const SignupForm = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
           />
         </div>
         <div>
@@ -43,6 +44,7 @@ export const SignupForm = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
           />
         </div>
         <div>
@@ -52,6 +54,7 @@ export const SignupForm = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
+            className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
           />
         </div>
         <button type="submit">Register</button>
