@@ -15,10 +15,14 @@ public class FindFriendsContext(DbContextOptions<FindFriendsContext> options) : 
     {
         base.OnModelCreating(builder);
 
-        // Configure the table name for the ApplicationUser entity
+        // Configure the table name for the User entity
         builder.Entity<User>(entity =>
         {
             entity.ToTable(name: "Users");
         });
     }
 }
+
+// sooo, basically the problem now is that the user cannot be registered bc 
+// Cannot create a DbSet for 'IdentityUser' because this type is not included in the model for the context.
+// Maybe change the Entity<User> to IdentityyUser and redo the migration????

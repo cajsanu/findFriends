@@ -13,9 +13,8 @@ builder.Services.AddAuthorization();
 builder.Services.AddDbContext<FindFriendsContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<User, IdentityRole>()
-    .AddEntityFrameworkStores<FindFriendsContext>()
-    .AddDefaultTokenProviders();
+builder.Services.AddIdentityApiEndpoints<User>()
+    .AddEntityFrameworkStores<FindFriendsContext>();
 
 builder.Services.AddScoped<UserService>();
 
@@ -42,16 +41,8 @@ app.UseCors("AllowSpecificOrigin");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-// app.MapIdentityApi<IdentityUser>();
+app.MapIdentityApi<User>();
 app.CreateDbIfNotExists();
-
-
-app.MapGet("/", () =>
-{
-    return "Hello World!";
-})
-.WithName("Hello world")
-.WithOpenApi();
 
 app.Run();
 
