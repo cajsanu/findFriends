@@ -6,6 +6,14 @@ export interface User {
   dogs?: Array<Dog>;
 }
 
+export interface SignupUser {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  city: string;
+}
+
 export enum Sex {
   male = "male",
   female = "female",

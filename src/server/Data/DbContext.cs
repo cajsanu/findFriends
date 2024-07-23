@@ -22,7 +22,3 @@ public class FindFriendsContext(DbContextOptions<FindFriendsContext> options) : 
         });
     }
 }
-
-// sooo, basically the problem now is that the user cannot be registered bc 
-// Cannot create a DbSet for 'IdentityUser' because this type is not included in the model for the context.
-// Maybe change the Entity<User> to IdentityyUser and redo the migration????
