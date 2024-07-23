@@ -647,6 +647,11 @@ video {
   background-color: rgb(251 207 232 / var(--tw-bg-opacity));
 }
 
+.bg-teal-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(13 148 136 / var(--tw-bg-opacity));
+}
+
 .p-10 {
   padding: 2.5rem;
 }
@@ -676,6 +681,10 @@ video {
 
 .font-semibold {
   font-weight: 600;
+}
+
+.leading-6 {
+  line-height: 1.5rem;
 }
 
 .text-black {
@@ -727,9 +736,19 @@ h1 {
   background-color: rgb(251 207 232 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-teal-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(153 246 228 / var(--tw-bg-opacity));
+}
+
 .hover\:text-pink-800:hover {
   --tw-text-opacity: 1;
   color: rgb(157 23 77 / var(--tw-text-opacity));
+}
+
+.hover\:text-teal-800:hover {
+  --tw-text-opacity: 1;
+  color: rgb(17 94 89 / var(--tw-text-opacity));
 }
 
 .focus-visible\:outline:focus-visible {
@@ -746,5 +765,9 @@ h1 {
 
 .focus-visible\:outline-pink-600:focus-visible {
   outline-color: #db2777;
+}
+
+.focus-visible\:outline-teal-600:focus-visible {
+  outline-color: #0d9488;
 }
 
