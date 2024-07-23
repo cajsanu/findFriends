@@ -12,25 +12,33 @@ public static class DbInitialiser
             return;
         }
 
-        var user1 = new User("Ron", "Hummings", "Espoo");
+        var user1 = new User
+        {
+            UserName = "user1@example.com",
+            Email = "user1@example.com",
+            FirstName = "John",
+            LastName = "Doe",
+            City = "New York"
+        };
         var ownerid1 = user1.Id;
-        user1.Dogs.Add(new Dog(ownerid1, "Samuel", "Shiba inu", "male"));
-        var user2 = new User("Tony", "Stark", "Helsinki");
+        user1.Dogs.Add(new Dog(ownerid1, "Samuel", "Shiba Inu", "male"));
+
+        var user2 = new User
+        {
+            UserName = "user2@example.com",
+            Email = "user2@example.com",
+            FirstName = "Jane",
+            LastName = "Smith",
+            City = "Los Angeles"
+        };
         var ownerid2 = user2.Id;
         user2.Dogs.Add(new Dog(ownerid2, "Carl", "Dalmatian", "female"));
-        var user3 = new User("Clara", "Mulligan", "Espoo");
-        var ownerid3 = user3.Id;
-        user3.Dogs.Add(new Dog(ownerid3, "Roomba", "Shitzu", "female"));
-        var user4 = new User("Pat", "Paddington", "Kuusamo");
-        var ownerid4 = user4.Id;
-        user4.Dogs.Add(new Dog(ownerid4, "Kalevi", "Mix", "male"));
-        var user5 = new User("Pernilla", "Takanen", "Helsinki");
-        var ownerid5 = user5.Id;
-        user5.Dogs.Add(new Dog(ownerid5, "Leya", "Coccer spaniel", "female"));
+        user2.Dogs.Add(new Dog(ownerid2, "Roomba", "Shitzu", "female"));
 
-        List<User> users = [user1, user2, user3, user4, user5];
+         List<User> users = [user1, user2];
 
         context.Users.AddRange(users);
+
         context.SaveChanges();
 
     }
