@@ -2,7 +2,6 @@ using FindFriends.Models;
 using FindFriends.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 
 namespace FindFriends.Services;
@@ -24,18 +23,24 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
 
     public async Task<User> GetUser()
     {
-        var userId = _contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-        if (userId != null)
+        if (_contextAccessor.HttpContext?.User.Identity?.IsAuthenticated ?? false)
         {
-            return await _userManager.FindByIdAsync(userId);
+
+            var userId = _contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            Console.WriteLine(userId);
+            foreach (var claim in _contextAccessor.HttpContext.User.Claims)
+            {
+                Console.WriteLine($"{claim.Type}: {claim.Value}");
+            }
+
+            if (userId != null)
+            {
+                var user = await _context.Users.FindAsync(userId);
+                Console.WriteLine(user + "!!!!!!!");
+                return user;
+            }
         }
         return null;
-    }
-
-    public User Create(User newUser)
-    {
-        _context.Users.Add(newUser);
-        _context.SaveChanges();
-        return newUser;
     }
 }
