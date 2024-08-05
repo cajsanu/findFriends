@@ -1,9 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import userRequests from "../requests/user";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -12,12 +16,15 @@ export const LoginForm = () => {
         email,
         password,
       });
+      const user = await userRequests.getUser();
+      console.log(user);
       console.log(response);
-      setEmail("");
-      setPassword("");
+      // navigate(`home/${response.data.id}`)
     } catch (error) {
       console.log(error);
     }
+    setEmail("");
+    setPassword("");
   };
 
   return (
