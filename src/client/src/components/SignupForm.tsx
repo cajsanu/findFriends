@@ -28,7 +28,7 @@ export const SignupForm = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold tracking-tight text-white">
+      <h2 className="text-2xl font-bold text-white">
         Create an account
       </h2>
       <form onSubmit={handleSubmit}>
