@@ -16,7 +16,7 @@ export const LoginForm = () => {
         email,
         password,
       });
-      const user = await userRequests.getUser();
+      const user = await userRequests.getUser(response.data.accessToken);
       console.log(user);
       console.log(response);
       // navigate(`home/${response.data.id}`)
