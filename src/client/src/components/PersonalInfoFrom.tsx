@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { User } from "../types";
 import userRequests from "../requests/user";
 
-export const PersonalInfoForm = (user: User) => {
+export const PersonalInfoForm = (user: {id: string, token:string}) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [city, setCity] = useState("");
@@ -14,7 +13,7 @@ export const PersonalInfoForm = (user: User) => {
       return;
     }
     try {
-      const response = await userRequests.updateInfo(user.id);
+      const response = await userRequests.updateInfo(user.id, user.token);
       console.log(response);
       setFirstName("");
       setLastName("");
@@ -59,7 +58,7 @@ export const PersonalInfoForm = (user: User) => {
             City*:
           </label>
           <input
-            type="password"
+            type="city"
             value={city}
             onChange={(c) => setCity(c.target.value)}
             required

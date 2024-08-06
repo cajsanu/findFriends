@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import userRequests from "../requests/user";
 import { User } from "../types";
+import { PersonalInfoForm } from "../components";
 
 export const HomePage = () => {
   const [fact, setFact] = useState(null);
   const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,8 +20,9 @@ export const HomePage = () => {
       const token = window.localStorage.getItem("token");
       if (token) {
         const user = await userRequests.getUser(token);
+        setToken(token);
         user ? setUser(user) : setUser(null);
-        console.log(user)
+        console.log(user);
       } else {
         navigate("/");
       }
@@ -37,13 +40,16 @@ export const HomePage = () => {
     navigate("/");
   };
 
-
   if (!user) {
-    return <>Loading...</>
+    return <>Loading...</>;
   }
 
   if (!user.firstName || !user.lastName || !user.city) {
-    return <>Please fill in information</>
+    return (
+      <div>
+        <PersonalInfoForm id={user.id} token={token} />
+      </div>
+    );
   }
 
   return (
