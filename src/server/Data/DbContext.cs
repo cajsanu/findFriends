@@ -1,14 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using FindFriends.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 
 
 namespace FindFriends.Data;
 
 public class FindFriendsContext(DbContextOptions<FindFriendsContext> options) : IdentityDbContext<User>(options)
 {
-    // public DbSet<User> Users => Set<User>();
     public DbSet<Dog> Dogs => Set<Dog>();
 
     protected override void OnModelCreating(ModelBuilder builder)

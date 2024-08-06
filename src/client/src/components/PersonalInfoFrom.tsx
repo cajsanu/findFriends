@@ -1,26 +1,24 @@
 import { useState } from "react";
-import axios from "axios";
+import { User } from "../types";
+import userRequests from "../requests/user";
 
-export const SignupForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+export const PersonalInfoForm = (user: User) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [city, setCity] = useState("");
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    if (password !== confirmPassword) {
-      console.log("Passwords do not match");
+    if (!firstName || !lastName || !city) {
+      console.log("All required fields must be filled in");
       return;
     }
     try {
-      const response = await axios.post("http://localhost:5053/register", {
-        email,
-        password,
-      });
+      const response = await userRequests.updateInfo(user.id);
       console.log(response);
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
+      setFirstName("");
+      setLastName("");
+      setCity("");
     } catch (error) {
       console.log(error);
     }
@@ -29,47 +27,47 @@ export const SignupForm = () => {
   return (
     <div>
       <h2 className="text-2xl font-bold text-white">
-        Create an account
+        Set your personal information
       </h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label className="block text-sm font-medium leading-6 text-white flex justify-right">
-            Email:
+            FirstName*:
           </label>
           <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="firstname"
+            value={firstName}
+            onChange={(n) => setFirstName(n.target.value)}
             required
             className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
           />
         </div>
         <div>
           <label className="block text-sm font-medium leading-6 text-white flex justify-right">
-            Password:
+            LastName*:
           </label>
           <input
-            type="password"
-            value={password}
-            onChange={(p) => setPassword(p.target.value)}
+            type="lastname"
+            value={lastName}
+            onChange={(n) => setLastName(n.target.value)}
             required
             className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
           />
         </div>
         <div>
           <label className="block text-sm font-medium leading-6 text-white flex justify-right">
-            Confirm Password:
+            City*:
           </label>
           <input
             type="password"
-            value={confirmPassword}
-            onChange={(p) => setConfirmPassword(p.target.value)}
+            value={city}
+            onChange={(c) => setCity(c.target.value)}
             required
             className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
           />
         </div>
         <button className="bg-pink-200 p-1 rounded text-pink-600" type="submit">
-          Register
+          Done
         </button>
       </form>
     </div>

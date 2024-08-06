@@ -19,6 +19,7 @@ export const HomePage = () => {
       if (token) {
         const user = await userRequests.getUser(token);
         user ? setUser(user) : setUser(null);
+        console.log(user)
       } else {
         navigate("/");
       }
@@ -36,10 +37,19 @@ export const HomePage = () => {
     navigate("/");
   };
 
+
+  if (!user) {
+    return <>Loading...</>
+  }
+
+  if (!user.firstName || !user.lastName || !user.city) {
+    return <>Please fill in information</>
+  }
+
   return (
     <div className="felx flex-col justify-center p-10">
       <div className="bg-sky-300 p-5">
-        <h1 className="text-sky-700">Welcome user</h1>
+        <h1 className="text-sky-700">Welcome {user?.firstName}</h1>
         <button
           className="rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 hover:text-pink-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
           onClick={handleClickUsers}

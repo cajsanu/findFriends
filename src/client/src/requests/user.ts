@@ -9,4 +9,7 @@ const getUser = async (token: string) => {
   return res.data
 };
 
-export default { getUser };
+const updateInfo = async(id: string) => {
+  const res = await axios.put(URL)
+}
+export default { getUser, updateInfo };

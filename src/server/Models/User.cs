@@ -1,4 +1,3 @@
-using System; 
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
@@ -27,19 +26,3 @@ public class User : IdentityUser
     
     public List<Dog> Dogs { get; } = new();
 }
-
-
-
-// public class User(string firstName, string lastName, string city) : IdentityUser
-// {
-//     [Required]
-//     public string FirstName { get; set; } = firstName;
-//     [Required]
-//     public string LastName { get; set; } = lastName;
-//     [Required]
-//     public string City { get; set; } = city;
-//     [Required]
-//     public bool IsAdmin { get; } = false;
-//     public List<Dog> Dogs { get; } = new();
-
-// }
