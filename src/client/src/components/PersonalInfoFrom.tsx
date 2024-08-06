@@ -35,8 +35,8 @@ export const PersonalInfoForm = (user: { id: string; token: string }) => {
         </h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <div>
-            <label className="block text-sm font-medium leading-6 text-white flex justify-right">
-              FirstName*:
+            <label className="block text-m leading-6 text-white flex justify-right">
+              FirstName *
             </label>
             <input
               type="firstname"
@@ -47,8 +47,8 @@ export const PersonalInfoForm = (user: { id: string; token: string }) => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium leading-6 text-white flex justify-right">
-              LastName*:
+            <label className="block text-m leading-6 text-white flex justify-right">
+              LastName *
             </label>
             <input
               type="lastname"
@@ -59,8 +59,8 @@ export const PersonalInfoForm = (user: { id: string; token: string }) => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium leading-6 text-white flex justify-right">
-              City*:
+            <label className="block text-m leading-6 text-white flex justify-right">
+              City *
             </label>
             <input
               type="city"
@@ -72,7 +72,7 @@ export const PersonalInfoForm = (user: { id: string; token: string }) => {
           </div>
           <div>
             <button
-              className="bg-rose-800 p-2 rounded text-white"
+              className="transition duration-150 rounded-md px-3 py-1.5 text-sm font-semibold leading-6 bg-rose-800 text-white hover:bg-rose-100 hover:text-rose-800"
               type="submit"
             >
               Done
