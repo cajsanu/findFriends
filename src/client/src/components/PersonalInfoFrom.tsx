@@ -1,7 +1,7 @@
 import { useState } from "react";
 import userRequests from "../requests/user";
 
-export const PersonalInfoForm = (user: { id: string; token: string }) => {
+export const PersonalInfoForm = (userId: {id: string}) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [city, setCity] = useState("");
@@ -13,12 +13,15 @@ export const PersonalInfoForm = (user: { id: string; token: string }) => {
       return;
     }
     try {
-      const response = await userRequests.updateInfo(user.id, user.token, {
-        firstName,
-        lastName,
-        city,
-      });
-      console.log(response);
+      const token = window.localStorage.getItem("token");
+      if (token) {
+        const response = await userRequests.updateInfo(userId.id, token, {
+          firstName,
+          lastName,
+          city,
+        });
+        console.log(response);
+      }
       setFirstName("");
       setLastName("");
       setCity("");
