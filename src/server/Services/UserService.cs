@@ -3,6 +3,8 @@ using FindFriends.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.OpenApi.Extensions;
 
 namespace FindFriends.Services;
 
@@ -35,5 +37,14 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
             }
         }
         return null;
+    }
+
+    public async Task<bool> UpdateUserInfo(User user, string firstName, string lastName, string city)
+    {
+        user.FirstName = firstName;
+        user.LastName = lastName;
+        user.City = city;
+        var res = await _userManager.UpdateAsync(user);
+        return res.Succeeded;
     }
 }

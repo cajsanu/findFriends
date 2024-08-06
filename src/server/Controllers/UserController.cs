@@ -16,11 +16,36 @@ namespace FindFriends.Controllers
         public async Task<ActionResult<User>> GetUser()
         {
             var user = await _userService.GetUser();
-            if (user != null){
+            if (user != null)
+            {
                 return Ok(user);
-            } else {
+            }
+            else
+            {
                 return null;
             }
+        }
+
+        [HttpPut("{id}")]
+        [Authorize]
+        public async Task<ActionResult<bool>> UpdateUserInfo(string id, [FromBody] UserInfoDto info)
+        {
+            var user = await _userService.GetUser();
+            if (user != null && user.Id == id)
+            {
+                return await _userService.UpdateUserInfo(user, info.FirstName, info.LastName, info.City);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        public class UserInfoDto
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string City { get; set; }
         }
     }
 }
