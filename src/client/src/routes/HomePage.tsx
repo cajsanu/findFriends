@@ -1,14 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import userRequests from "../requests/user";
+import { GetLoggedinUser } from "../utils/getLoggedinUser";
 import { User } from "../types";
 import { PersonalInfoForm, SingleDog } from "../components";
 
 export const HomePage = () => {
   const [fact, setFact] = useState(null);
   const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,15 +16,9 @@ export const HomePage = () => {
       setFact(res.data.facts);
     };
     const getUser = async () => {
-      const token = window.localStorage.getItem("token");
-      if (token) {
-        const user = await userRequests.getUser(token);
-        setToken(token);
-        user ? setUser(user) : setUser(null);
-        console.log(user);
-      } else {
-        navigate("/");
-      }
+      const user = await GetLoggedinUser();
+      user ? setUser(user) : navigate("/");
+      console.log(user);
     };
     getDogFact();
     getUser();
@@ -41,8 +34,8 @@ export const HomePage = () => {
   };
 
   const handleAddDog = () => {
-    console.log("Woof")
-  }
+    console.log("Woof");
+  };
 
   if (!user) {
     return <>Loading...</>;
@@ -51,7 +44,7 @@ export const HomePage = () => {
   if (!user.firstName || !user.lastName || !user.city) {
     return (
       <div>
-        <PersonalInfoForm id={user.id} token={token} />
+        <PersonalInfoForm id={user.id} />
       </div>
     );
   }
@@ -88,11 +81,20 @@ export const HomePage = () => {
         <div className="flex flex-col">
           <p className="bg-white">All chats of user</p>
           <div className="bg-pink-200 p-10">
-           <div>
-            {user ? user.dogs?.map((d) => (
-              <SingleDog key={d.id} name={d.name} breed={d.breed} sex={d.sex} id={d.id} ownerId={d.ownerId}/>
-            )) : null}
-           </div>
+            <div>
+              {user
+                ? user.dogs?.map((d) => (
+                    <SingleDog
+                      key={d.id}
+                      name={d.name}
+                      breed={d.breed}
+                      sex={d.sex}
+                      id={d.id}
+                      ownerId={d.ownerId}
+                    />
+                  ))
+                : null}
+            </div>
           </div>
         </div>
         <div className="flex justify-end">

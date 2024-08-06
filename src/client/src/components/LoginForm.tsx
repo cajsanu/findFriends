@@ -1,7 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
+import { login } from "../requests/login";
 import { useNavigate } from "react-router-dom";
-import userRequests from "../requests/user";
+import { GetLoggedinUser } from "../utils/getLoggedinUser";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -11,12 +11,8 @@ export const LoginForm = () => {
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5053/login", {
-        email,
-        password,
-      });
-      window.localStorage.setItem("token", response.data.accessToken);
-      const user = await userRequests.getUser(response.data.accessToken);
+      await login(email, password);
+      const user = await GetLoggedinUser();
       if (user) {
         navigate(`home/${user.id}`);
       }
