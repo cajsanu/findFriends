@@ -20,7 +20,7 @@ export const HomePage = () => {
         const user = await userRequests.getUser(token);
         user ? setUser(user) : setUser(null);
       } else {
-        navigate("/")
+        navigate("/");
       }
     };
     getDogFact();
@@ -29,6 +29,11 @@ export const HomePage = () => {
 
   const handleClickUsers = () => {
     navigate("/users");
+  };
+
+  const handleLogout = () => {
+    window.localStorage.removeItem("token");
+    navigate("/");
   };
 
   return (
@@ -43,6 +48,12 @@ export const HomePage = () => {
         </button>
         <button className="rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 hover:text-pink-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600">
           Start new chat
+        </button>
+        <button
+          onClick={handleLogout}
+          className="rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 hover:text-pink-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
+        >
+          Logout
         </button>
       </div>
       <div className="flex flex-row justify-around p-10">
