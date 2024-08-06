@@ -1,7 +1,6 @@
 using FindFriends.Data;
 using FindFriends.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 using FindFriends.Models;
 
 var builder = WebApplication.CreateBuilder(args);

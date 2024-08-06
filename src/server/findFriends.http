@@ -1,6 +1,6 @@
 @findFriends_HostAddress = http://localhost:5053
 
-GET {{findFriends_HostAddress}}/
+POST {{findFriends_HostAddress}}/register
 Accept: application/json
 
 ###

@@ -2,13 +2,12 @@ export interface User {
   id: string;
   firstName: string;
   lastName: string;
+  email: string;
   city: string;
   dogs?: Array<Dog>;
 }
 
 export interface SignupUser {
-  firstName: string;
-  lastName: string;
   email: string;
   password: string;
   city: string;
