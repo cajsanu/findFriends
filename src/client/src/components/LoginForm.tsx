@@ -6,7 +6,6 @@ import userRequests from "../requests/user";
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
@@ -16,10 +15,11 @@ export const LoginForm = () => {
         email,
         password,
       });
+      window.localStorage.setItem("token", response.data.accessToken);
       const user = await userRequests.getUser(response.data.accessToken);
-      console.log(user);
-      console.log(response);
-      // navigate(`home/${response.data.id}`)
+      if (user) {
+        navigate(`home/${user.id}`);
+      }
     } catch (error) {
       console.log(error);
     }

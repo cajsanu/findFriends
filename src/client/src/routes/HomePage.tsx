@@ -1,17 +1,30 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import userRequests from "../requests/user";
+import { User } from "../types";
 
 export const HomePage = () => {
   const [fact, setFact] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getDogFact = async() => {
-        const res = await axios.get("https://dogapi.dog/api/facts")
-        setFact(res.data.facts)
+    const getDogFact = async () => {
+      const res = await axios.get("https://dogapi.dog/api/facts");
+      setFact(res.data.facts);
+    };
+    const getUser = async () => {
+      const token = window.localStorage.getItem("token");
+      if (token) {
+        const user = await userRequests.getUser(token);
+        user ? setUser(user) : setUser(null);
+      } else {
+        navigate("/")
+      }
     };
     getDogFact();
+    getUser();
   }, []);
 
   const handleClickUsers = () => {
@@ -28,10 +41,7 @@ export const HomePage = () => {
         >
           See users
         </button>
-        <button
-          className="rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 hover:text-pink-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
-         
-        >
+        <button className="rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 hover:text-pink-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600">
           Start new chat
         </button>
       </div>

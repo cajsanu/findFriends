@@ -13,9 +13,9 @@ namespace FindFriends.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult<User> GetUser()
+        public async Task<ActionResult<User>> GetUser()
         {
-            var user = _userService.GetUser();
+            var user = await _userService.GetUser();
             if (user != null){
                 return Ok(user);
             } else {
