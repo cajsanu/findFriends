@@ -10,6 +10,11 @@ export interface User {
 export interface SignupUser {
   email: string;
   password: string;
+}
+
+export interface UserInfo {
+  firstName: string;
+  lastName: string;
   city: string;
 }
 
