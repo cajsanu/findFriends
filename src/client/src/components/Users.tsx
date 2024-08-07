@@ -3,7 +3,6 @@ import { User } from "../types";
 import { getAll } from "../requests/users";
 import { SingleDog } from "../components";
 import { useNavigate } from "react-router-dom";
-import useEnhancedEffect from "@mui/material/utils/useEnhancedEffect";
 
 const SingleUser = (user: User) => {
   return (

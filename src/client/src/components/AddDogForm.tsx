@@ -2,7 +2,11 @@ import { useState } from "react";
 import userRequests from "../requests/user";
 import { Sex } from "../types";
 
-export const AddDogForm = (userId: { id: string }) => {
+interface AddDogsFormProps {
+  userId: string
+  onSuccess: () => void
+}
+export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
   const [name, setName] = useState("");
   const [breed, setBreed] = useState("");
   const [sex, setSex] = useState<Sex>();
@@ -16,12 +20,12 @@ export const AddDogForm = (userId: { id: string }) => {
     try {
       const token = window.localStorage.getItem("token");
       if (token) {
-        const response = await userRequests.addUserDog(userId.id, token, {
+        await userRequests.addUserDog(userId, token, {
           name,
           breed,
           sex,
         });
-        console.log(response);
+        onSuccess();
       }
       setName("");
       setBreed("");

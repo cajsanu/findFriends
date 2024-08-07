@@ -10,10 +10,9 @@ import Modal from "@mui/material/Modal";
 export const HomePage = () => {
   const [fact, setFact] = useState(null);
   const [user, setUser] = useState<User | null>(null);
-  const [open, setOpen] = useState(false);
+  const [openAddDog, setOpenAddDog] = useState(false);
+  const [openMyDogs, setOpenMyDogs] = useState(false);
   const navigate = useNavigate();
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     const getDogFact = async () => {
@@ -23,11 +22,14 @@ export const HomePage = () => {
     const getUser = async () => {
       const user = await GetLoggedinUser();
       user ? setUser(user) : navigate("/");
-      console.log(user);
     };
     getDogFact();
     getUser();
   }, []);
+
+  const handleAddDogSuccess = async() => {
+    setUser(await GetLoggedinUser());
+  };
 
   const handleClickUsers = () => {
     navigate("/users");
@@ -36,6 +38,13 @@ export const HomePage = () => {
   const handleLogout = () => {
     window.localStorage.removeItem("token");
     navigate("/");
+  };
+
+  const handleOpenAddDog = () => setOpenAddDog(true);
+  const handleOpenMyDogs = () => setOpenMyDogs(true);
+  const handleClose = () => {
+    setOpenAddDog(false);
+    setOpenMyDogs(false);
   };
 
   if (!user) {
@@ -78,20 +87,51 @@ export const HomePage = () => {
             Logout
           </button>
           <button
-            onClick={handleOpen}
+            onClick={handleOpenAddDog}
             className="rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 hover:text-pink-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
           >
             Add dog
           </button>
+          <button
+            onClick={handleOpenMyDogs}
+            className="rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 hover:text-pink-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
+          >
+            My dogs
+          </button>
           <div>
             <Modal
-              open={open}
+              open={openAddDog}
               onClose={handleClose}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
               <Box>
-                <AddDogForm id={user.id} />
+                <AddDogForm userId={user.id} onSuccess={handleAddDogSuccess} />
+                <button onClick={handleClose}>Close</button>
+              </Box>
+            </Modal>
+          </div>
+          <div>
+            <Modal
+              open={openMyDogs}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box>
+                <div>
+                  <p>My dogs</p>
+                  {user
+                    ? user.dogs?.map((d) => (
+                        <SingleDog
+                          key={d.id}
+                          name={d.name}
+                          breed={d.breed}
+                          sex={d.sex}
+                        />
+                      ))
+                    : null}
+                </div>
                 <button onClick={handleClose}>Close</button>
               </Box>
             </Modal>
@@ -99,25 +139,6 @@ export const HomePage = () => {
         </div>
       </div>
       <div className="flex flex-row justify-around p-10">
-        <div className="flex flex-col">
-          <p className="bg-white">All chats of user</p>
-          <div className="bg-pink-200 p-10">
-            <div>
-              {user
-                ? user.dogs?.map((d) => (
-                    <SingleDog
-                      key={d.id}
-                      name={d.name}
-                      breed={d.breed}
-                      sex={d.sex}
-                      id={d.id}
-                      ownerId={d.userId}
-                    />
-                  ))
-                : null}
-            </div>
-          </div>
-        </div>
         <div className="flex justify-end">
           <div className="">
             <p>Did you know?</p>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { NewDog, User, UserInfo } from "../types";
+import { BaseDog, User, UserDog, UserInfo } from "../types";
 const URL = "/api/user";
 
 const getUser = async (token: string) => {
@@ -16,7 +16,7 @@ const updateInfo = async (id: string, token: string, info: UserInfo) => {
   return res.data;
 };
 
-const addUserDog = async (id: string, token: string, dog: NewDog) => {
+const addUserDog = async (id: string, token: string, dog: BaseDog): Promise<UserDog> => {
   console.log(dog)
   const res = await axios.post(`${URL}/${id}/dogs`, dog, {
     headers: { Authorization: `Bearer ${token}` },
