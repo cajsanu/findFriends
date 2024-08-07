@@ -1,7 +1,7 @@
-import { Dog } from "../types"
+import { BaseDog } from "../types"
 
 
-export const SingleDog = (dog: Dog) => {
+export const SingleDog = (dog: BaseDog) => {
     return (
         <>
         <div>

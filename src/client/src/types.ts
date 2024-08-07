@@ -20,13 +20,13 @@ export interface UserInfo {
 
 export type Sex = "male" | "female";
 
-export interface NewDog {
+export interface BaseDog {
   name: string;
   breed: string;
   sex: Sex;
 }
 
-export interface UserDog extends NewDog {
+export interface UserDog extends BaseDog {
   id: string;
   userId: string;
 }
