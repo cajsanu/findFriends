@@ -1,6 +1,8 @@
-import { Users } from "../components/Users"
+import { Users } from "../components"
 
 export const UsersPage = () => {
+
+    
     return (
         <>
         <div>

@@ -32,8 +32,9 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
 
             if (userId != null)
             {
-                _context.Users.Include(user => user.Dogs);
-                var user = await _context.Users.FindAsync(userId);
+                var user = await _context.Users
+                .Include(u => u.Dogs)
+                .FirstOrDefaultAsync(u => u.Id == userId);
                 
                 return user;
             }

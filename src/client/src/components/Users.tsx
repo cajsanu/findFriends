@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { User } from "../types";
 import { getAll } from "../requests/users";
-import { SingleDog } from "../components/Dog";
+import { SingleDog } from "../components";
+import { useNavigate } from "react-router-dom";
+import useEnhancedEffect from "@mui/material/utils/useEnhancedEffect";
 
 const SingleUser = (user: User) => {
   return (
@@ -24,11 +26,17 @@ const SingleUser = (user: User) => {
 
 export const Users = () => {
   const [users, setUsers] = useState<User[] | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getUsers = async () => {
-      const users = await getAll();
-      setUsers(users.data);
+      const token = window.localStorage.getItem("token");
+      if (token) {
+        const users = await getAll(token);
+        setUsers(users.data);
+      } else {
+        navigate("/");
+      }
     };
     getUsers();
   }, []);
