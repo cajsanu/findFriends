@@ -17,7 +17,8 @@ const updateInfo = async (id: string, token: string, info: UserInfo) => {
 };
 
 const addUserDog = async (id: string, token: string, dog: NewDog) => {
-  const res = await axios.post(`${URL}/${id}`, dog, {
+  console.log(dog)
+  const res = await axios.post(`${URL}/${id}/dogs`, dog, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return res.data;

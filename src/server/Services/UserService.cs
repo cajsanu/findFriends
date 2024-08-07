@@ -23,7 +23,7 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
 
     }
 
-    public async Task<User> GetUser()
+    public async Task<User> GetCurrentUser()
     {
         if (_contextAccessor.HttpContext?.User.Identity?.IsAuthenticated ?? false)
         {
@@ -32,7 +32,9 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
 
             if (userId != null)
             {
+                _context.Users.Include(user => user.Dogs);
                 var user = await _context.Users.FindAsync(userId);
+                
                 return user;
             }
         }
@@ -46,5 +48,13 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
         user.City = city;
         var res = await _userManager.UpdateAsync(user);
         return res.Succeeded;
+    }
+
+    public async Task<Dog> AddUserDog(User user, string dogName, string breed, string sex)
+    {
+        Console.WriteLine(dogName + breed + sex);
+        user.Dogs.Add(new Dog(user.Id, dogName, breed, sex));
+        await _userManager.UpdateAsync(user);
+        return null;
     }
 }
