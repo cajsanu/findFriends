@@ -17,7 +17,6 @@ const updateInfo = async (id: string, token: string, info: UserInfo) => {
 };
 
 const addUserDog = async (id: string, token: string, dog: BaseDog): Promise<UserDog> => {
-  console.log(dog)
   const res = await axios.post(`${URL}/${id}/dogs`, dog, {
     headers: { Authorization: `Bearer ${token}` },
   });

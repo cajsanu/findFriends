@@ -6,20 +6,19 @@ import { useNavigate } from "react-router-dom";
 
 const SingleUser = (user: User) => {
   return (
-    <>
+    <div className="border p-5 flex flex-col">
+      <p className="font-bold text-xl">
+        {user.firstName.toUpperCase()} {user.lastName.toUpperCase()}, {user.city}
+      </p>
       <div>
-        <h2>
-          {user.firstName.toUpperCase()} {user.lastName.toUpperCase()}
-        </h2>
-        <p>Lives in {user.city}</p>
-        <h3>Dogs:</h3>
-        {user.dogs ? (
-          user.dogs.map((d) => <SingleDog key={d.id} {...d} />)
-        ) : (
-          <p>This owner has no dogs</p>
-        )}
+      <p className="font-semibold">Dogs:</p>
+      {user.dogs ? (
+        user.dogs.map((d) => <SingleDog key={d.id} dog={d} />)
+      ) : (
+        <p>This owner has no dogs</p>
+      )}
       </div>
-    </>
+    </div>
   );
 };
 
@@ -40,13 +39,9 @@ export const Users = () => {
     getUsers();
   }, []);
 
-  console.log(users);
-
   return (
-    <>
-      <div>
-        {users ? users.map((u) => <SingleUser key={u.id} {...u} />) : null}
-      </div>
-    </>
+    <div className="w-3/4">
+      {users ? users.map((u) => <SingleUser key={u.id} {...u} />) : null}
+    </div>
   );
 };
