@@ -1,0 +1,92 @@
+import { useState } from "react";
+import userRequests from "../requests/user";
+import { Sex } from "../types";
+
+export const AddDogForm = (userId: { id: string }) => {
+  const [name, setName] = useState("");
+  const [breed, setBreed] = useState("");
+  const [sex, setSex] = useState<Sex>();
+
+  const handleSubmit = async (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    if (!name || !breed || !sex) {
+      console.log("All required fields must be filled in");
+      return;
+    }
+    try {
+      const token = window.localStorage.getItem("token");
+      if (token) {
+        const response = await userRequests.addUserDog(userId.id, token, {
+          name,
+          breed,
+          sex,
+        });
+        console.log(response);
+      }
+      setName("");
+      setBreed("");
+      setSex(undefined);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <div className="flex justify-center pt-40">
+      <div className="flex flex-col p-10 bg-rose-300 w-2/4 border-double border-4 border-rose-800 shadow-2xl">
+        <h2 className="text-2xl font-bold text-white pb-5">
+          Please enter your dogs information below
+        </h2>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+          <div>
+            <label className="block text-m leading-6 text-white flex justify-right">
+              Name *
+            </label>
+            <input
+              type="name"
+              value={name}
+              onChange={(n) => setName(n.target.value)}
+              required
+              className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
+            />
+          </div>
+          <div>
+            <label className="block text-m leading-6 text-white flex justify-right">
+              Breed *
+            </label>
+            <input
+              type="breed"
+              value={breed}
+              onChange={(b) => setBreed(b.target.value)}
+              required
+              className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
+            />
+          </div>
+          <div>
+            <label className="block text-m leading-6 text-white flex justify-right">
+              Sex *
+            </label>
+            <select
+              required
+              value={sex}
+              onChange={(s) => setSex(s.target.value as Sex)}
+              className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
+            >
+              <option value=""></option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+            </select>
+          </div>
+          <div>
+            <button
+              className="transition duration-150 rounded-md px-3 py-1.5 text-sm font-semibold leading-6 bg-rose-800 text-white hover:bg-rose-100 hover:text-rose-800"
+              type="submit"
+            >
+              Done
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};

@@ -3,12 +3,17 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GetLoggedinUser } from "../utils/getLoggedinUser";
 import { User } from "../types";
-import { PersonalInfoForm, SingleDog } from "../components";
+import { PersonalInfoForm, SingleDog, AddDogForm } from "../components";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
 
 export const HomePage = () => {
   const [fact, setFact] = useState(null);
   const [user, setUser] = useState<User | null>(null);
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     const getDogFact = async () => {
@@ -33,12 +38,15 @@ export const HomePage = () => {
     navigate("/");
   };
 
-  const handleAddDog = () => {
-    console.log("Woof");
-  };
-
   if (!user) {
-    return <>Loading...</>;
+    return (
+      <div>
+        <p>You have been automatically signed out, please go log in again </p>
+        <a className="underline" href="/">
+          Log in
+        </a>
+      </div>
+    );
   }
 
   if (!user.firstName || !user.lastName || !user.city) {
@@ -70,11 +78,24 @@ export const HomePage = () => {
             Logout
           </button>
           <button
-            onClick={handleAddDog}
+            onClick={handleOpen}
             className="rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 hover:text-pink-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
           >
             Add dog
           </button>
+          <div>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box>
+                <AddDogForm id={user.id} />
+                <button onClick={handleClose}>Close</button>
+              </Box>
+            </Modal>
+          </div>
         </div>
       </div>
       <div className="flex flex-row justify-around p-10">
@@ -90,7 +111,7 @@ export const HomePage = () => {
                       breed={d.breed}
                       sex={d.sex}
                       id={d.id}
-                      ownerId={d.ownerId}
+                      ownerId={d.userId}
                     />
                   ))
                 : null}

@@ -4,7 +4,7 @@ export interface User {
   lastName: string;
   email: string;
   city: string;
-  dogs?: Array<Dog>;
+  dogs?: Array<UserDog>;
 }
 
 export interface SignupUser {
@@ -18,18 +18,18 @@ export interface UserInfo {
   city: string;
 }
 
-export enum Sex {
-  male = "male",
-  female = "female",
-}
+export type Sex = "male" | "female";
 
-export interface Dog {
-  id: string;
-  ownerId: User["id"];
+export interface NewDog {
   name: string;
   breed: string;
   sex: Sex;
 }
 
+export interface UserDog extends NewDog {
+  id: string;
+  userId: string;
+}
+
 export type UserWithoutId = Omit<User, "id">;
-export type DogWithoutId = Omit<Dog, "id">;
+export type DogWithoutIds = Omit<UserDog, "id" | "userId">;
