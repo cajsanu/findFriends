@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import { signup } from "../requests/signup";
 
 export const SignupForm = () => {
   const [email, setEmail] = useState("");
@@ -9,14 +9,11 @@ export const SignupForm = () => {
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     if (password !== confirmPassword) {
-      console.log("Passwords do not match");
+      window.alert("Passwords do not match");
       return;
     }
     try {
-      const response = await axios.post("http://localhost:5053/register", {
-        email,
-        password,
-      });
+      const response = await signup(email, password);
       console.log(response);
       setEmail("");
       setPassword("");

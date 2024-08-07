@@ -1,8 +1,7 @@
 import axios from "axios";
-import { SignupUser } from "../types";
-const URL = "/register";
+const URL = "http://localhost:5053/register";
 
-export const create = async (newUser: SignupUser) => {
-  const res = await axios.post(URL, newUser);
-  return res;
+export const signup = async (email: string, password: string) => {
+  const res = await axios.post(URL, {email, password});
+  return res.data;
 };
