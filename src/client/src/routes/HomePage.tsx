@@ -68,34 +68,43 @@ export const HomePage = () => {
   }
 
   return (
-    <div className="felx flex-col justify-center p-10">
-      <div className="bg-pink-300 p-5">
-        <h1 className="text-rose-900">Welcome {user?.firstName}</h1>
-        <div>
+    <div>
+      <div className="felx flex-col justify-center p-10 bg-gradient-to-r from-rose-400 via-rose-700 to-rose-400">
+        <div className="flex flex-row justify-around p-10">
+          <div className="flex justify-end">
+            <div className="">
+              <p>Did you know?</p>
+              <p className="max-w-56 bg-white text-black rounded p-5">{fact}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="bg-gradient-to-r from-rose-500 to-rose-500 p-5">
+        <div className="flex justify-around">
           <button
-            className="rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 hover:text-pink-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
+            className="rounded-md hover:text-pink-900 px-3 py-1.5 text-sm font-semibold text-white"
             onClick={handleClickUsers}
           >
             See users
           </button>
-          <button className="rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 hover:text-pink-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600">
+          <button className="rounded-md hover:text-pink-900 px-3 py-1.5 text-sm font-semibold text-white">
             Start new chat
           </button>
           <button
             onClick={handleLogout}
-            className="rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 hover:text-pink-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
+            className="rounded-md hover:text-pink-900 px-3 py-1.5 text-sm font-semibold text-white"
           >
             Logout
           </button>
           <button
             onClick={handleOpenAddDog}
-            className="rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 hover:text-pink-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
+            className="rounded-md hover:text-pink-900 px-3 py-1.5 text-sm font-semibold text-white"
           >
             Add dog
           </button>
           <button
             onClick={handleOpenMyDogs}
-            className="rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-pink-200 hover:text-pink-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
+            className="rounded-md hover:text-pink-900 px-3 py-1.5 text-sm font-semibold text-white"
           >
             My dogs
           </button>
@@ -134,13 +143,8 @@ export const HomePage = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-row justify-around p-10">
-        <div className="flex justify-end">
-          <div className="">
-            <p>Did you know?</p>
-            <p className="max-w-56 bg-white text-black rounded p-5">{fact}</p>
-          </div>
-        </div>
+      <div>
+        <h1>Lorem impsum</h1>
       </div>
     </div>
   );
