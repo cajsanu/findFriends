@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User, UserInfo } from "../types";
+import { NewDog, User, UserInfo } from "../types";
 const URL = "/api/user";
 
 const getUser = async (token: string) => {
@@ -15,4 +15,12 @@ const updateInfo = async (id: string, token: string, info: UserInfo) => {
   });
   return res.data;
 };
-export default { getUser, updateInfo };
+
+const addUserDog = async (id: string, token: string, dog: NewDog) => {
+  const res = await axios.post(`${URL}/${id}`, dog, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.data;
+};
+
+export default { getUser, updateInfo, addUserDog };
