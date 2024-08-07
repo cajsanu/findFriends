@@ -1,13 +1,17 @@
 import { UserDog } from "../types";
 import { SingleDog } from "./Dog";
 
-export const MyDogs = (dogs: UserDog[]) => {
+interface MyDogProps {
+  dogs: UserDog[];
+}
+
+export const MyDogs = ({ dogs }: MyDogProps) => {
   return (
-    <div>
-      <div>
-        <p>My dogs</p>
+    <div className="flex justify-center pt-40">
+      <div className="flex flex-col p-10 shadow-2xl">
+        <p className="font-semibold text-xl text-rose-400 pb-5 flex justify-start">My dogs</p>
         {dogs.map((d) => (
-          <SingleDog key={d.id} name={d.name} breed={d.breed} sex={d.sex} />
+          <SingleDog key={d.id} dog={d} />
         ))}
       </div>
     </div>

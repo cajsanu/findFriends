@@ -1,7 +1,11 @@
 import { useState } from "react";
 import userRequests from "../requests/user";
 
-export const PersonalInfoForm = (userId: {id: string}) => {
+interface InfoFormProps {
+  userId: string;
+}
+
+export const PersonalInfoForm = ({ userId }: InfoFormProps) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [city, setCity] = useState("");
@@ -15,12 +19,11 @@ export const PersonalInfoForm = (userId: {id: string}) => {
     try {
       const token = window.localStorage.getItem("token");
       if (token) {
-        const response = await userRequests.updateInfo(userId.id, token, {
+        await userRequests.updateInfo(userId, token, {
           firstName,
           lastName,
           city,
         });
-        console.log(response);
       }
       setFirstName("");
       setLastName("");

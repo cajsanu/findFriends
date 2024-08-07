@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GetLoggedinUser } from "../utils/getLoggedinUser";
 import { User } from "../types";
-import { PersonalInfoForm, SingleDog, AddDogForm } from "../components";
+import { PersonalInfoForm, AddDogForm } from "../components";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import { MyDogs } from "../components/MyDogs";
 
 export const HomePage = () => {
   const [fact, setFact] = useState(null);
@@ -27,7 +28,7 @@ export const HomePage = () => {
     getUser();
   }, []);
 
-  const handleAddDogSuccess = async() => {
+  const handleAddDogSuccess = async () => {
     setUser(await GetLoggedinUser());
   };
 
@@ -61,7 +62,7 @@ export const HomePage = () => {
   if (!user.firstName || !user.lastName || !user.city) {
     return (
       <div>
-        <PersonalInfoForm id={user.id} />
+        <PersonalInfoForm userId={user.id} />
       </div>
     );
   }
@@ -117,20 +118,15 @@ export const HomePage = () => {
               onClose={handleClose}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
+              className="bg-pink-200"
             >
               <Box>
                 <div>
-                  <p>My dogs</p>
-                  {user
-                    ? user.dogs?.map((d) => (
-                        <SingleDog
-                          key={d.id}
-                          name={d.name}
-                          breed={d.breed}
-                          sex={d.sex}
-                        />
-                      ))
-                    : null}
+                  {user.dogs ? (
+                    <MyDogs dogs={user.dogs} />
+                  ) : (
+                    <p>You have not added any dogs yet</p>
+                  )}
                 </div>
                 <button onClick={handleClose}>Close</button>
               </Box>
