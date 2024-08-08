@@ -3,8 +3,7 @@ using FindFriends.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.OpenApi.Extensions;
+using System.Linq;
 
 namespace FindFriends.Services;
 
@@ -14,10 +13,17 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
     private readonly UserManager<User> _userManager = userManager;
     private readonly IHttpContextAccessor _contextAccessor = contextAccessor;
 
-    public List<User> GetAll()
+    public List<User> GetAll(string? searchString)
     {
+        var users = from u in _context.Users
+                    select u;    
 
-        return [.. _context.Users
+        if (!String.IsNullOrEmpty(searchString))
+        {
+            users = users.Where(u => u.City.Contains(searchString));
+        }
+
+        return [.. users
             .AsNoTracking()
             .Include(u => u.Dogs)];
 
