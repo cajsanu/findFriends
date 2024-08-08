@@ -43,7 +43,7 @@ export const UsersPage = () => {
   }
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center font-mono">
       <div className="w-full">
         <div className="p-12">
           <h1>All registered users</h1>
