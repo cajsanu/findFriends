@@ -30,6 +30,8 @@ export const HomePage = () => {
 
   const handleAddDogSuccess = async () => {
     setUser(await GetLoggedinUser());
+    setOpenMyDogs(true);
+    setOpenAddDog(false);
   };
 
   const handleClickUsers = () => {
