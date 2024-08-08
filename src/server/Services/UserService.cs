@@ -13,20 +13,16 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
     private readonly UserManager<User> _userManager = userManager;
     private readonly IHttpContextAccessor _contextAccessor = contextAccessor;
 
-    public List<User> GetAll(string? searchString)
+    public async Task<IEnumerable<User>> GetAll(string? search)
     {
-        var users = from u in _context.Users
-                    select u;    
-
-        if (!String.IsNullOrEmpty(searchString))
+        if (string.IsNullOrWhiteSpace(search))
         {
-            users = users.Where(u => u.City.Contains(searchString));
+            return await _context.Users.ToListAsync();
         }
 
-        return [.. users
-            .AsNoTracking()
-            .Include(u => u.Dogs)];
-
+        return await _context.Users
+            .Where(u => u.City.ToLower().Contains(search.ToLower()))
+            .ToListAsync();
     }
 
     public async Task<User> GetCurrentUser()
@@ -41,7 +37,7 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
                 var user = await _context.Users
                 .Include(u => u.Dogs)
                 .FirstOrDefaultAsync(u => u.Id == userId);
-                
+
                 return user;
             }
         }
