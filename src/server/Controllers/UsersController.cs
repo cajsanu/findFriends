@@ -14,9 +14,9 @@ namespace FindFriends.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult<List<User>> GetAll()
+        public ActionResult<List<User>> GetAll(string? searchString)
         {
-            var users = _userService.GetAll();
+            var users = _userService.GetAll(searchString);
             return Ok(users);
         }
 
