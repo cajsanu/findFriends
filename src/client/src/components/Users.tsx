@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
 import { User } from "../types";
-import userRequests from "../requests/users";
 import { SingleDog } from "../components";
-import { useNavigate } from "react-router-dom";
+
+interface UsersProps {
+  users: User[];
+}
 
 const SingleUser = (user: User) => {
   return (
@@ -24,23 +25,7 @@ const SingleUser = (user: User) => {
   );
 };
 
-export const Users = () => {
-  const [users, setUsers] = useState<User[] | null>(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const getUsers = async () => {
-      const token = window.localStorage.getItem("token");
-      if (token) {
-        const users = await userRequests.getAll(token);
-        setUsers(users.data);
-      } else {
-        navigate("/");
-      }
-    };
-    getUsers();
-  }, []);
-
+export const Users = ({ users }: UsersProps) => {
   return (
     <div className="flex flex-wrap justify-around py-10 gap-10">
       {users ? users.map((u) => <SingleUser key={u.id} {...u} />) : null}

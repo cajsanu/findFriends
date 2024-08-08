@@ -2,11 +2,11 @@ import axios from "axios";
 import { User, BaseDog, UserInfo, UserDog } from "../types";
 const URL = "/api/users";
 
-const getAll = async (token: string) => {
-  const res = await axios.get<User[]>(URL, {
+const getAll = async (token: string, search: string) => {
+  const res = await axios.get<User[]>(URL + (search ? `?search=${search}` : ""), {
     headers: { Authorization: `Bearer ${token}` },
   });
-  return res;
+  return res.data;
 };
 
 const updateInfo = async (id: string, token: string, info: UserInfo) => {
