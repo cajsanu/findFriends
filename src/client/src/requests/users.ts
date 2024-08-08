@@ -6,6 +6,7 @@ const getAll = async (token: string, search: string) => {
   const res = await axios.get<User[]>(URL + (search ? `?search=${search}` : ""), {
     headers: { Authorization: `Bearer ${token}` },
   });
+  console.log(res.data)
   return res.data;
 };
 

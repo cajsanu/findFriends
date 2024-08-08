@@ -8,20 +8,19 @@ namespace FindFriends.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class UsersController(UserService userService) : ControllerBase
     {
         private readonly UserService _userService = userService;
 
         [HttpGet]
-        [Authorize]
-        public ActionResult<List<User>> GetAll(string? searchString)
+        public async Task<ActionResult<IEnumerable<User>>> GetAll([FromQuery] string? search)
         {
-            var users = _userService.GetAll(searchString);
+            var users = await _userService.GetAll(search);
             return Ok(users);
         }
 
         [HttpPut("{id}")]
-        [Authorize]
         public async Task<ActionResult<bool>> UpdateUserInfo(string id, [FromBody] UserInfoDto info)
         {
             var user = await _userService.GetCurrentUser();
@@ -37,7 +36,6 @@ namespace FindFriends.Controllers
 
 
         [HttpPost("{id}/dogs")]
-        [Authorize]
         public async Task<ActionResult<Dog>> AddUserDog(string id, [FromBody] NewDogDto newDog)
         {
             var user = await _userService.GetCurrentUser();
