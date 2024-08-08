@@ -28,15 +28,16 @@ export const PersonalInfoForm = ({ userId }: InfoFormProps) => {
       setFirstName("");
       setLastName("");
       setCity("");
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div className="flex justify-center pt-40">
-      <div className="flex flex-col p-10 bg-rose-300 w-2/4 border-double border-4 border-rose-800 shadow-2xl">
-        <h2 className="text-2xl font-bold text-white pb-5">
+    <div className="flex justify-center pt-40 font-mono">
+      <div className="flex flex-col p-10 bg-rose-300 w-2/4 rounded shadow-2xl">
+        <h2 className="text-xl font-bold text-white pb-5">
           Please enter your personal information to finish your profile
         </h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">

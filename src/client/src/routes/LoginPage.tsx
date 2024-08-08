@@ -2,7 +2,7 @@ import { LoginForm } from "../components";
 
 export const LoginPage = () => {
   return (
-    <div className="bg-gradient-to-r from-rose-400 to-rose-800">
+    <div className="bg-gradient-to-r from-rose-400 to-rose-800 font-mono">
       <div className="flex flex-col">
         <div>
           <h1 className="py-20">Welcome to Find Friends</h1>
