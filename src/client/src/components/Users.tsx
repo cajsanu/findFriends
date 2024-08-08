@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { User } from "../types";
-import { getAll } from "../requests/users";
+import userRequests from "../requests/users";
 import { SingleDog } from "../components";
 import { useNavigate } from "react-router-dom";
 
@@ -32,7 +32,7 @@ export const Users = () => {
     const getUsers = async () => {
       const token = window.localStorage.getItem("token");
       if (token) {
-        const users = await getAll(token);
+        const users = await userRequests.getAll(token);
         setUsers(users.data);
       } else {
         navigate("/");
