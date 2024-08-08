@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import { Users } from "../components";
+import { RequiresAuthentication, Users } from "../components";
 import { User } from "../types";
 import { useNavigate } from "react-router-dom";
 import userRequests from "../requests/users";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
+import { GetLoggedinUser } from "../utils/getLoggedinUser";
 
 export const UsersPage = () => {
   const [users, setUsers] = useState<User[] | null>(null);
+  const [loggedinUser, setLoggedinUser] = useState<User | null>(null);
+
   const [citySearch, setCitySearch] = useState("");
   const navigate = useNavigate();
 
@@ -23,8 +26,17 @@ export const UsersPage = () => {
         navigate("/");
       }
     };
+    const getUser = async () => {
+      const user = await GetLoggedinUser();
+      user ? setLoggedinUser(user) : navigate("/");
+    };
     getUsers();
+    getUser();
   }, [citySearch]);
+
+  if (!loggedinUser) {
+    return <RequiresAuthentication />
+  }
 
   if (!users) {
     return <div>No users could be found at the moment</div>;
@@ -34,8 +46,8 @@ export const UsersPage = () => {
     <div className="flex justify-center">
       <div className="w-full">
         <div className="p-12">
-          <h1>All users</h1>
-          <p>You can filter users based on the city they live in</p>
+          <h1>All registered users</h1>
+          <p>Lorem ipsum</p>
         </div>
         <div className="bg-rose-300 p-5">
           <form>
@@ -51,7 +63,7 @@ export const UsersPage = () => {
               color="error"
             />
             <IconButton type="submit" aria-label="search">
-              <SearchIcon/>
+              <SearchIcon />
             </IconButton>
           </form>
         </div>

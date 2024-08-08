@@ -21,6 +21,11 @@ const SingleUser = (user: User) => {
           )
         ) : null}
       </div>
+      <div className="flex justify-end">
+        <button className="rounded-md hover:text-rose-900 px-3 py-1.5 text-sm font-semibold text-stone-400">
+          Start chat
+        </button>
+      </div>
     </div>
   );
 };

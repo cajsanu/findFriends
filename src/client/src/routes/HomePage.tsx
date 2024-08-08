@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GetLoggedinUser } from "../utils/getLoggedinUser";
 import { User } from "../types";
-import { PersonalInfoForm, AddDogForm } from "../components";
+import { PersonalInfoForm, AddDogForm, RequiresAuthentication } from "../components";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { MyDogs } from "../components/MyDogs";
@@ -51,14 +51,7 @@ export const HomePage = () => {
   };
 
   if (!user) {
-    return (
-      <div>
-        <p>You have been automatically signed out, please go log in again </p>
-        <a className="underline" href="/">
-          Log in
-        </a>
-      </div>
-    );
+    return <RequiresAuthentication />
   }
 
   if (!user.firstName || !user.lastName || !user.city) {
