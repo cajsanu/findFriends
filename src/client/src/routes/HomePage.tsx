@@ -108,39 +108,38 @@ export const HomePage = () => {
           >
             My dogs
           </button>
-          <div>
-            <Modal
-              open={openAddDog}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box>
-                <AddDogForm userId={user.id} onSuccess={handleAddDogSuccess} />
-                <button onClick={handleClose}>Close</button>
-              </Box>
-            </Modal>
-          </div>
-          <div>
-            <Modal
-              open={openMyDogs}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-              className="bg-pink-200"
-            >
-              <Box>
-                <div>
-                  {user.dogs ? (
-                    <MyDogs dogs={user.dogs} />
-                  ) : (
-                    <p>You have not added any dogs yet</p>
-                  )}
-                </div>
-                <button onClick={handleClose}>Close</button>
-              </Box>
-            </Modal>
-          </div>
+        </div>
+        <div>
+          <Modal
+            open={openAddDog}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box>
+              <AddDogForm userId={user.id} onSuccess={handleAddDogSuccess} />
+              <button onClick={handleClose}>Close</button>
+            </Box>
+          </Modal>
+        </div>
+        <div>
+          <Modal
+            open={openMyDogs}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box>
+              <div>
+                {user.dogs ? (
+                  <MyDogs dogs={user.dogs} />
+                ) : (
+                  <p>You have not added any dogs yet</p>
+                )}
+              </div>
+              <button onClick={handleClose}>Close</button>
+            </Box>
+          </Modal>
         </div>
       </div>
       <div>
