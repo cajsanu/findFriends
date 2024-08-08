@@ -1,5 +1,5 @@
 import { useState } from "react";
-import userRequests from "../requests/user";
+import userRequests from "../requests/users";
 import { Sex } from "../types";
 
 interface AddDogsFormProps {
