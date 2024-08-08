@@ -3,7 +3,6 @@ import { Users } from "../components";
 import { User } from "../types";
 import { useNavigate } from "react-router-dom";
 import userRequests from "../requests/users";
-import { useDebounce } from "../hooks/useDebounce";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
@@ -12,14 +11,13 @@ export const UsersPage = () => {
   const [users, setUsers] = useState<User[] | null>(null);
   const [citySearch, setCitySearch] = useState("");
   const navigate = useNavigate();
-  const search = useDebounce(citySearch, 500);
 
   useEffect(() => {
     const getUsers = async () => {
       const token = window.localStorage.getItem("token");
       if (token) {
-        search && search.length > 1
-          ? setUsers(await userRequests.getAll(token, search))
+        citySearch
+          ? setUsers(await userRequests.getAll(token, citySearch))
           : setUsers(await userRequests.getAll(token, ""));
       } else {
         navigate("/");

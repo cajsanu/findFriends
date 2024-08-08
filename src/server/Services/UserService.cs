@@ -3,7 +3,6 @@ using FindFriends.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
-using System.Linq;
 
 namespace FindFriends.Services;
 
