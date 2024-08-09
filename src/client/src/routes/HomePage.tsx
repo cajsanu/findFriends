@@ -7,6 +7,7 @@ import { PersonalInfoForm, AddDogForm, RequiresAuthentication } from "../compone
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { MyDogs } from "../components/MyDogs";
+import { logout } from "../requests/logout";
 
 export const HomePage = () => {
   const [fact, setFact] = useState(null);
@@ -38,9 +39,14 @@ export const HomePage = () => {
     navigate("/users");
   };
 
-  const handleLogout = () => {
-    window.localStorage.removeItem("token");
-    navigate("/");
+  const handleLogout = async () => {
+    try {
+      const token = window.localStorage.getItem("token");
+      if (token) await logout(token);
+      navigate("/");
+    } catch (err) {
+      console.log(err)
+    }
   };
 
   const handleOpenAddDog = () => setOpenAddDog(true);
