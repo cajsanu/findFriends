@@ -32,7 +32,7 @@ const SingleUser = (user: User) => {
 
 export const Users = ({ users }: UsersProps) => {
   return (
-    <div className="flex flex-wrap justify-around py-10 gap-10">
+    <div className="flex flex-wrap justify-center py-10 gap-10">
       {users ? users.map((u) => <SingleUser key={u.id} {...u} />) : null}
     </div>
   );
