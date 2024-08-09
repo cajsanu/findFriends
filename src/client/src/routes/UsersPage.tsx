@@ -17,14 +17,9 @@ export const UsersPage = () => {
 
   useEffect(() => {
     const getUsers = async () => {
-      const token = window.localStorage.getItem("token");
-      if (token) {
-        citySearch
-          ? setUsers(await userRequests.getAll(token, citySearch))
-          : setUsers(await userRequests.getAll(token, ""));
-      } else {
-        navigate("/");
-      }
+      citySearch
+        ? setUsers(await userRequests.getAll(citySearch))
+        : setUsers(await userRequests.getAll(""));
     };
     const getUser = async () => {
       const user = await GetLoggedinUser();
@@ -35,7 +30,7 @@ export const UsersPage = () => {
   }, [citySearch]);
 
   if (!loggedinUser) {
-    return <RequiresAuthentication />
+    return <RequiresAuthentication />;
   }
 
   if (!users) {
