@@ -3,9 +3,20 @@ import { SingleDog } from "../components";
 
 interface UsersProps {
   users: User[];
+  loggedInUser: User;
 }
 
-const SingleUser = (user: User) => {
+interface SingleUserProps {
+  user: User;
+  loggedInUser: User;
+}
+
+const SingleUser = ({ user, loggedInUser }: SingleUserProps) => {
+  
+  if (loggedInUser.id == user.id || !user.firstName) {
+    return null;
+  }
+
   return (
     <div className="relative border rounded-xl p-6 flex flex-col bg-rose-100">
       <p className="font-bold text-xl text-rose-800 pb-2">
@@ -30,10 +41,14 @@ const SingleUser = (user: User) => {
   );
 };
 
-export const Users = ({ users }: UsersProps) => {
+export const Users = ({ users, loggedInUser }: UsersProps) => {
   return (
     <div className="flex flex-wrap justify-center py-10 gap-10">
-      {users ? users.map((u) => <SingleUser key={u.id} {...u} />) : null}
+      {users
+        ? users.map((u) => (
+            <SingleUser key={u.id} user={u} loggedInUser={loggedInUser} />
+          ))
+        : null}
     </div>
   );
 };
