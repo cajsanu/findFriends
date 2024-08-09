@@ -5,13 +5,13 @@ export const LoginPage = () => {
     <div className="bg-gradient-to-r from-rose-400 to-rose-800 font-mono">
       <div className="flex flex-col">
         <div>
-          <h1 className="py-20">Welcome to Find Friends</h1>
+          <h1 className="pt-20">Welcome to Find Friends</h1>
         </div>
-        <div className="flex flex-row justify-center justify-around">
+        <div className="flex flex-col justify-center justify-around p-5">
           <div>
             <p>This would include a short description</p>
           </div>
-          <div className="">
+          <div className="p-20">
             <LoginForm />
             <div>
               <p className="text-white">Not a registered friend yet?</p>

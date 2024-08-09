@@ -43,13 +43,13 @@ export const UsersPage = () => {
   }
 
   return (
-    <div className="flex justify-center font-mono">
+    <div className="font-mono flex justify-center m-5">
       <div className="w-full">
         <div className="p-12">
-          <h1>All registered users</h1>
+          <h1 className="flex justify-center">All registered users</h1>
           <p>Lorem ipsum</p>
         </div>
-        <div className="bg-rose-300 p-5">
+        <div className="bg-rose-300 p-5 flex justify-center">
           <form>
             <TextField
               id="search-bar"

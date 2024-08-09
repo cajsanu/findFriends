@@ -558,6 +558,10 @@ video {
   position: relative;
 }
 
+.m-5 {
+  margin: 1.25rem;
+}
+
 .block {
   display: block;
 }
