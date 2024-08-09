@@ -16,7 +16,7 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
     {
         if (string.IsNullOrWhiteSpace(search))
         {
-            return await _context.Users.Include(u =>u.Dogs).ToListAsync();
+            return await _context.Users.Include(u => u.Dogs).ToListAsync();
         }
 
         return await _context.Users
