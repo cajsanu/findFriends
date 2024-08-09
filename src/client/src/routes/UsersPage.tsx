@@ -6,7 +6,7 @@ import userRequests from "../requests/users";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
-import { GetLoggedinUser } from "../utils/getLoggedinUser";
+import { getCurrentUser } from "../requests/user";
 
 export const UsersPage = () => {
   const [users, setUsers] = useState<User[] | null>(null);
@@ -22,7 +22,7 @@ export const UsersPage = () => {
         : setUsers(await userRequests.getAll(""));
     };
     const getUser = async () => {
-      const user = await GetLoggedinUser();
+      const user = await getCurrentUser();
       user ? setLoggedinUser(user) : navigate("/");
     };
     getUsers();
