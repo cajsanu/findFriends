@@ -34,7 +34,7 @@ export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
 
   return (
     <div className="flex justify-center pt-40">
-      <div className="flex flex-col p-10 bg-rose-300 w-2/4 border-double border-4 border-rose-800 shadow-2xl">
+      <div className="flex flex-col p-10 bg-rose-300 w-2/4 rounded shadow-2xl">
         <h2 className="text-2xl font-bold text-white pb-5">
           Please enter your dogs information below
         </h2>
@@ -80,7 +80,7 @@ export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
           </div>
           <div>
             <button
-              className="transition duration-150 rounded-md px-3 py-1.5 text-sm font-semibold leading-6 bg-rose-800 text-white hover:bg-rose-100 hover:text-rose-800"
+              className="transition duration-150 rounded-md px-3 py-1.5 text-sm font-semibold leading-6 bg-rose-200 text-pink-800 hover:bg-rose-100"
               type="submit"
             >
               Done

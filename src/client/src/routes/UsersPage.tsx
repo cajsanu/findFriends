@@ -3,11 +3,10 @@ import { RequiresAuthentication, Users } from "../components";
 import { User } from "../types";
 import { useNavigate } from "react-router-dom";
 import userRequests from "../requests/users";
-import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import { getCurrentUser } from "../requests/user";
 import { UserNavBar } from "../components/UserNavBar";
+import SearchIcon from "@mui/icons-material/Search";
 
 export const UsersPage = () => {
   const [users, setUsers] = useState<User[] | null>(null);
@@ -46,8 +45,8 @@ export const UsersPage = () => {
           <h1 className="flex justify-center">All registered users</h1>
           <p>Lorem ipsum</p>
         </div>
-        <div className="bg-rose-300 p-5 flex justify-center">
-          <form>
+        <div className="p-5 flex justify-center">
+          <form className="bg-rose-100 rounded-md">
             <TextField
               id="search-bar"
               className="text"
@@ -57,12 +56,12 @@ export const UsersPage = () => {
               variant="outlined"
               placeholder="Search..."
               size="small"
-              color="error"
+              color="secondary"
             />
-            <IconButton type="submit" aria-label="search">
-              <SearchIcon />
-            </IconButton>
           </form>
+          <div className="pl-2">
+            <SearchIcon fontSize="large" />
+          </div>
         </div>
         <div className="flex justify-center m-5">
           <Users users={users} loggedInUser={loggedinUser} />

@@ -16,6 +16,7 @@ export const HomePage = () => {
 
   return (
     <div className="font-mono">
+      <UserNavBar />
       <div className="felx flex-col justify-center p-10 bg-gradient-to-r from-rose-400 via-rose-700 to-rose-400">
         <div className="flex flex-row justify-around p-10">
           <div className="flex justify-end">
@@ -26,7 +27,6 @@ export const HomePage = () => {
           </div>
         </div>
       </div>
-      <UserNavBar />
       <div>
         <h1>Lorem impsum</h1>
       </div>

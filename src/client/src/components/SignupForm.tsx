@@ -53,7 +53,7 @@ export const SignupForm = () => {
               value={password}
               onChange={(p) => setPassword(p.target.value)}
               required
-              className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
+              className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-pink-800"
             />
           </div>
           <div>
@@ -65,12 +65,12 @@ export const SignupForm = () => {
               value={confirmPassword}
               onChange={(p) => setConfirmPassword(p.target.value)}
               required
-              className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
+              className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-pink-800"
             />
           </div>
           <div className="pt-5">
             <button
-              className="rounded-md bg-rose-200 hover:bg-rose-100 px-3 py-1.5 text-sm font-semibold text-stone-700"
+              className="rounded-md bg-rose-200 hover:bg-rose-100 px-3 py-1.5 text-sm font-semibold text-rose-800"
               type="submit"
             >
               Register

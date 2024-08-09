@@ -26,13 +26,13 @@ export const LoginForm = () => {
   return (
     <div className="flex justify-center">
       <div>
-        <h2 className="text-2xl font-bold tracking-tight text-white">
+        <h2 className="text-2xl font-bold tracking-tight text-white py-2">
           Sign in to your account
         </h2>
         <div>
           <form onSubmit={handleSubmit}>
             <div>
-              <label className="block text-sm font-medium leading-6 text-white flex justify-right">
+              <label className="block text-sm font-medium leading-6 text-white flex justify-right pt-2">
                 Email:
               </label>
               <input
@@ -40,11 +40,11 @@ export const LoginForm = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-pink-400"
+                className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-pink-800"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium leading-6 text-white flex justify-right">
+              <label className="block text-sm font-medium leading-6 text-white flex justify-right pt-2">
                 Password:
               </label>
               <input
@@ -52,15 +52,17 @@ export const LoginForm = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-pink-400"
+                className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-pink-800"
               />
             </div>
-            <button
-              className="transition delay-150 flex w-full justify-center rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-pink-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
-              type="submit"
-            >
-              Log in
-            </button>
+            <div className="py-3">
+              <button
+                className="transition delay-150 flex w-full justify-center rounded-md bg-rose-300 px-3 py-1.5 text-sm font-semibold leading-6 text-rose-800 hover:bg-rose-200"
+                type="submit"
+              >
+                Log in
+              </button>
+            </div>
           </form>
         </div>
       </div>
