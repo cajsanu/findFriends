@@ -65,33 +65,33 @@ export const UserNavBar = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-rose-500 to-rose-500 p-5">
-      <div className="flex justify-between">
-        <div>
+    <div className="bg-red-100 p-5">
+      <div className="flex justify-between font-semibold text-rose-400 text-m">
+        <div className="">
           <button
             onClick={handleHome}
-            className="rounded-md hover:text-pink-900 px-3 py-1.5 text-sm font-semibold text-white"
+            className="px-3 py-1.5 hover:text-pink-900"
           >
             Home
           </button>
           <button
-            className="rounded-md hover:text-pink-900 px-3 py-1.5 text-sm font-semibold text-white"
+            className="px-3 py-1.5 hover:text-pink-900"
             onClick={handleClickUsers}
           >
             See users
           </button>
-          <button className="rounded-md hover:text-pink-900 px-3 py-1.5 text-sm font-semibold text-white">
-            Start new chat
+          <button className="px-3 py-1.5 hover:text-pink-900">
+            New chat
           </button>
           <button
             onClick={handleOpenAddDog}
-            className="rounded-md hover:text-pink-900 px-3 py-1.5 text-sm font-semibold text-white"
+            className="px-3 py-1.5 hover:text-pink-900"
           >
             Add dog
           </button>
           <button
             onClick={handleOpenMyDogs}
-            className="rounded-md hover:text-pink-900 px-3 py-1.5 text-sm font-semibold text-white"
+            className="px-3 py-1.5 hover:text-pink-900"
           >
             My dogs
           </button>
@@ -99,7 +99,7 @@ export const UserNavBar = () => {
         <div>
           <button
             onClick={handleLogout}
-            className="rounded-md hover:text-pink-900 px-3 py-1.5 text-sm font-semibold text-white"
+            className="px-3 py-1.5 hover:text-pink-900"
           >
             Logout
           </button>
