@@ -13,7 +13,10 @@ export default defineConfig({
       "/register": {
         target: "http://localhost:5053",
         changeOrigin: true,
-        secure: false,
+      },
+      "/login": {
+        target: "http://localhost:5053",
+        changeOrigin: true,
       },
     },
   },

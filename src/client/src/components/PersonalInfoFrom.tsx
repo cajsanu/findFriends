@@ -17,14 +17,11 @@ export const PersonalInfoForm = ({ userId }: InfoFormProps) => {
       return;
     }
     try {
-      const token = window.localStorage.getItem("token");
-      if (token) {
-        await userRequests.updateInfo(userId, token, {
-          firstName,
-          lastName,
-          city,
-        });
-      }
+      await userRequests.updateInfo(userId, {
+        firstName,
+        lastName,
+        city,
+      });
       setFirstName("");
       setLastName("");
       setCity("");

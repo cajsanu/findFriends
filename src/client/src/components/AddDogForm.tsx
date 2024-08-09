@@ -3,8 +3,8 @@ import userRequests from "../requests/users";
 import { Sex } from "../types";
 
 interface AddDogsFormProps {
-  userId: string
-  onSuccess: () => void
+  userId: string;
+  onSuccess: () => void;
 }
 export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
   const [name, setName] = useState("");
@@ -18,15 +18,12 @@ export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
       return;
     }
     try {
-      const token = window.localStorage.getItem("token");
-      if (token) {
-        await userRequests.addUserDog(userId, token, {
-          name,
-          breed,
-          sex,
-        });
-        onSuccess();
-      }
+      await userRequests.addUserDog(userId, {
+        name,
+        breed,
+        sex,
+      });
+      onSuccess()<
       setName("");
       setBreed("");
       setSex(undefined);

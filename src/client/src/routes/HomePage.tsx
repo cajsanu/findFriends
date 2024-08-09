@@ -41,8 +41,7 @@ export const HomePage = () => {
 
   const handleLogout = async () => {
     try {
-      const token = window.localStorage.getItem("token");
-      if (token) await logout(token);
+      await logout();
       navigate("/");
     } catch (err) {
       console.log(err)
