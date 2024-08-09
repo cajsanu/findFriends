@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GetLoggedinUser } from "../utils/getLoggedinUser";
+import { getCurrentUser } from "../requests/user";
 import { User } from "../types";
 import { PersonalInfoForm, AddDogForm, RequiresAuthentication } from "../components";
 import Box from "@mui/material/Box";
@@ -22,7 +22,7 @@ export const HomePage = () => {
       setFact(res.data.facts);
     };
     const getUser = async () => {
-      const user = await GetLoggedinUser();
+      const user = await getCurrentUser();
       user ? setUser(user) : navigate("/");
     };
     getDogFact();
@@ -30,7 +30,7 @@ export const HomePage = () => {
   }, []);
 
   const handleAddDogSuccess = async () => {
-    setUser(await GetLoggedinUser());
+    setUser(await getCurrentUser());
     setOpenMyDogs(true);
     setOpenAddDog(false);
   };

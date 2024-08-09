@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { login } from "../requests/login";
 import { useNavigate } from "react-router-dom";
-import { GetLoggedinUser } from "../utils/getLoggedinUser";
+import { getCurrentUser } from "../requests/user";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -12,7 +12,7 @@ export const LoginForm = () => {
     event.preventDefault();
     try {
       await login(email, password);
-      const user = await GetLoggedinUser();
+      const user = await getCurrentUser();
       if (user) {
         navigate(`home/${user.id}`);
       }
