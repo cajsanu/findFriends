@@ -70,28 +70,28 @@ export const UserNavBar = () => {
         <div className="">
           <button
             onClick={handleHome}
-            className="px-3 py-1.5 hover:text-pink-900"
+            className="px-3 py-1.5 hover:text-rose-700"
           >
             Home
           </button>
           <button
-            className="px-3 py-1.5 hover:text-pink-900"
+            className="px-3 py-1.5 hover:text-rose-700"
             onClick={handleClickUsers}
           >
             See users
           </button>
-          <button className="px-3 py-1.5 hover:text-pink-900">
+          <button className="px-3 py-1.5 hover:text-rose-700">
             New chat
           </button>
           <button
             onClick={handleOpenAddDog}
-            className="px-3 py-1.5 hover:text-pink-900"
+            className="px-3 py-1.5 hover:text-rose-700"
           >
             Add dog
           </button>
           <button
             onClick={handleOpenMyDogs}
-            className="px-3 py-1.5 hover:text-pink-900"
+            className="px-3 py-1.5 hover:text-rose-700"
           >
             My dogs
           </button>
@@ -99,7 +99,7 @@ export const UserNavBar = () => {
         <div>
           <button
             onClick={handleLogout}
-            className="px-3 py-1.5 hover:text-pink-900"
+            className="px-3 py-1.5 hover:text-rose-700"
           >
             Logout
           </button>
@@ -114,7 +114,7 @@ export const UserNavBar = () => {
         >
           <Box>
             <AddDogForm userId={user.id} onSuccess={handleAddDogSuccess} />
-            <button onClick={handleClose}>Close</button>
+            <button className="font-bold text-xl" onClick={handleClose}>x</button>
           </Box>
         </Modal>
       </div>
@@ -133,7 +133,7 @@ export const UserNavBar = () => {
                 <p>You have not added any dogs yet</p>
               )}
             </div>
-            <button onClick={handleClose}>Close</button>
+            <button className="font-bold text-xl" onClick={handleClose}>x</button>
           </Box>
         </Modal>
       </div>

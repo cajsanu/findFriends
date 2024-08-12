@@ -48,7 +48,7 @@ export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
               value={name}
               onChange={(n) => setName(n.target.value)}
               required
-              className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
+              className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-pink-800"
             />
           </div>
           <div>
@@ -60,7 +60,7 @@ export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
               value={breed}
               onChange={(b) => setBreed(b.target.value)}
               required
-              className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
+              className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-pink-800"
             />
           </div>
           <div>
@@ -71,7 +71,7 @@ export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
               required
               value={sex}
               onChange={(s) => setSex(s.target.value as Sex)}
-              className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
+              className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-pink-800"
             >
               <option value=""></option>
               <option value="female">Female</option>
@@ -80,7 +80,7 @@ export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
           </div>
           <div>
             <button
-              className="transition duration-150 rounded-md px-3 py-1.5 text-sm font-semibold leading-6 bg-rose-200 text-pink-800 hover:bg-rose-100"
+              className="transition duration-150 rounded-md px-3 py-1.5 text-sm font-semibold leading-6 bg-rose-200 text-rose-800 hover:bg-rose-100"
               type="submit"
             >
               Done
