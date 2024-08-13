@@ -2,34 +2,48 @@ import { useState } from "react";
 import * as signalR from "@microsoft/signalr";
 
 export const Chat = () => {
-  //   const [message, setMessage] = useState("");
+  const [inputMessage, setInputMessage] = useState("");
+  const [outputMessage, setOutputMessage] = useState("");
 
-  // Create connection
-  console.log("before connection");
   const connection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub")
     .build();
 
-  // Start the connection
   connection.start().catch((err) => console.error(err.toString()));
 
-  //Handle receiving messages
-  connection.on("ReceiveMessage", ( message: string) => {
-    console.log(`${message}`);
-    // Add your logic to update the chat UI here
+  connection.on("RecieveMessage", (message: string) => {
+    setOutputMessage(message);
   });
 
-  // Send message
-  const sendMessage = (user: string, message: string) => {
-    connection
-      .invoke("SendMessage", user, message)
-      .catch((err) => console.error(err.toString()));
+  const sendMessage = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (connection && inputMessage.trim()) {
+      try {
+        await connection.invoke("SendMessage", inputMessage);
+        setInputMessage("");
+      } catch (err) {
+        console.error(err.toString());
+      }
+    }
   };
 
   return (
     <div>
       <p>Chat</p>
-      <button></button>
+      <p className="bg-white text-black">{outputMessage}</p>
+
+      <form onSubmit={sendMessage}>
+        <input
+          type="text"
+          value={inputMessage}
+          onChange={(e) => setInputMessage(e.target.value)}
+          placeholder="Type your message here..."
+          className="bg-white text-black"
+        />
+        <button type="submit" className="bg-teal-400">
+          Send
+        </button>
+      </form>
     </div>
   );
 };
