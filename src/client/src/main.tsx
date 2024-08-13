@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { UsersPage, HomePage, SignUpPage, LoginPage } from "./routes";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import "./input.css";
-import { Chat } from "@mui/icons-material";
+import { Chat } from "./routes/Chat";
 
 const theme = createTheme({
   palette: {
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
     errorElement: <div>"Not found"</div>,
   },
   {
-    path: "/chatHub",
+    path: "/chat",
     element: <Chat />,
     errorElement: <div>"Not found"</div>,
   },
