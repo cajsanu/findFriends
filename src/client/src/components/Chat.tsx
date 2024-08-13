@@ -29,9 +29,6 @@ export const Chat = () => {
 
   return (
     <div>
-      <p>Chat</p>
-      <p className="bg-white text-black">{outputMessage}</p>
-
       <form onSubmit={sendMessage}>
         <input
           type="text"
@@ -40,10 +37,11 @@ export const Chat = () => {
           placeholder="Type your message here..."
           className="bg-white text-black"
         />
-        <button type="submit" className="bg-teal-400">
+        <button type="submit" className="bg-rose-900">
           Send
         </button>
       </form>
+      <p className="bg-white text-black">{outputMessage}</p>
     </div>
   );
 };

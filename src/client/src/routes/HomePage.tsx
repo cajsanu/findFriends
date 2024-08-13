@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { UserNavBar } from "../components/UserNavBar";
+import { UserNavBar, Chat } from "../components";
 
 export const HomePage = () => {
   const [fact, setFact] = useState(null);
@@ -29,6 +29,9 @@ export const HomePage = () => {
       </div>
       <div>
         <h1>Lorem impsum</h1>
+      </div>
+      <div>
+        <Chat />
       </div>
     </div>
   );
