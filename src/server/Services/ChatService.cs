@@ -13,9 +13,11 @@ public class ChatService(FindFriendsContext context)
         await _context.SaveChangesAsync();
     }
 
-    public Chat CreateChat()
+    public async Task<Chat> CreateChat()
     {
         var chat = new Chat();
+        _context.Chats.Add(chat);
+        await _context.SaveChangesAsync();
         return chat;
     }
 

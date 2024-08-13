@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { UserNavBar, Chat } from "../components";
-import { createChat } from "../requests/Chats";
+import { createChat } from "../requests/chats"; 
 
 export const HomePage = () => {
   const [fact, setFact] = useState(null);

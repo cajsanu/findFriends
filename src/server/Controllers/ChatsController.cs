@@ -13,9 +13,9 @@ namespace FindFriends.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult<Chat> CreateChat()
+        public async Task<ActionResult<Chat>> CreateChat()
         {
-            Chat chat = _chatService.CreateChat();
+            Chat chat = await _chatService.CreateChat();
             return Ok(chat);
         }
     }
