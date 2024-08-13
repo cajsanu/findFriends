@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace FindFriends.Models;
 
 
-public class ChatMessage(string senderId, string message)
+public class ChatMessage(string senderId, string message, string chatId)
 {
     [Required]
     [MaxLength(100)]
@@ -11,8 +11,10 @@ public class ChatMessage(string senderId, string message)
     [Required]
     public string SenderId { get; set; } = senderId;
     [Required]
+    public string ChatId { get; set; } = chatId;
+    [Required]
     public string Message { get; set; } = message;
     [Required]
-    public DateTime Timestamp { get; set; } = DateTime.Now;
+    public DateTime Timestamp { get; set; }
 }
 
