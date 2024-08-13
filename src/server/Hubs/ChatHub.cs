@@ -10,7 +10,7 @@ public class ChatHub(ChatService chatService) : Hub
 
     public async Task SendPrivateMessage(string message, string chatId)
     {
-        Console.WriteLine("!!!!!!" + message);
+        Console.WriteLine("!!!!!!" + message + chatId);
         var userId = Context.UserIdentifier;
         // var chat = await _chatService.GetChatAsync(chatId);
 

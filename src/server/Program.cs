@@ -18,6 +18,7 @@ builder.Services.AddIdentityApiEndpoints<User>()
     .AddEntityFrameworkStores<FindFriendsContext>();
 
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<ChatService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

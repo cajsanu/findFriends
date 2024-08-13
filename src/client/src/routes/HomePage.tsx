@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { UserNavBar, Chat } from "../components";
+import { createChat } from "../requests/Chats";
 
 export const HomePage = () => {
   const [fact, setFact] = useState(null);
-
+  const [chatInfo, setChatInfo] = useState(null);
 
   useEffect(() => {
     const getDogFact = async () => {
@@ -13,6 +14,13 @@ export const HomePage = () => {
     };
     getDogFact();
   }, []);
+
+  const handleStarChat = async () => {
+    const chatInfo = await createChat();
+    setChatInfo(chatInfo);
+  };
+
+  console.log(chatInfo);
 
   return (
     <div className="font-mono">
@@ -30,9 +38,8 @@ export const HomePage = () => {
       <div>
         <h1>Lorem impsum</h1>
       </div>
-      <div>
-        <Chat />
-      </div>
+      <div>{chatInfo ? <Chat chatId={chatInfo.id} /> : null}</div>
+      <button onClick={handleStarChat}>Start chat</button>
     </div>
   );
 };
