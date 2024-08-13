@@ -25,4 +25,5 @@ public class User : IdentityUser
     public bool IsAdmin { get; } = false;
     
     public List<Dog> Dogs { get; } = new();
+    public List<Chat> Chats { get; } = new();
 }

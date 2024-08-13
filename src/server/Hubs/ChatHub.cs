@@ -6,8 +6,12 @@ public class ChatHub : Hub
 {
     public async Task SendMessage(string message)
     {
-        Console.WriteLine(message + "!!!!!!!!!!");
-        await Clients.All.SendAsync("RecieveMessage", message);
+        await Clients.Caller.SendAsync("RecieveMessage", message);
     }
-        
+
+    public async Task SendPrivateMessage(string user, string message)
+    {
+        await Clients.User(user).SendAsync("ReceiveMessage", message);
+    }
+
 }

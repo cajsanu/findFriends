@@ -3,7 +3,7 @@ import * as signalR from "@microsoft/signalr";
 
 export const Chat = () => {
   const [inputMessage, setInputMessage] = useState("");
-  const [outputMessage, setOutputMessage] = useState("");
+  const [outputMessages, setOutputMessages] = useState<string[]>([]);
 
   const connection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub")
@@ -12,7 +12,7 @@ export const Chat = () => {
   connection.start().catch((err) => console.error(err.toString()));
 
   connection.on("RecieveMessage", (message: string) => {
-    setOutputMessage(message);
+    setOutputMessages((prevMesages) => [...prevMesages, message]);
   });
 
   const sendMessage = async (event: React.FormEvent) => {
@@ -28,7 +28,7 @@ export const Chat = () => {
   };
 
   return (
-    <div>
+    <div className="p-10">
       <form onSubmit={sendMessage}>
         <input
           type="text"
@@ -41,7 +41,11 @@ export const Chat = () => {
           Send
         </button>
       </form>
-      <p className="bg-white text-black">{outputMessage}</p>
+      <div>
+        {outputMessages.map((m) => (
+          <p>{m}</p>
+        ))}
+      </div>
     </div>
   );
 };

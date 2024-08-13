@@ -8,6 +8,9 @@ namespace FindFriends.Data;
 public class FindFriendsContext(DbContextOptions<FindFriendsContext> options) : IdentityDbContext<User>(options)
 {
     public DbSet<Dog> Dogs => Set<Dog>();
+    public DbSet<Chat> Chats => Set<Chat>();
+    public DbSet<ChatMessage> ChatMessages => Set<ChatMessage>();
+    public DbSet<UserChat> UserChats => Set<UserChat>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
