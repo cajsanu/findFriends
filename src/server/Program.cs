@@ -2,12 +2,14 @@ using FindFriends.Data;
 using FindFriends.Services;
 using Microsoft.EntityFrameworkCore;
 using FindFriends.Models;
+using FindFriends.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
+builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<FindFriendsContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -43,6 +45,10 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapIdentityApi<User>();
 app.CreateDbIfNotExists();
+app.UseDefaultFiles();
+app.UseStaticFiles();
+app.MapHub<ChatHub>("/chatHub");
+app.MapFallbackToFile("index.html");
 
 app.Run();
 

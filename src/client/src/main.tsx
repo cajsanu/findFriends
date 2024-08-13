@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { UsersPage, HomePage, SignUpPage, LoginPage } from "./routes";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import "./input.css";
+import { Chat } from "@mui/icons-material";
 
 const theme = createTheme({
   palette: {
@@ -34,7 +35,13 @@ const router = createBrowserRouter([
     element: <UsersPage />,
     errorElement: <div>"Not found"</div>,
   },
+  {
+    path: "/chatHub",
+    element: <Chat />,
+    errorElement: <div>"Not found"</div>,
+  },
 ]);
+
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
