@@ -10,7 +10,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 export const UsersPage = () => {
   const [users, setUsers] = useState<User[] | null>(null);
-  const [loggedinUser, setLoggedinUser] = useState<User | null>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   const [citySearch, setCitySearch] = useState("");
   const navigate = useNavigate();
@@ -23,13 +23,13 @@ export const UsersPage = () => {
     };
     const getUser = async () => {
       const user = await getCurrentUser();
-      user ? setLoggedinUser(user) : navigate("/");
+      user ? setCurrentUser(user) : navigate("/");
     };
     getUsers();
     getUser();
   }, [citySearch]);
 
-  if (!loggedinUser) {
+  if (!currentUser) {
     return <RequiresAuthentication />;
   }
 
@@ -40,7 +40,7 @@ export const UsersPage = () => {
   return (
     <div className="font-mono flex justify-center">
       <div className="w-full">
-        <UserNavBar />
+        <UserNavBar user={currentUser}/>
         <div className="p-12">
           <h1 className="flex justify-center">All registered users</h1>
           <p>Lorem ipsum</p>
@@ -64,7 +64,7 @@ export const UsersPage = () => {
           </div>
         </div>
         <div className="flex justify-center m-5">
-          <Users users={users} loggedInUser={loggedinUser} />
+          <Users users={users} currentUser={currentUser} />
         </div>
       </div>
     </div>

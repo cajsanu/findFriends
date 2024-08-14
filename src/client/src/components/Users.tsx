@@ -1,21 +1,29 @@
 import { User } from "../types";
 import { SingleDog } from "../components";
+import { startChat } from "../requests/chats";
+import { useNavigate } from "react-router-dom";
 
 interface UsersProps {
   users: User[];
-  loggedInUser: User;
+  currentUser: User;
 }
 
 interface SingleUserProps {
   user: User;
-  loggedInUser: User;
+  currentUser: User;
 }
 
-const SingleUser = ({ user, loggedInUser }: SingleUserProps) => {
+const SingleUser = ({ user, currentUser }: SingleUserProps) => {
+  const navigate = useNavigate()
   
-  if (loggedInUser.id == user.id || !user.firstName) {
+  if (currentUser.id == user.id || !user.firstName) {
     return null;
   }
+
+  const handleStartChat = async () => {
+    const chat = await startChat(user.id);
+    navigate(`/chat/${chat.id}`)
+  };
 
   return (
     <div className="relative border rounded-xl p-6 flex flex-col bg-rose-100">
@@ -33,7 +41,7 @@ const SingleUser = ({ user, loggedInUser }: SingleUserProps) => {
         ) : null}
       </div>
       <div className="flex justify-end">
-        <button className="rounded-md hover:text-rose-900 px-3 py-1.5 text-sm font-semibold text-stone-400">
+        <button onClick={handleStartChat} className="rounded-md hover:text-rose-900 px-3 py-1.5 text-sm font-semibold text-stone-400">
           Start chat
         </button>
       </div>
@@ -41,13 +49,13 @@ const SingleUser = ({ user, loggedInUser }: SingleUserProps) => {
   );
 };
 
-export const Users = ({ users, loggedInUser }: UsersProps) => {
+export const Users = ({ users, currentUser }: UsersProps) => {
   console.log(users)
   return (
     <div className="flex flex-wrap justify-center py-10 gap-10">
       {users
         ? users.map((u) => (
-            <SingleUser key={u.id} user={u} loggedInUser={loggedInUser} />
+            <SingleUser key={u.id} user={u} currentUser={currentUser} />
           ))
         : null}
     </div>

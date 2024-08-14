@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { UserNavBar, Chat } from "../components";
-import { startChat } from "../requests/chats"; 
+import { startChat } from "../requests/chats";
 import { User } from "../types";
 import { getCurrentUser } from "../requests/user";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +28,7 @@ export const HomePage = () => {
   console.log(currentUser)
 
   const handleStarChat = async () => {
-    const chat = await startChat();
+    // const chat = await startChat();
     setChat(chat);
   };
 

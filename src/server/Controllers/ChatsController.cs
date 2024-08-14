@@ -14,12 +14,13 @@ namespace FindFriends.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<Chat>> StartChat()
+        public async Task<ActionResult<Chat>> StartChat([FromBody] string recieverId)
         {
             User user = await _userService.GetCurrentUser();
             Chat newChat = await _chatService.StartChat();
             await _userService.AddChat(user, newChat);
             await _chatService.CreateUserChat(user.Id, newChat.Id);
+            await _chatService.CreateUserChat(recieverId, newChat.Id);
             return Ok(newChat);
         }
 
