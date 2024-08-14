@@ -1,14 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { UserNavBar, Chat } from "../components";
-import { startChat } from "../requests/chats";
 import { User } from "../types";
 import { getCurrentUser } from "../requests/user";
 import { useNavigate } from "react-router-dom";
+import { ChatsList } from "../components/ChatsList";
 
 export const HomePage = () => {
   const [fact, setFact] = useState(null);
-  const [chat, setChat] = useState(null);
   const [currentUser, setCurrentUser] = useState<User>(null);
   const navigate = useNavigate();
 
@@ -27,11 +26,6 @@ export const HomePage = () => {
 
   console.log(currentUser)
 
-  const handleStarChat = async () => {
-    // const chat = await startChat();
-    setChat(chat);
-  };
-
   return (
     <div className="font-mono">
       <UserNavBar user={currentUser}/>
@@ -46,12 +40,9 @@ export const HomePage = () => {
         </div>
       </div>
       <div>
-        {currentUser ? currentUser.chats.map((c) => (
-          <li>{c.id}</li>
-        )) : null}
+        {currentUser ? <ChatsList chats={currentUser.chats} /> : null}
       </div>
-      <div>{chat ? <Chat chatId={chat.id} /> : null}</div>
-      <button onClick={handleStarChat}>Start chat</button>
+      {/* <div>{chat ? <Chat chatId={chat.id} /> : null}</div> */}
     </div>
   );
 };

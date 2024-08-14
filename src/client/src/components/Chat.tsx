@@ -1,15 +1,16 @@
 import { useState } from "react";
 import * as signalR from "@microsoft/signalr";
+import { BaseChat } from "../types";
 
-interface ChatId {
-  chatId: ChatId;
+interface ChatProps {
+  chat: BaseChat;
 }
 
-export const Chat = ({ chatId }: ChatId) => {
+export const Chat = ({ chat }: ChatProps) => {
   const [inputMessage, setInputMessage] = useState("");
   const [outputMessages, setOutputMessages] = useState<string[]>([]);
 
-  console.log(chatId)
+  console.log(chat);
 
   const connection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub")
@@ -17,7 +18,7 @@ export const Chat = ({ chatId }: ChatId) => {
 
   connection.start().catch((err) => console.error(err.toString()));
 
-  connection.on("RecievePrivateMessage", (message: string) => {
+  connection.on("ReceivePrivateMessage", (message: string) => {
     setOutputMessages((prevMesages) => [...prevMesages, message]);
   });
 
@@ -25,7 +26,7 @@ export const Chat = ({ chatId }: ChatId) => {
     event.preventDefault();
     if (connection && inputMessage.trim()) {
       try {
-        await connection.invoke("SendPrivateMessage", inputMessage, chatId);
+        await connection.invoke("SendPrivateMessage", inputMessage, chat.id);
         setInputMessage("");
       } catch (err) {
         console.error(err.toString());
@@ -35,6 +36,12 @@ export const Chat = ({ chatId }: ChatId) => {
 
   return (
     <div className="p-10">
+      <div>
+        {chat ? chat.messages.map((m) => <p key={m.id}>{m.message}</p>) : null}
+        {outputMessages.map((m) => (
+          <p>{m}</p>
+        ))}
+      </div>
       <form onSubmit={sendPrivateMessage}>
         <input
           type="text"
@@ -47,11 +54,6 @@ export const Chat = ({ chatId }: ChatId) => {
           Send
         </button>
       </form>
-      <div>
-        {outputMessages.map((m) => (
-          <p>{m}</p>
-        ))}
-      </div>
     </div>
   );
 };

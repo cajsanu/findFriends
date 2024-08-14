@@ -5,7 +5,7 @@ export interface User {
   email: string;
   city: string;
   dogs?: Array<UserDog>;
-  chats?: Array<Chat>;
+  chats?: Array<BaseChat>;
 }
 
 export interface SignupUser {
@@ -32,10 +32,18 @@ export interface UserDog extends BaseDog {
   userId: string;
 }
 
-export interface Chat {
+export interface BaseChat {
   id: string;
   name?: string;
-  messages?: Array<string>;
+  messages?: Array<BaseMessage>;
+}
+
+export interface BaseMessage {
+  id: string;
+  senderId: string;
+  chatId: string;
+  timeStamp: string;
+  message: string;
 }
 
 export type UserWithoutId = Omit<User, "id">;

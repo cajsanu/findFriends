@@ -18,7 +18,7 @@ public class ChatHub(ChatService chatService) : Hub
         Chat chat = await _chatService.GetChatAsync(chatId);
         await _chatService.AddChatMessage(chat, chatMessage);
 
-        await Clients.Caller.SendAsync("ReceivePrivateMessage", Context.UserIdentifier, message);
+        await Clients.Caller.SendAsync("ReceivePrivateMessage", message);
 
     }
 
