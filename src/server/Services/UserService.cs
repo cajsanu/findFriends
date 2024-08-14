@@ -16,12 +16,16 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
     {
         if (string.IsNullOrWhiteSpace(search))
         {
-            return await _context.Users.Include(u => u.Dogs).ToListAsync();
+            return await _context.Users
+                .Include(u => u.Dogs)
+                .Include(u => u.Chats)
+                .ToListAsync();
         }
 
         return await _context.Users
             .Where(u => u.City.ToLower().Contains(search.ToLower()))
             .Include(u => u.Dogs)
+            .Include(u => u.Chats)
             .ToListAsync();
     }
 
@@ -36,6 +40,7 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
             {
                 var user = await _context.Users
                 .Include(u => u.Dogs)
+                .Include(u => u.Chats)
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
                 return user;

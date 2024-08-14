@@ -7,13 +7,7 @@ public class ChatService(FindFriendsContext context)
 {
     private readonly FindFriendsContext _context = context;
 
-    public async Task SaveMessageAsync(ChatMessage message)
-    {
-        _context.ChatMessages.Add(message);
-        await _context.SaveChangesAsync();
-    }
-
-    public async Task<Chat> CreateChat()
+    public async Task<Chat> StartChat()
     {
         var chat = new Chat();
         _context.Chats.Add(chat);
@@ -21,16 +15,23 @@ public class ChatService(FindFriendsContext context)
         return chat;
     }
 
+    public async Task SaveMessageAsync(ChatMessage message)
+    {
+        _context.ChatMessages.Add(message);
+        await _context.SaveChangesAsync();
+    }
 
-    // public async Task<Chat> GetChatAsync(string chatId)
-    // {
-    //     var chat = await _context.Chats.FirstOrDefaultAsync(c => c.Id == chatId);
-    //     return chat;
-    // }
 
-    //  public async Task CreateUserChat(string userId, string chatId)
-    // {
-    //     _context.ChatMessages.Add();
-    //     await _context.SaveChangesAsync();
-    // }
+    public async Task<Chat> GetChatAsync(string chatId)
+    {
+        Chat chat = await _context.Chats.FirstAsync(c => c.Id == chatId);
+        return chat;
+    }
+
+     public async Task CreateUserChat(string userId, string chatId)
+    {
+        UserChat userchat = new UserChat(userId, chatId);
+        _context.UserChats.Add(userchat);
+        await _context.SaveChangesAsync();
+    }
 }

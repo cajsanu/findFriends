@@ -12,12 +12,11 @@ public class ChatHub(ChatService chatService) : Hub
     {
         Console.WriteLine("!!!!!!" + message + chatId);
         var userId = Context.UserIdentifier;
-        // var chat = await _chatService.GetChatAsync(chatId);
 
         var chatMessage = new ChatMessage(senderId: userId, message: message, chatId: chatId);
         await _chatService.SaveMessageAsync(chatMessage);
 
-        // await _chatService.CreateUserChat(userId, chat.id);
+        // await _chatService.CreateUserChat(userId, chatId);
 
         await Clients.Caller.SendAsync("ReceivePrivateMessage", Context.UserIdentifier, message);
 
