@@ -50,7 +50,6 @@ const SingleUser = ({ user, currentUser }: SingleUserProps) => {
 };
 
 export const Users = ({ users, currentUser }: UsersProps) => {
-  console.log(users)
   return (
     <div className="flex flex-wrap justify-center py-10 gap-10">
       {users

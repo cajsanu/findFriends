@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using FindFriends.Models;
 using FindFriends.Services;
 using Microsoft.AspNetCore.Authorization;
+using FindFriends.Dtos;
 
 namespace FindFriends.Controllers
 {
@@ -14,13 +15,14 @@ namespace FindFriends.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<Chat>> StartChat([FromBody] string recieverId)
+        public async Task<ActionResult<Chat>> StartChat([FromBody] RecieverIdDto receiver)
         {
+            Console.WriteLine(receiver.ReceiverId + "!!!!!!!!!!!!!!!");
             User user = await _userService.GetCurrentUser();
             Chat newChat = await _chatService.StartChat();
             await _userService.AddChat(user, newChat);
             await _chatService.CreateUserChat(user.Id, newChat.Id);
-            await _chatService.CreateUserChat(recieverId, newChat.Id);
+            await _chatService.CreateUserChat(receiver.ReceiverId, newChat.Id);
             return Ok(newChat);
         }
 

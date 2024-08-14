@@ -11,9 +11,10 @@ export const getChatById = async (id: string) => {
   }
 };
 
-export const startChat = async (recieverId: string) => {
+export const startChat = async (receiverId: string) => {
+  console.log(receiverId);
   try {
-    const res = await axios.post(URL, recieverId);
+    const res = await axios.post(URL, { receiverId: receiverId });
     return res.data;
   } catch (err) {
     console.log(err);
