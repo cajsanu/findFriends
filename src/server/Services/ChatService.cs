@@ -24,14 +24,24 @@ public class ChatService(FindFriendsContext context)
 
     public async Task<Chat> GetChatAsync(string chatId)
     {
-        Chat chat = await _context.Chats.FirstAsync(c => c.Id == chatId);
+        Chat chat = await _context.Chats
+            .Include(c => c.Messages)
+            .FirstAsync(c => c.Id == chatId);
         return chat;
     }
 
-     public async Task CreateUserChat(string userId, string chatId)
+    public async Task CreateUserChat(string userId, string chatId)
     {
+        Console.WriteLine(chatId + "!!!!!!!!!");
         UserChat userchat = new UserChat(userId, chatId);
         _context.UserChats.Add(userchat);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task AddChatMessage(Chat chat, ChatMessage chatMessage)
+    {
+        Console.WriteLine();
+        chat.Messages.Add(chatMessage);
         await _context.SaveChangesAsync();
     }
 }

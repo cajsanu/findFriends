@@ -46,7 +46,9 @@ export const HomePage = () => {
         </div>
       </div>
       <div>
-        <h1>Lorem impsum</h1>
+        {currentUser ? currentUser.chats.map((c) => (
+          <li>{c.id}</li>
+        )) : null}
       </div>
       <div>{chat ? <Chat chatId={chat.id} /> : null}</div>
       <button onClick={handleStarChat}>Start chat</button>

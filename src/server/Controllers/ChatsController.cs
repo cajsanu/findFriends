@@ -19,6 +19,7 @@ namespace FindFriends.Controllers
             User user = await _userService.GetCurrentUser();
             Chat newChat = await _chatService.StartChat();
             await _userService.AddChat(user, newChat);
+            await _chatService.CreateUserChat(user.Id, newChat.Id);
             return Ok(newChat);
         }
 

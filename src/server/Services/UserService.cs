@@ -41,6 +41,7 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
                 var user = await _context.Users
                 .Include(u => u.Dogs)
                 .Include(u => u.Chats)
+                    .ThenInclude(c => c.Messages)
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
                 return user;
