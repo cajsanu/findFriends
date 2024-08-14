@@ -42,7 +42,6 @@ export const HomePage = () => {
       <div>
         {currentUser ? <ChatsList chats={currentUser.chats} /> : null}
       </div>
-      {/* <div>{chat ? <Chat chatId={chat.id} /> : null}</div> */}
     </div>
   );
 };

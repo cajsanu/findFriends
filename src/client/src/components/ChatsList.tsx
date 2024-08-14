@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { BaseChat } from "../types";
 
 interface ChatsProp {
@@ -10,24 +9,19 @@ interface ChatProp {
 }
 
 const SingleChat = ({ chat }: ChatProp) => {
-  const navigate = useNavigate();
-
-  const handleClickOpenChat = () => {
-    navigate(`/chat/${chat.id}`);
-  };
-
   return (
-    <div>
-      <li>{chat.id}</li>
-      <button onClick={handleClickOpenChat}>Chat</button>
+    <div className="p-2">
+      <a className="text-rose-600 hover:text-rose-800" href={`/chat/${chat.id}`}>
+        <div className="p-5 bg-rose-100 hover:bg-rose-200 rounded">{chat.id}</div>
+      </a>
     </div>
   );
 };
 
 export const ChatsList = ({ chats }: ChatsProp) => {
   return (
-    <div>
-      <p>Chats</p>
+    <div className="p-10">
+      <p className="font-bold text-xl p-5">Active chats</p>
       {chats ? chats.map((c) => <SingleChat key={c.id} chat={c} />) : null}
     </div>
   );
