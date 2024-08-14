@@ -65,4 +65,12 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
         await _userManager.UpdateAsync(user);
         return null;
     }
+
+    public async Task<Chat> AddChat(User user, Chat chat)
+    {
+        Console.WriteLine(chat);
+        user.Chats.Add(chat);
+        await _userManager.UpdateAsync(user);
+        return null;
+    }
 }

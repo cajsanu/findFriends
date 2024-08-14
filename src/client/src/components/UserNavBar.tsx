@@ -8,19 +8,15 @@ import { AddDogForm } from "./AddDogForm";
 import { getCurrentUser } from "../requests/user";
 import { RequiresAuthentication, PersonalInfoForm, MyDogs } from ".";
 
-export const UserNavBar = () => {
+interface CurrentUser {
+  user: User;
+}
+
+export const UserNavBar = ({ user }: CurrentUser) => {
   const [openAddDog, setOpenAddDog] = useState(false);
   const [openMyDogs, setOpenMyDogs] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
+ 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const getUser = async () => {
-      const user = await getCurrentUser();
-      user ? setUser(user) : navigate("/");
-    };
-    getUser();
-  }, []);
 
   if (!user) {
     return <RequiresAuthentication />;
@@ -35,11 +31,11 @@ export const UserNavBar = () => {
   }
 
   const handleHome = () => {
-    navigate(`/home/${user.id}`)
-  }
+    navigate(`/home/${user.id}`);
+  };
 
   const handleAddDogSuccess = async () => {
-    setUser(await getCurrentUser());
+    user = await getCurrentUser();
     setOpenMyDogs(true);
     setOpenAddDog(false);
   };
@@ -80,9 +76,7 @@ export const UserNavBar = () => {
           >
             See users
           </button>
-          <button className="px-3 py-1.5 hover:text-rose-700">
-            New chat
-          </button>
+          <button className="px-3 py-1.5 hover:text-rose-700">New chat</button>
           <button
             onClick={handleOpenAddDog}
             className="px-3 py-1.5 hover:text-rose-700"
@@ -114,7 +108,9 @@ export const UserNavBar = () => {
         >
           <Box>
             <AddDogForm userId={user.id} onSuccess={handleAddDogSuccess} />
-            <button className="font-bold text-xl" onClick={handleClose}>x</button>
+            <button className="font-bold text-xl" onClick={handleClose}>
+              x
+            </button>
           </Box>
         </Modal>
       </div>
@@ -133,7 +129,9 @@ export const UserNavBar = () => {
                 <p>You have not added any dogs yet</p>
               )}
             </div>
-            <button className="font-bold text-xl" onClick={handleClose}>x</button>
+            <button className="font-bold text-xl" onClick={handleClose}>
+              x
+            </button>
           </Box>
         </Modal>
       </div>
