@@ -5,7 +5,7 @@ export interface User {
   email: string;
   city: string;
   dogs?: Array<UserDog>;
-  chats?: Array<BaseChat>;
+  userChats?: Array<{ chat: BaseChat }>;
 }
 
 export interface SignupUser {

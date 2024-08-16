@@ -17,12 +17,10 @@ namespace FindFriends.Controllers
         [Authorize]
         public async Task<ActionResult<Chat>> StartChat([FromBody] RecieverIdDto receiver)
         {
-            Console.WriteLine(receiver.ReceiverId + "!!!!!!!!!!!!!!!");
             User user = await _userService.GetCurrentUser();
             Chat newChat = await _chatService.StartChat();
-            await _userService.AddChat(user, newChat);
-            await _chatService.CreateUserChat(user.Id, newChat.Id);
-            await _chatService.CreateUserChat(receiver.ReceiverId, newChat.Id);
+            await _chatService.CreateUserChat(user.Id, newChat);
+            await _chatService.CreateUserChat(receiver.ReceiverId, newChat);
             return Ok(newChat);
         }
 

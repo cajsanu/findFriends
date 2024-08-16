@@ -9,6 +9,11 @@ public class Chat
     {
         ChatName = string.Empty;
     }
+    public Chat(string Id)
+    {
+        this.Id = Id;
+        ChatName = string.Empty;
+    }
     
     [Required]
     [MaxLength(100)]

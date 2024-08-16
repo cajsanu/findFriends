@@ -30,10 +30,9 @@ public class ChatService(FindFriendsContext context)
         return chat;
     }
 
-    public async Task CreateUserChat(string userId, string chatId)
+    public async Task CreateUserChat(string userId, Chat chat)
     {
-        Console.WriteLine(chatId + "!!!!!!!!!");
-        UserChat userchat = new UserChat(userId, chatId);
+        UserChat userchat = new UserChat(userId, chat);
         _context.UserChats.Add(userchat);
         await _context.SaveChangesAsync();
     }

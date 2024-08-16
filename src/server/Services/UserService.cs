@@ -18,14 +18,16 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
         {
             return await _context.Users
                 .Include(u => u.Dogs)
-                .Include(u => u.Chats)
+                .Include(u => u.UserChats)
+                    .ThenInclude(userChat => userChat.Chat)
                 .ToListAsync();
         }
 
         return await _context.Users
             .Where(u => u.City.ToLower().Contains(search.ToLower()))
             .Include(u => u.Dogs)
-            .Include(u => u.Chats)
+            .Include(u => u.UserChats)
+                .ThenInclude(userChat => userChat.Chat)
             .ToListAsync();
     }
 
@@ -40,9 +42,12 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
             {
                 var user = await _context.Users
                 .Include(u => u.Dogs)
-                .Include(u => u.Chats)
-                    .ThenInclude(c => c.Messages)
+                .Include(u => u.UserChats)
+                    .ThenInclude(userChat => userChat.Chat)
+                        .ThenInclude(c => c.Messages)
                 .FirstOrDefaultAsync(u => u.Id == userId);
+
+                
 
                 return user;
             }
@@ -67,11 +72,11 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
         return null;
     }
 
-    public async Task<Chat> AddChat(User user, Chat chat)
-    {
-        Console.WriteLine(chat);
-        user.Chats.Add(chat);
-        await _userManager.UpdateAsync(user);
-        return null;
-    }
+    // public async Task<Chat> AddChat(User user, Chat chat)
+    // {
+    //     Console.WriteLine(chat);
+    //     user.Chats.Add(chat);
+    //     await _userManager.UpdateAsync(user);
+    //     return null;
+    // }
 }

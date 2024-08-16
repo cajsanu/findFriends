@@ -14,16 +14,16 @@ public class User : IdentityUser
 
     [Required]
     public string FirstName { get; set; }
-    
+
     [Required]
     public string LastName { get; set; }
-    
+
     [Required]
     public string City { get; set; }
-    
+
     [Required]
     public bool IsAdmin { get; } = false;
-    
+
     public List<Dog> Dogs { get; } = new();
-    public List<Chat> Chats { get; } = new();
+    public List<UserChat> UserChats { get; } = new();
 }
