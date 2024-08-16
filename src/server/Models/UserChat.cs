@@ -7,12 +7,12 @@ public class UserChat
 {
     public UserChat(string userId, string chatId)
     {
-        this.UserId = userId;
-        this.Chat = new(chatId);
+        UserId = userId;
+        Chat = new(chatId);
     }
     public UserChat(string userId, Chat chat) {
-        this.UserId = userId;
-        this.Chat = chat;
+        UserId = userId;
+        Chat = chat;
     }
 
     [Required]

@@ -1,3 +1,4 @@
+using System.IO.Compression;
 using FindFriends.Data;
 using FindFriends.Models;
 using Microsoft.EntityFrameworkCore;
@@ -21,12 +22,29 @@ public class ChatService(FindFriendsContext context)
         await _context.SaveChangesAsync();
     }
 
+    public async Task<User> GetOtherUserInChat(string currentUserId, string chatId)
+    {
+        List<UserChat> userChats = await _context.UserChats
+            .Where(uc => uc.Chat.Id == chatId)
+            .ToListAsync();
+
+        string? otherUserId = userChats
+            .Where(uc => uc.UserId != currentUserId)
+            .Select(uc => uc.UserId)
+            .FirstOrDefault();
+
+        User user = await _context.Users
+            .FirstAsync(u => u.Id == otherUserId);
+
+        return user;
+    }
+
 
     public async Task<Chat> GetChatAsync(string chatId)
     {
         Chat chat = await _context.Chats
-            .Include(c => c.Messages)
-            .FirstAsync(c => c.Id == chatId);
+          .Include(c => c.Messages)
+          .FirstAsync(c => c.Id == chatId);
         return chat;
     }
 

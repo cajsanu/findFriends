@@ -19,7 +19,7 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
             return await _context.Users
                 .Include(u => u.Dogs)
                 .Include(u => u.UserChats)
-                    .ThenInclude(userChat => userChat.Chat)
+                    .ThenInclude(uc => uc.Chat)
                 .ToListAsync();
         }
 
@@ -27,7 +27,7 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
             .Where(u => u.City.ToLower().Contains(search.ToLower()))
             .Include(u => u.Dogs)
             .Include(u => u.UserChats)
-                .ThenInclude(userChat => userChat.Chat)
+                .ThenInclude(uc => uc.Chat)
             .ToListAsync();
     }
 
@@ -43,7 +43,7 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
                 var user = await _context.Users
                 .Include(u => u.Dogs)
                 .Include(u => u.UserChats)
-                    .ThenInclude(userChat => userChat.Chat)
+                    .ThenInclude(uc => uc.Chat)
                         .ThenInclude(c => c.Messages)
                 .FirstOrDefaultAsync(u => u.Id == userId);
 

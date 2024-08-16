@@ -9,12 +9,14 @@ export const ChatPage = () => {
   const { id } = useParams();
   const [chat, setChat] = useState<BaseChat>(null);
   const [currentUser, setCurrentUser] = useState<User>(null);
-  const navigate = useNavigate()
+  const [otherUser, setOtherUser] = useState<User>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getChat = async () => {
-      const chat = await getChatById(id);
-      setChat(chat);
+      const chatData = await getChatById(id);
+      setChat(chatData.chat);
+      setOtherUser(chatData.otherUser);
     };
     const getUser = async () => {
       const user = await getCurrentUser();
@@ -31,11 +33,14 @@ export const ChatPage = () => {
   return (
     <div>
       <div>
-        <UserNavBar user={currentUser}/>
+        <UserNavBar user={currentUser} />
       </div>
-      <div>{chat.id}</div>
-      {/* {chat ? chat.messages.map((m) => <li key={m.id}>{m}</li>) : null} */}
-      <Chat chat={chat} />
+      <div className="p-10">
+        <div className="bg-rose-100">
+          <div className="text-rose-900">Chat with {otherUser.firstName}</div>
+          <Chat chat={chat} />
+        </div>
+      </div>
     </div>
   );
 };

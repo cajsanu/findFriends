@@ -26,10 +26,21 @@ namespace FindFriends.Controllers
 
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<ActionResult<Chat>> GetChat(string id)
+        public async Task<ActionResult<ChatAndOtherUserDto>> GetChat(string id)
         {
             Chat chat = await _chatService.GetChatAsync(id);
-            return Ok(chat);
+
+            User currentUser = await _userService.GetCurrentUser();
+
+            User otherUser = await _chatService.GetOtherUserInChat(currentUser.Id, id);
+
+            var chatAndUserDto = new ChatAndOtherUserDto
+            {
+                Chat = chat,
+                OtherUser = otherUser,
+            };
+
+            return Ok(chatAndUserDto);
         }
     }
 }

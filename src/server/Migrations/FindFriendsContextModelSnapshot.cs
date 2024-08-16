@@ -34,7 +34,7 @@ namespace findFriends.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Chats");
+                    b.ToTable("Chats", (string)null);
                 });
 
             modelBuilder.Entity("FindFriends.Models.ChatMessage", b =>
@@ -62,7 +62,7 @@ namespace findFriends.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.ToTable("ChatMessages");
+                    b.ToTable("ChatMessages", (string)null);
                 });
 
             modelBuilder.Entity("FindFriends.Models.Dog", b =>
@@ -91,7 +91,7 @@ namespace findFriends.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Dogs");
+                    b.ToTable("Dogs", (string)null);
                 });
 
             modelBuilder.Entity("FindFriends.Models.User", b =>
@@ -190,7 +190,7 @@ namespace findFriends.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserChats");
+                    b.ToTable("UserChats", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -35,25 +35,32 @@ export const Chat = ({ chat }: ChatProps) => {
   };
 
   return (
-    <div className="p-10">
+    <div>
       <div>
         {chat ? chat.messages.map((m) => <p key={m.id}>{m.message}</p>) : null}
         {outputMessages.map((m) => (
           <p>{m}</p>
         ))}
       </div>
-      <form onSubmit={sendPrivateMessage}>
-        <input
-          type="text"
-          value={inputMessage}
-          onChange={(e) => setInputMessage(e.target.value)}
-          placeholder="Type your message here..."
-          className="bg-white text-black"
-        />
-        <button type="submit" className="bg-rose-900">
-          Send
-        </button>
-      </form>
+      <div>
+        <form onSubmit={sendPrivateMessage}>
+          <input
+            type="text"
+            value={inputMessage}
+            onChange={(e) => setInputMessage(e.target.value)}
+            placeholder="Type your message here..."
+            className="bg-white text-black rounded px-3 py-1.5 w-3/4"
+          />
+          <div className="p-2">
+            <button
+              type="submit"
+              className="transition delay-150 justify-center rounded-md bg-rose-300 px-3 py-1.5 text-sm font-semibold leading-6 text-rose-800 hover:bg-rose-200"
+            >
+              Send
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
