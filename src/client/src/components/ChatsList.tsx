@@ -1,18 +1,26 @@
-import { BaseChat } from "../types";
+import { BaseChat, User } from "../types";
+
+interface UserChat {
+  id: string,
+  chat: BaseChat,
+  user: User,
+  userId?: string,
+  chatId?: string,
+}
 
 interface ChatsProp {
-  chats: BaseChat[];
+  chats: UserChat[];
 }
 
 interface ChatProp {
-  chat: BaseChat;
+  userChat: UserChat;
 }
 
-const SingleChat = ({ chat }: ChatProp) => {
+const SingleChat = ({ userChat }: ChatProp) => {
   return (
     <div className="p-2">
-      <a className="text-rose-600 hover:text-rose-800" href={`/chat/${chat.id}`}>
-        <div className="p-5 bg-rose-100 hover:bg-rose-200 rounded">{chat.id}</div>
+      <a className="text-rose-600 hover:text-rose-800" href={`/chat/${userChat.chat.id}`}>
+        <div className="p-5 bg-rose-100 hover:bg-rose-200 rounded">{userChat.user.firstName}</div>
       </a>
     </div>
   );
@@ -22,7 +30,7 @@ export const ChatsList = ({ chats }: ChatsProp) => {
   return (
     <div className="p-10">
       <p className="font-bold text-xl p-5">Active chats</p>
-      {chats ? chats.map((c) => <SingleChat key={c.id} chat={c} />) : null}
+      {chats ? chats.map((c) => <SingleChat key={c.id} userChat={c} />) : null}
     </div>
   );
 };

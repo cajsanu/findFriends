@@ -11,7 +11,6 @@ public class UserChat
         Chat = new(chatId);
     }
     public UserChat(Chat chat, User user) {
-        // UserId = userId;
         Chat = chat;
         User = user;
     }

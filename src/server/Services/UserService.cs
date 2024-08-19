@@ -77,18 +77,14 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
         List<Chat> myChats = await _context.UserChats
             .Where(userChat => userChat.UserId == userId)
             .Include(myUserChat => myUserChat.Chat)
-            .Include(myUserChat => myUserChat.User)
             .Select(myUserChatWithChatLinked => myUserChatWithChatLinked.Chat)
             .ToListAsync();
 
         List<string> idsOfMyChats = myChats.Select(chat => chat.Id).ToList();
 
-        List<UserChat> userChatsOfMyRecepients = await _context.Chats
-            .Where(chat => idsOfMyChats.Contains(chat.Id))
-            .Include(chat => chat.UserChats)
-                .ThenInclude(userchat => userchat.User)
-            .SelectMany(chat => chat.UserChats)
-            .Where(userChatOfMeOrRecepient => userChatOfMeOrRecepient.UserId != userId)
+        List<UserChat> userChatsOfMyRecepients = await _context.UserChats
+            .Where(userChat => idsOfMyChats.Contains(userChat.ChatId) && userChat.UserId != userId)
+            .Include(userchat => userchat.User)
             .ToListAsync();
 
         return userChatsOfMyRecepients;

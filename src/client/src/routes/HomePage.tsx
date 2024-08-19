@@ -51,7 +51,7 @@ export const HomePage = () => {
       <div>
         {currentUser ? (
           <ChatsList
-            chats={currentUser.userChats.map((userChat) => userChat.chat)}
+            chats={chats}
           />
         ) : null}
       </div>

@@ -51,11 +51,8 @@ public class ChatService(FindFriendsContext context)
     public async Task CreateUserChat(string userId, Chat chat)
     {
         User user = await _context.Users.FirstAsync(u => u.Id == userId);
-        Console.WriteLine("USER" + user);
 
         UserChat userchat = new UserChat(chat, user);
-        Console.WriteLine("USERCHATUser" + userchat.User);
-
         _context.UserChats.Add(userchat);
         await _context.SaveChangesAsync();
     }
