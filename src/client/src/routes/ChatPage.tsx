@@ -5,18 +5,23 @@ import { BaseChat, User } from "../types";
 import { Chat, UserNavBar } from "../components";
 import { getCurrentUser } from "../requests/user";
 
+interface OtherUser {
+  firstName: string;
+  city: string;
+}
+
 export const ChatPage = () => {
   const { id } = useParams();
   const [chat, setChat] = useState<BaseChat>(null);
   const [currentUser, setCurrentUser] = useState<User>(null);
-  const [otherUser, setOtherUser] = useState<User>(null);
+  const [otherUser, setOtherUser] = useState<OtherUser>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const getChat = async () => {
       const chatData = await getChatById(id);
       setChat(chatData.chat);
-      setOtherUser(chatData.otherUser);
+      setOtherUser({ firstName: chatData.firstName, city: chatData.city });
     };
     const getUser = async () => {
       const user = await getCurrentUser();

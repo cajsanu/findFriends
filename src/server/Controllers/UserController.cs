@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using FindFriends.Models;
 using FindFriends.Services;
 using Microsoft.AspNetCore.Authorization;
+using FindFriends.Dtos;
 
 namespace FindFriends.Controllers
 {
@@ -13,12 +14,20 @@ namespace FindFriends.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<User>> GetUser()
+        public async Task<ActionResult<UserDto>> GetUser()
         {
             var user = await _userService.GetCurrentUser();
             if (user != null)
             {
-                return Ok(user);
+                var userDto = new UserDto
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    City = user.City,
+                    Dogs = user.Dogs,
+                };
+                return Ok(userDto);
             }
             else
             {

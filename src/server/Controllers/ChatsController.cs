@@ -37,7 +37,8 @@ namespace FindFriends.Controllers
             var chatAndUserDto = new ChatAndOtherUserDto
             {
                 Chat = chat,
-                OtherUser = otherUser,
+                FirstName = otherUser.FirstName,
+                City = otherUser.City
             };
 
             return Ok(chatAndUserDto);

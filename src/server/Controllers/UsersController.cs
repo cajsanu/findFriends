@@ -14,10 +14,20 @@ namespace FindFriends.Controllers
         private readonly UserService _userService = userService;
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetAll([FromQuery] string? search)
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetAll([FromQuery] string? search)
         {
             var users = await _userService.GetAll(search);
-            return Ok(users);
+
+            var userDtos = users.Select(user => new UserDto
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                City = user.City,
+                Dogs = user.Dogs,
+            }).ToList();
+
+            return Ok(userDtos);
         }
 
         [HttpPut("{id}")]
@@ -54,7 +64,14 @@ namespace FindFriends.Controllers
         public async Task<ActionResult<List<UserChat>>> GetUserChats(string id)
         {
             List<UserChat> userChats = await _userService.GetUserChats(id);
-            return userChats;
+            var userChatDtos = userChats.Select(userChat => new UserChatDto
+            {
+                Id = userChat.Id,
+                User = userChat.User,
+                Chat = userChat.Chat,
+            }).ToList();
+
+            return Ok(userChatDtos);
         }
     }
 }
