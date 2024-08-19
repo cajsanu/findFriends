@@ -6,11 +6,21 @@ interface ChatProps {
   chat: BaseChat;
 }
 
+interface MessageProp {
+  message: string;
+}
+
+const Message = ({ message }: MessageProp) => {
+  return (
+    <div className="p-2">
+      <p className="p-5 bg-pink-200">{message}</p>
+    </div>
+  );
+};
+
 export const Chat = ({ chat }: ChatProps) => {
   const [inputMessage, setInputMessage] = useState("");
   const [outputMessages, setOutputMessages] = useState<string[]>([]);
-
-  console.log(chat);
 
   const connection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub")
@@ -35,14 +45,20 @@ export const Chat = ({ chat }: ChatProps) => {
   };
 
   return (
-    <div>
-      <div>
-        {chat ? chat.messages.map((m) => <p key={m.id}>{m.message}</p>) : null}
-        {outputMessages.map((m) => (
-          <p>{m}</p>
-        ))}
+    <div className="flex flex-col">
+      <div className="flex justify-center">
+        <div className="bg-white text-black h-96 w-3/4 rounded">
+          {chat
+            ? chat.messages.map((m) => (
+                <Message key={m.id} message={m.message} />
+              ))
+            : null}
+          {outputMessages.map((m) => (
+            <Message key={m} message={m} />
+          ))}
+        </div>
       </div>
-      <div>
+      <div className="py-2">
         <form onSubmit={sendPrivateMessage}>
           <input
             type="text"

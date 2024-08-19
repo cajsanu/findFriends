@@ -61,7 +61,7 @@ namespace FindFriends.Controllers
 
         [HttpGet("{id}/chats")]
         [Authorize]
-        public async Task<ActionResult<List<UserChat>>> GetUserChats(string id)
+        public async Task<ActionResult<List<UserChatDto>>> GetUserChats(string id)
         {
             List<UserChat> userChats = await _userService.GetUserChats(id);
             var userChatDtos = userChats.Select(userChat => new UserChatDto
