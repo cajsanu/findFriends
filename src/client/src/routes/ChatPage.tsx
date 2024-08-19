@@ -36,20 +36,22 @@ export const ChatPage = () => {
   }
 
   return (
-    <div className="">
+    <div>
       <div>
         <UserNavBar user={currentUser} />
       </div>
-      <div>
-        <div className="p-10">
-          <p className="text-rose-900 text-xl flex justify-start font-bold">
-            Chat with {otherUser.firstName}
-          </p>
-          <p className="text-rose-900 text-sm flex justify-start font-semibold">
-            Who lives in {otherUser.city}
-          </p>
+      <div className="flex justify-center pt-10">
+        <div className="bg-white w-2/4 rounded">
+          <div className="p-10">
+            <p className="text-rose-900 text-xl flex justify-start font-bold">
+              Chat with {otherUser.firstName}
+            </p>
+            <p className="text-rose-900 text-sm flex justify-start font-semibold">
+              who lives in {otherUser.city}
+            </p>
+          </div>
+          <Chat chat={chat} />
         </div>
-        <Chat chat={chat} />
       </div>
     </div>
   );
