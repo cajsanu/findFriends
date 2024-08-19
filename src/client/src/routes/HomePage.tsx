@@ -29,7 +29,6 @@ export const HomePage = () => {
   useEffect(() => {
     const getUserChats = async () => {
       const chats = await userRequests.getUserChats(currentUser.id);
-      console.log("chats", chats);
       setChats(chats);
     };
     getUserChats();

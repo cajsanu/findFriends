@@ -1,19 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as signalR from "@microsoft/signalr";
-import { BaseChat } from "../types";
+import { BaseChat, BaseMessage, User } from "../types";
+import { getCurrentUser } from "../requests/user";
 
 interface ChatProps {
   chat: BaseChat;
 }
 
 interface MessageProp {
-  message: string;
+  message: BaseMessage;
 }
 
 const Message = ({ message }: MessageProp) => {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      setCurrentUser(await getCurrentUser());
+    };
+    getUser();
+  }, []);
+
+  if (currentUser) {
+    if (message.senderId == currentUser.id) {
+      return (
+        <div className="p-2 flex justify-end">
+          <p className="bg-pink-600 rounded px-2 py-1.5">{message.message}</p>
+        </div>
+      );
+    }
+  }
+
   return (
-    <div className="p-2">
-      <p className="p-5 bg-pink-200">{message}</p>
+    <div className="p-2 flex justify-start">
+      <p className="bg-rose-200 text-stone-800 rounded px-2 py-1.5">
+        {message.message}
+      </p>
     </div>
   );
 };
@@ -45,17 +67,19 @@ export const Chat = ({ chat }: ChatProps) => {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="">
       <div className="flex justify-center">
-        <div className="bg-white text-black h-96 w-3/4 rounded">
-          {chat
-            ? chat.messages.map((m) => (
-                <Message key={m.id} message={m.message} />
-              ))
-            : null}
-          {outputMessages.map((m) => (
-            <Message key={m} message={m} />
-          ))}
+        <div className="bg-white h-96 w-2/4 rounded flex flex-col">
+          <div className="p-10 flex-1 overflow-y-auto">
+            {chat
+              ? chat.messages.map((m) => <Message key={m.id} message={m} />)
+              : null}
+            {outputMessages.map((m) => (
+              <div key={m} className="p-2 flex justify-end">
+                <p className="bg-pink-600 rounded px-2 py-1.5">{m}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <div className="py-2">
@@ -65,12 +89,12 @@ export const Chat = ({ chat }: ChatProps) => {
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
             placeholder="Type your message here..."
-            className="bg-white text-black rounded px-3 py-1.5 w-3/4"
+            className="bg-white text-black rounded px-3 py-1.5 w-2/4"
           />
           <div className="p-2">
             <button
               type="submit"
-              className="transition delay-150 justify-center rounded-md bg-rose-300 px-3 py-1.5 text-sm font-semibold leading-6 text-rose-800 hover:bg-rose-200"
+              className="transition delay-150 justify-center rounded-md bg-rose-300 px-3 py-1.5 text-sm font-semibold leading-6 text-rose-900 hover:bg-rose-200"
             >
               Send
             </button>
