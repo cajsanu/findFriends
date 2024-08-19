@@ -41,7 +41,7 @@ export const ChatPage = () => {
         <UserNavBar user={currentUser} />
       </div>
       <div className="flex justify-center pt-10">
-        <div className="bg-white w-2/4 rounded">
+        <div className="bg-rose-100 w-2/4 rounded">
           <div className="p-10">
             <p className="text-rose-900 text-xl flex justify-start font-bold">
               Chat with {otherUser.firstName}

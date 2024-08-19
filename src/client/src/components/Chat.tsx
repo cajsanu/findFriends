@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import * as signalR from "@microsoft/signalr";
 import { BaseChat, BaseMessage, User } from "../types";
 import { getCurrentUser } from "../requests/user";
+import SendIcon from "@mui/icons-material/Send";
 
 interface ChatProps {
   chat: BaseChat;
@@ -33,7 +34,7 @@ const Message = ({ message }: MessageProp) => {
 
   return (
     <div className="p-2 flex justify-start">
-      <p className="bg-rose-200 text-stone-800 rounded px-2 py-1.5">
+      <p className="bg-rose-300 text-stone-800 rounded px-2 py-1.5">
         {message.message}
       </p>
     </div>
@@ -82,22 +83,25 @@ export const Chat = ({ chat }: ChatProps) => {
           </div>
         </div>
       </div>
-      <div className="py-2">
+      <div className="p-5">
         <form onSubmit={sendPrivateMessage}>
-          <input
-            type="text"
-            value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
-            placeholder="Type your message here..."
-            className="bg-white text-black rounded px-3 py-1.5 w-2/4"
-          />
-          <div className="p-2">
-            <button
-              type="submit"
-              className="transition delay-150 justify-center rounded-md bg-rose-300 px-3 py-1.5 text-sm font-semibold leading-6 text-rose-900 hover:bg-rose-200"
-            >
-              Send
-            </button>
+          <div className="flex flex-row">
+            <input
+              type="text"
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+              placeholder="Type your message here..."
+              className="bg-white text-black rounded w-full my-1 ps-5 focus:outline-none focus:ring focus:ring-rose-300"
+              color="secondary"
+            />
+            <div className="ps-2">
+              <button
+                type="submit"
+                className="transition delay-150 justify-center rounded-full bg-rose-300 p-5 text-sm font-semibold leading-6 text-rose-900 hover:bg-rose-200"
+              >
+                <SendIcon />
+              </button>
+            </div>
           </div>
         </form>
       </div>
