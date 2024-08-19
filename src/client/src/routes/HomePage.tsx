@@ -5,10 +5,12 @@ import { User } from "../types";
 import { getCurrentUser } from "../requests/user";
 import { useNavigate } from "react-router-dom";
 import { ChatsList } from "../components/ChatsList";
+import userRequests from "../requests/users";
 
 export const HomePage = () => {
   const [fact, setFact] = useState(null);
   const [currentUser, setCurrentUser] = useState<User>(null);
+  const [chats, setChats] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,11 +26,18 @@ export const HomePage = () => {
     getUser();
   }, []);
 
-  console.log(currentUser)
+  useEffect(() => {
+    const getUserChats = async () => {
+      const chats = await userRequests.getUserChats(currentUser.id);
+      console.log("chats", chats);
+      setChats(chats);
+    };
+    getUserChats();
+  }, [currentUser]);
 
   return (
     <div className="font-mono">
-      <UserNavBar user={currentUser}/>
+      <UserNavBar user={currentUser} />
       <div className="felx flex-col justify-center p-10 bg-gradient-to-r from-rose-400 via-rose-700 to-rose-400">
         <div className="flex flex-row justify-around p-10">
           <div className="flex justify-end">
@@ -40,7 +49,11 @@ export const HomePage = () => {
         </div>
       </div>
       <div>
-        {currentUser ? <ChatsList chats={currentUser.userChats.map(userChat => userChat.chat)} /> : null}
+        {currentUser ? (
+          <ChatsList
+            chats={currentUser.userChats.map((userChat) => userChat.chat)}
+          />
+        ) : null}
       </div>
     </div>
   );

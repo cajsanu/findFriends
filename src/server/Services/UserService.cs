@@ -47,7 +47,7 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
                         .ThenInclude(c => c.Messages)
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
-                
+
 
                 return user;
             }
@@ -72,11 +72,25 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
         return null;
     }
 
-    // public async Task<Chat> AddChat(User user, Chat chat)
-    // {
-    //     Console.WriteLine(chat);
-    //     user.Chats.Add(chat);
-    //     await _userManager.UpdateAsync(user);
-    //     return null;
-    // }
+    public async Task<List<UserChat>> GetUserChats(string userId)
+    {
+        List<Chat> myChats = await _context.UserChats
+            .Where(userChat => userChat.UserId == userId)
+            .Include(myUserChat => myUserChat.Chat)
+            .Include(myUserChat => myUserChat.User)
+            .Select(myUserChatWithChatLinked => myUserChatWithChatLinked.Chat)
+            .ToListAsync();
+
+        List<string> idsOfMyChats = myChats.Select(chat => chat.Id).ToList();
+
+        List<UserChat> userChatsOfMyRecepients = await _context.Chats
+            .Where(chat => idsOfMyChats.Contains(chat.Id))
+            .Include(chat => chat.UserChats)
+                .ThenInclude(userchat => userchat.User)
+            .SelectMany(chat => chat.UserChats)
+            .Where(userChatOfMeOrRecepient => userChatOfMeOrRecepient.UserId != userId)
+            .ToListAsync();
+
+        return userChatsOfMyRecepients;
+    }
 }

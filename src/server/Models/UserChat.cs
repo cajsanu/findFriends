@@ -10,9 +10,10 @@ public class UserChat
         UserId = userId;
         Chat = new(chatId);
     }
-    public UserChat(string userId, Chat chat) {
-        UserId = userId;
+    public UserChat(Chat chat, User user) {
+        // UserId = userId;
         Chat = chat;
+        User = user;
     }
 
     [Required]
@@ -20,6 +21,10 @@ public class UserChat
     public string Id { get; set; } = Guid.NewGuid().ToString();
     [Required]
     public string UserId { get; set; }
+    [Required]
+    public User User { get; set; }
+    [Required]
+    public string ChatId { get; set; }
     [Required]
     public Chat Chat { get; set; }
 }

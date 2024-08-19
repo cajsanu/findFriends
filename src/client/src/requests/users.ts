@@ -14,6 +14,16 @@ const getAll = async (search: string) => {
   }
 };
 
+const getUserChats = async (id: string) => {
+  try {
+    const res = await axios.get(`${URL}/${id}/chats`)
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+}
+
 const updateInfo = async (id: string, info: UserInfo) => {
   try {
     const res = await axios.put(`${URL}/${id}`, info);
@@ -33,4 +43,4 @@ const addUserDog = async (id: string, dog: BaseDog): Promise<UserDog | null> => 
   }
 };
 
-export default { getAll, updateInfo, addUserDog };
+export default { getAll, updateInfo, addUserDog, getUserChats };

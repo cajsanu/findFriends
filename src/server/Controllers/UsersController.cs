@@ -49,5 +49,12 @@ namespace FindFriends.Controllers
             }
         }
 
+        [HttpGet("{id}/chats")]
+        [Authorize]
+        public async Task<ActionResult<List<UserChat>>> GetUserChats(string id)
+        {
+            List<UserChat> userChats = await _userService.GetUserChats(id);
+            return userChats;
+        }
     }
 }
