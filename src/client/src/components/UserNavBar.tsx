@@ -8,10 +8,6 @@ import { AddDogForm } from "./AddDogForm";
 import { getCurrentUser } from "../requests/user";
 import { RequiresAuthentication, PersonalInfoForm, MyDogs } from ".";
 
-// interface CurrentUserProps {
-//   user: User;
-// }
-
 export const UserNavBar = () => {
   const [openAddDog, setOpenAddDog] = useState(false);
   const [openMyDogs, setOpenMyDogs] = useState(false);
@@ -33,14 +29,6 @@ export const UserNavBar = () => {
 
   if (!user) {
     return <RequiresAuthentication />;
-  }
-
-  if (!user.firstName || !user.lastName || !user.city) {
-    return (
-      <div>
-        <PersonalInfoForm userId={user.id} />
-      </div>
-    );
   }
 
   const handleHome = () => {
@@ -65,9 +53,6 @@ export const UserNavBar = () => {
       console.log(err);
     }
   };
-
-  console.log(user.dogs);
-  console.log(dogs);
 
   const handleOpenAddDog = () => setOpenAddDog(true);
   const handleOpenMyDogs = () => setOpenMyDogs(true);

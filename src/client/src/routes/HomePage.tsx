@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { UserNavBar } from "../components";
+import { PersonalInfoForm, RequiresAuthentication, UserNavBar } from "../components";
 import { User } from "../types";
 import { getCurrentUser } from "../requests/user";
 import { useNavigate } from "react-router-dom";
@@ -35,6 +35,22 @@ export const HomePage = () => {
     };
     getUserChats();
   }, [currentUser]);
+
+  const handleSuccessfullInfoUpdate = async () => {
+    setCurrentUser(await getCurrentUser());
+  }
+
+  if (!currentUser) {
+    return <RequiresAuthentication />;
+  }
+
+  if (!currentUser.firstName || !currentUser.lastName || !currentUser.city) {
+    return (
+      <div>
+        <PersonalInfoForm userId={currentUser.id} onSuccess={handleSuccessfullInfoUpdate}/>
+      </div>
+    );
+  }
 
   return (
     <div className="font-mono">

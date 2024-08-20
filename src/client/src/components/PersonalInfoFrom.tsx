@@ -3,9 +3,10 @@ import userRequests from "../requests/users";
 
 interface InfoFormProps {
   userId: string;
+  onSuccess: () => void;
 }
 
-export const PersonalInfoForm = ({ userId }: InfoFormProps) => {
+export const PersonalInfoForm = ({ userId, onSuccess }: InfoFormProps) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [city, setCity] = useState("");
@@ -25,7 +26,7 @@ export const PersonalInfoForm = ({ userId }: InfoFormProps) => {
       setFirstName("");
       setLastName("");
       setCity("");
-      window.location.reload();
+      onSuccess();
     } catch (error) {
       console.log(error);
     }
