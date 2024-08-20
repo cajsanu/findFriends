@@ -38,7 +38,7 @@ export const ChatPage = () => {
   return (
     <div>
       <div>
-        <UserNavBar user={currentUser} />
+        <UserNavBar />
       </div>
       <div className="flex justify-center pt-10">
         <div className="bg-rose-100 w-2/4 rounded">

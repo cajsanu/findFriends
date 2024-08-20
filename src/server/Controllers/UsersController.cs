@@ -51,7 +51,8 @@ namespace FindFriends.Controllers
             var user = await _userService.GetCurrentUser();
             if (user != null && user.Id == id)
             {
-                return await _userService.AddUserDog(user, newDog.Name, newDog.Breed, newDog.Sex);
+                Dog dog =  await _userService.AddUserDog(user, newDog.Name, newDog.Breed, newDog.Sex);
+                return Ok(dog);
             }
             else
             {

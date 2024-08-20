@@ -3,20 +3,33 @@ import Modal from "@mui/material/Modal";
 import { logout } from "../requests/logout";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { User } from "../types";
+import { User, UserDog } from "../types";
 import { AddDogForm } from "./AddDogForm";
 import { getCurrentUser } from "../requests/user";
 import { RequiresAuthentication, PersonalInfoForm, MyDogs } from ".";
 
-interface CurrentUser {
-  user: User;
-}
+// interface CurrentUserProps {
+//   user: User;
+// }
 
-export const UserNavBar = ({ user }: CurrentUser) => {
+export const UserNavBar = () => {
   const [openAddDog, setOpenAddDog] = useState(false);
   const [openMyDogs, setOpenMyDogs] = useState(false);
- 
+  const [user, setUser] = useState<User | null>(null);
+  const [dogs, setDogs] = useState<UserDog[]>([]);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const setUserDogs = async () => {
+      const user = await getCurrentUser();
+      if (user) {
+        setUser(user);
+        setDogs(user.dogs);
+      }
+    };
+    setUserDogs();
+  }, []);
 
   if (!user) {
     return <RequiresAuthentication />;
@@ -34,8 +47,8 @@ export const UserNavBar = ({ user }: CurrentUser) => {
     navigate(`/home/${user.id}`);
   };
 
-  const handleAddDogSuccess = async () => {
-    user = await getCurrentUser();
+  const handleAddDogSuccess = async (newDog: UserDog) => {
+    setDogs((prevDogs) => [...prevDogs, newDog]);
     setOpenMyDogs(true);
     setOpenAddDog(false);
   };
@@ -52,6 +65,9 @@ export const UserNavBar = ({ user }: CurrentUser) => {
       console.log(err);
     }
   };
+
+  console.log(user.dogs);
+  console.log(dogs);
 
   const handleOpenAddDog = () => setOpenAddDog(true);
   const handleOpenMyDogs = () => setOpenMyDogs(true);
@@ -122,8 +138,8 @@ export const UserNavBar = ({ user }: CurrentUser) => {
         >
           <Box>
             <div>
-              {user.dogs ? (
-                <MyDogs dogs={user.dogs} />
+              {dogs ? (
+                <MyDogs dogs={dogs} />
               ) : (
                 <p>You have not added any dogs yet</p>
               )}

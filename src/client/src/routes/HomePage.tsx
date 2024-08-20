@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { UserNavBar, Chat } from "../components";
+import { UserNavBar } from "../components";
 import { User } from "../types";
 import { getCurrentUser } from "../requests/user";
 import { useNavigate } from "react-router-dom";
@@ -38,7 +38,7 @@ export const HomePage = () => {
 
   return (
     <div className="font-mono">
-      <UserNavBar user={currentUser} />
+      <UserNavBar />
       <div className="felx flex-col justify-center p-10 bg-gradient-to-r from-rose-400 via-rose-700 to-rose-400">
         <div className="flex flex-row justify-around p-10">
           <div className="flex justify-end">

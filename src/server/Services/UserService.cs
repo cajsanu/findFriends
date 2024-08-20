@@ -3,6 +3,7 @@ using FindFriends.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace FindFriends.Services;
 
@@ -66,10 +67,10 @@ public class UserService(FindFriendsContext context, UserManager<User> userManag
 
     public async Task<Dog> AddUserDog(User user, string dogName, string breed, string sex)
     {
-        Console.WriteLine(dogName + breed + sex);
-        user.Dogs.Add(new Dog(user.Id, dogName, breed, sex));
+        Dog newDog = new Dog(user.Id, dogName, breed, sex);
+        user.Dogs.Add(newDog);
         await _userManager.UpdateAsync(user);
-        return null;
+        return newDog;
     }
 
     public async Task<List<UserChat>> GetUserChats(string userId)

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import userRequests from "../requests/users";
-import { Sex } from "../types";
+import { Sex, UserDog } from "../types";
 
 interface AddDogsFormProps {
   userId: string;
-  onSuccess: () => void;
+  onSuccess: (newDog: UserDog) => void;
 }
 export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
   const [name, setName] = useState("");
@@ -18,12 +18,12 @@ export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
       return;
     }
     try {
-      await userRequests.addUserDog(userId, {
+      const newDog = await userRequests.addUserDog(userId, {
         name,
         breed,
         sex,
       });
-      onSuccess()<
+      onSuccess(newDog);
       setName("");
       setBreed("");
       setSex(undefined);

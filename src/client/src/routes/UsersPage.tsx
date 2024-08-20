@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { RequiresAuthentication, Users } from "../components";
+import { RequiresAuthentication, Users, UserNavBar } from "../components";
 import { User } from "../types";
 import { useNavigate } from "react-router-dom";
 import userRequests from "../requests/users";
 import TextField from "@mui/material/TextField";
 import { getCurrentUser } from "../requests/user";
-import { UserNavBar } from "../components/UserNavBar";
 import SearchIcon from "@mui/icons-material/Search";
 
 export const UsersPage = () => {
@@ -40,7 +39,7 @@ export const UsersPage = () => {
   return (
     <div className="font-mono flex justify-center">
       <div className="w-full">
-        <UserNavBar user={currentUser}/>
+        <UserNavBar />
         <div className="p-12">
           <h1 className="flex justify-center">All registered users</h1>
         </div>
