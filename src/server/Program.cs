@@ -19,6 +19,7 @@ builder.Services.AddIdentityApiEndpoints<User>()
 
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ChatService>();
+builder.Services.AddScoped<DogService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

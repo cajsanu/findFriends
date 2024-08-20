@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using FindFriends.Models;
 using FindFriends.Services;
 using Microsoft.AspNetCore.Authorization;
 using FindFriends.Dtos;
