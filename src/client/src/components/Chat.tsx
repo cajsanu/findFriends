@@ -70,7 +70,7 @@ export const Chat = ({ chat }: ChatProps) => {
   return (
     <div className="">
       <div className="flex justify-center">
-        <div className="h-96 flex flex-col">
+        <div className="h-96 w-full flex flex-col">
           <div className="p-10 flex-1 overflow-y-auto">
             {chat
               ? chat.messages.map((m) => <Message key={m.id} message={m} />)

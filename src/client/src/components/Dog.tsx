@@ -18,7 +18,7 @@ export const SingleDog = ({ dog }: SingleDogProps) => {
     try {
       if (window.confirm(`Are you sure you want to remove ${dog.name}?`)) {
         await removeDog(dog.id);
-        setOpenMyDog(false);
+        window.location.reload();
       }
     } catch (err) {
       console.log(err);
@@ -45,7 +45,9 @@ export const SingleDog = ({ dog }: SingleDogProps) => {
         <Box>
           <div className="flex justify-center pt-60">
             <div className="flex flex-col p-10 bg-stone-800 w-2/4 rounded shadow-2xl">
-              <p className="font-semibold text-xl font-mono">{dog.name} <PetsIcon fontSize="medium"/></p>
+              <p className="font-semibold text-xl font-mono">
+                {dog.name} <PetsIcon fontSize="medium" />
+              </p>
               <div className="p-5">
                 <button
                   onClick={handleRemoveDog}

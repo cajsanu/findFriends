@@ -822,6 +822,11 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), #be123c var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
 
+.via-rose-600 {
+  --tw-gradient-to: rgb(225 29 72 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), #e11d48 var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
 .to-rose-400 {
   --tw-gradient-to: #fb7185 var(--tw-gradient-to-position);
 }
@@ -1086,6 +1091,11 @@ video {
 .text-rose-100 {
   --tw-text-opacity: 1;
   color: rgb(255 228 230 / var(--tw-text-opacity));
+}
+
+.text-red-900 {
+  --tw-text-opacity: 1;
+  color: rgb(127 29 29 / var(--tw-text-opacity));
 }
 
 .underline {

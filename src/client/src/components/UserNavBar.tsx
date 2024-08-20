@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { User, UserDog } from "../types";
 import { AddDogForm } from "./AddDogForm";
 import { getCurrentUser } from "../requests/user";
-import { RequiresAuthentication, PersonalInfoForm, MyDogs } from ".";
+import { RequiresAuthentication, MyDogs } from ".";
 
 export const UserNavBar = () => {
   const [openAddDog, setOpenAddDog] = useState(false);

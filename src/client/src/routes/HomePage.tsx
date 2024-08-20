@@ -1,6 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { PersonalInfoForm, RequiresAuthentication, UserNavBar } from "../components";
+import {
+  PersonalInfoForm,
+  RequiresAuthentication,
+  UserNavBar,
+} from "../components";
 import { User } from "../types";
 import { getCurrentUser } from "../requests/user";
 import { useNavigate } from "react-router-dom";
@@ -38,7 +42,7 @@ export const HomePage = () => {
 
   const handleSuccessfullInfoUpdate = async () => {
     setCurrentUser(await getCurrentUser());
-  }
+  };
 
   if (!currentUser) {
     return <RequiresAuthentication />;
@@ -47,7 +51,10 @@ export const HomePage = () => {
   if (!currentUser.firstName || !currentUser.lastName || !currentUser.city) {
     return (
       <div>
-        <PersonalInfoForm userId={currentUser.id} onSuccess={handleSuccessfullInfoUpdate}/>
+        <PersonalInfoForm
+          userId={currentUser.id}
+          onSuccess={handleSuccessfullInfoUpdate}
+        />
       </div>
     );
   }
@@ -55,22 +62,16 @@ export const HomePage = () => {
   return (
     <div className="font-mono">
       <UserNavBar />
-      <div className="felx flex-col justify-center p-10 bg-gradient-to-r from-rose-400 via-rose-700 to-rose-400">
-        <div className="flex flex-row justify-around p-10">
-          <div className="flex justify-end">
+      <div className="felx flex-col justify-center p-10 bg-gradient-to-r from-rose-400 to-rose-600">
+        <div className="">
+          <div className="flex flex-row justify-around">
+            <div>{currentUser ? <ChatsList chats={chats} /> : null}</div>
             <div className="">
-              <p>Did you know?</p>
+              <p className="font-bold text-xl p-5 flex justify-start">Did you know?</p>
               <p className="max-w-56 bg-white text-black rounded p-5">{fact}</p>
             </div>
           </div>
         </div>
-      </div>
-      <div>
-        {currentUser ? (
-          <ChatsList
-            chats={chats}
-          />
-        ) : null}
       </div>
     </div>
   );
