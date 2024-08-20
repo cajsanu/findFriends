@@ -9,21 +9,24 @@ interface SingleDogProps {
 }
 
 export const SingleDog = ({ dog }: SingleDogProps) => {
-  const [openMyDog, setOpenMyDogs] = useState(false);
+  const [openMyDog, setOpenMyDog] = useState(false);
 
-  const handleOpenMyDog = () => setOpenMyDogs(true);
-  const handleClose = () => setOpenMyDogs(false);
+  const handleOpenMyDog = () => setOpenMyDog(true);
+  const handleClose = () => setOpenMyDog(false);
 
   const handleRemoveDog = async () => {
     try {
-      await removeDog(dog.id)
+      if (window.confirm(`Are you sure you want to remove ${dog.name}?`)) {
+        await removeDog(dog.id);
+        setOpenMyDog(false);
+      }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   return (
-    <div>
+    <div className="">
       <div className="flex justify-start">
         <button
           onClick={handleOpenMyDog}
@@ -40,9 +43,18 @@ export const SingleDog = ({ dog }: SingleDogProps) => {
         aria-describedby="modal-modal-description"
       >
         <Box>
-          <div>
-            <p>{dog.name}</p>
-            <button onClick={handleRemoveDog}>Remove dog</button>
+          <div className="flex justify-center pt-60">
+            <div className="flex flex-col p-10 bg-stone-800 w-2/4 rounded shadow-2xl">
+              <p className="font-semibold text-xl font-mono">{dog.name} <PetsIcon fontSize="medium"/></p>
+              <div className="p-5">
+                <button
+                  onClick={handleRemoveDog}
+                  className="hover:text-rose-300 text-sm rounded p-1"
+                >
+                  Remove from my dogs
+                </button>
+              </div>
+            </div>
           </div>
           <button className="font-bold text-xl" onClick={handleClose}>
             x

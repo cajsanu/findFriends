@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User, BaseDog, UserInfo, UserDog } from "../types";
+import { User, BaseDog, UserInfo, UserDog, DogWithoutIds } from "../types";
 const URL = "/api/users";
 
 const getAll = async (search: string) => {
@@ -33,7 +33,7 @@ const updateInfo = async (id: string, info: UserInfo) => {
   }
 };
 
-const addUserDog = async (id: string, dog: BaseDog): Promise<UserDog | null> => {
+const addUserDog = async (id: string, dog: DogWithoutIds): Promise<UserDog | null> => {
   try {
     const res = await axios.post(`${URL}/${id}/dogs`, dog);
     return res.data;
