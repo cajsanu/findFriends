@@ -21,6 +21,7 @@ export interface UserInfo {
 export type Sex = "male" | "female";
 
 export interface BaseDog {
+  id: string,
   name: string;
   breed: string;
   sex: Sex;
