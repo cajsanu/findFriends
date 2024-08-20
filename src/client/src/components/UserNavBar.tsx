@@ -40,7 +40,7 @@ export const UserNavBar = ({ user }: CurrentUser) => {
     setOpenAddDog(false);
   };
 
-  const handleClickUsers = () => {
+  const handleClickNewChat = () => {
     navigate("/users");
   };
 
@@ -72,11 +72,10 @@ export const UserNavBar = ({ user }: CurrentUser) => {
           </button>
           <button
             className="px-3 py-1.5 hover:text-rose-700"
-            onClick={handleClickUsers}
+            onClick={handleClickNewChat}
           >
-            See users
+            New chat
           </button>
-          <button className="px-3 py-1.5 hover:text-rose-700">New chat</button>
           <button
             onClick={handleOpenAddDog}
             className="px-3 py-1.5 hover:text-rose-700"

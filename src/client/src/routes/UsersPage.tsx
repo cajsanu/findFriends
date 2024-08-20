@@ -43,7 +43,6 @@ export const UsersPage = () => {
         <UserNavBar user={currentUser}/>
         <div className="p-12">
           <h1 className="flex justify-center">All registered users</h1>
-          <p>Lorem ipsum</p>
         </div>
         <div className="p-5 flex justify-center">
           <form className="bg-rose-100 rounded-md">

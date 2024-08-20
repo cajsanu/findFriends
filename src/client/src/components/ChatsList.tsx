@@ -18,9 +18,9 @@ interface ChatProp {
 
 const SingleChat = ({ userChat }: ChatProp) => {
   return (
-    <div className="p-2">
+    <div className="p-2 w-1/4 flex justify-center">
       <a className="text-rose-600 hover:text-rose-800" href={`/chat/${userChat.chat.id}`}>
-        <div className="p-5 bg-rose-100 hover:bg-rose-200 rounded">{userChat.user.firstName}</div>
+        <div className="p-5 bg-rose-100 hover:bg-rose-200 rounded-full">Chat with {userChat.user.firstName} {userChat.user.lastName}</div>
       </a>
     </div>
   );
@@ -29,7 +29,7 @@ const SingleChat = ({ userChat }: ChatProp) => {
 export const ChatsList = ({ chats }: ChatsProp) => {
   return (
     <div className="p-10">
-      <p className="font-bold text-xl p-5">Active chats</p>
+      <p className="font-bold text-xl p-5 flex justify-start">Active chats</p>
       {chats ? chats.map((c) => <SingleChat key={c.id} userChat={c} />) : null}
     </div>
   );
