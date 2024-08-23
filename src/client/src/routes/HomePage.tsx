@@ -62,7 +62,7 @@ export const HomePage = () => {
   return (
     <div className="font-mono">
       <UserNavBar />
-      <div className="felx flex-col justify-center p-10 bg-gradient-to-r from-rose-400 to-rose-600">
+      <div className="felx flex-col justify-center p-10 pb-96 bg-gradient-to-r from-rose-400 to-rose-600">
         <div className="">
           <div className="flex flex-row justify-around">
             <div className="w-3/4">

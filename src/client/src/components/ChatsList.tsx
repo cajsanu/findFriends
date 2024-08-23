@@ -31,8 +31,8 @@ const SingleChat = ({ userChat }: ChatProp) => {
 export const ChatsList = ({ chats }: ChatsProp) => {
   if (chats.length < 1) {
     return (
-      <div className="hover:text-rose-600 underlined">
-        <a href="/users"></a>Find someone to go for a walk with!
+      <div className="flex justify-start font-semibold hover:text-rose-900 underline">
+        <a href="/users">Find someone to go for a walk with!</a>
       </div>
     );
   }

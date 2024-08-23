@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { signup } from "../requests/signup";
 import { useNavigate } from "react-router-dom";
+import { login } from "../requests/login";
+import { getCurrentUser } from "../requests/user";
 
 export const SignupForm = () => {
   const [email, setEmail] = useState("");
@@ -16,10 +18,14 @@ export const SignupForm = () => {
     }
     try {
       await signup(email, password);
+      await login(email, password);
+      const user = await getCurrentUser();
+      if (user) {
+        navigate(`/home/${user.id}`);
+      }
       setEmail("");
       setPassword("");
       setConfirmPassword("");
-      navigate("/") 
     } catch (error) {
       console.log(error);
     }
