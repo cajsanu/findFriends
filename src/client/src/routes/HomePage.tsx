@@ -65,10 +65,18 @@ export const HomePage = () => {
       <div className="felx flex-col justify-center p-10 bg-gradient-to-r from-rose-400 to-rose-600">
         <div className="">
           <div className="flex flex-row justify-around">
-            <div>{currentUser ? <ChatsList chats={chats} /> : null}</div>
-            <div className="">
-              <p className="font-bold text-xl p-5 flex justify-start">Did you know?</p>
-              <p className="max-w-56 bg-white text-black rounded p-5">{fact}</p>
+            <div className="w-3/4">
+              {currentUser ? <ChatsList chats={chats} /> : null}
+            </div>
+            <div className="flex justify-center ps-10">
+              <div>
+                <p className="font-bold text-xl p-5 flex justify-start">
+                  Did you know?
+                </p>
+                <p className="max-w-56 bg-white text-black rounded p-5">
+                  {fact}
+                </p>
+              </div>
             </div>
           </div>
         </div>

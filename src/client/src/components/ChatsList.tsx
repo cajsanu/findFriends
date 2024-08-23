@@ -18,11 +18,9 @@ interface ChatProp {
 
 const SingleChat = ({ userChat }: ChatProp) => {
   return (
-    <div className="p-2 flex justify-start">
-      <a
-        href={`/chat/${userChat.chat.id}`}
-      >
-        <div className="p-5 text-red-900 bg-rose-100 hover:bg-rose-200 font-semibold rounded-md">
+    <div className="pb-3">
+      <a href={`/chat/${userChat.chat.id}`}>
+        <div className="flex justify-start p-5 text-red-900 bg-rose-100 hover:bg-rose-200 font-semibold rounded">
           {userChat.user.firstName} {userChat.user.lastName}
         </div>
       </a>
@@ -32,7 +30,11 @@ const SingleChat = ({ userChat }: ChatProp) => {
 
 export const ChatsList = ({ chats }: ChatsProp) => {
   if (chats.length < 1) {
-    return null;
+    return (
+      <div className="hover:text-rose-600 underlined">
+        <a href="/users"></a>Find someone to go for a walk with!
+      </div>
+    );
   }
 
   return (
