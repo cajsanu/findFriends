@@ -10,6 +10,7 @@ import { getCurrentUser } from "../requests/user";
 import { useNavigate } from "react-router-dom";
 import { ChatsList } from "../components/ChatsList";
 import userRequests from "../requests/users";
+import { Pets } from "@mui/icons-material";
 
 export const HomePage = () => {
   const [fact, setFact] = useState(null);
@@ -66,7 +67,18 @@ export const HomePage = () => {
         <div className="">
           <div className="flex flex-row justify-around">
             <div className="w-3/4">
-              {currentUser ? <ChatsList chats={chats} /> : null}
+              {chats.length > 0 ? (
+                <ChatsList chats={chats} />
+              ) : (
+                <div className="font-semibold hover:text-rose-900">
+                  <a href="/users">
+                    Find someone to go for a walk with! <br />
+                    <Pets />
+                    <Pets />
+                    <Pets />
+                  </a>
+                </div>
+              )}
             </div>
             <div className="flex justify-center ps-10">
               <div>

@@ -29,14 +29,6 @@ const SingleChat = ({ userChat }: ChatProp) => {
 };
 
 export const ChatsList = ({ chats }: ChatsProp) => {
-  if (chats.length < 1) {
-    return (
-      <div className="flex justify-start font-semibold hover:text-rose-900 underline">
-        <a href="/users">Find someone to go for a walk with!</a>
-      </div>
-    );
-  }
-
   return (
     <div className="">
       <p className="font-bold text-xl p-5 flex justify-start">Active chats</p>
