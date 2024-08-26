@@ -10,6 +10,7 @@
 - **User Authentication & Authorization**: Secure registration and login using ASP.NET Core Identity.
 - **Location-Based Matching**: Find nearby dog owners based on your preferred location.
 - **Profile Management**: Create and manage user profiles, including details about your dogs.
+- **Manage Your Dogs**: Add and remove dogs as your pack size changes. 
 
 ## Tech Stack
 
@@ -26,10 +27,13 @@
 - **Entity Framework Core**: An ORM for database access using .NET objects.
 - **ASP.NET Core Identity**: A system for managing user authentication and authorization.
 
+### Database
+
+- **PostgreSQL**: An object-relational database to persist data.
+
 ## Getting Started
 
 ### Prerequisites
 
 - **.NET SDK**: Needed to build and run the ASP.NET Core backend.
-- **SQL Server**: The application uses SQL Server for data storage.
 
