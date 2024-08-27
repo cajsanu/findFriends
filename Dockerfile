@@ -1,36 +1,39 @@
 # For building the backend
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-backend
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY src/server/. ./
+COPY src/server/*.csproj ./server/
 
-RUN dotnet restore
+RUN dotnet restore ./server/findFriends.csproj
 
-RUN dotnet publish -c Release -o /app/publish
+COPY src/server/ ./server/
+
+RUN dotnet publish ./server/findFriends.csproj -c Release -o /app/publish
+RUN ls -al /app/publish
 
 # For building the frontend
 FROM node:20 AS build-frontend
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY src/client/package*.json ./
 
 RUN npm install
 
-COPY src/client/. ./
+COPY src/client/ ./
 
 RUN npm run build
 
 # Serving both frontend and backend
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Copy the build output
 COPY --from=build-backend /app/publish .
-COPY --from=build-frontend ./ .
+COPY --from=build-frontend /app/dist ./wwwroot
 
 EXPOSE 5053
 
-ENTRYPOINT ["dotnet", "DotNet.Docker.dll"]
+ENTRYPOINT ["dotnet", "findFriends.dll"]
