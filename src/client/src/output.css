@@ -579,44 +579,16 @@ video {
   height: 24rem;
 }
 
-.h-full {
-  height: 100%;
-}
-
 .w-2\/4 {
   width: 50%;
-}
-
-.w-full {
-  width: 100%;
-}
-
-.w-20 {
-  width: 5rem;
-}
-
-.w-2 {
-  width: 0.5rem;
-}
-
-.w-3 {
-  width: 0.75rem;
 }
 
 .w-3\/4 {
   width: 75%;
 }
 
-.w-3\/5 {
-  width: 60%;
-}
-
-.w-5\/6 {
-  width: 83.333333%;
-}
-
-.w-1\/4 {
-  width: 25%;
+.w-full {
+  width: 100%;
 }
 
 .max-w-56 {
@@ -665,10 +637,6 @@ video {
 
 .gap-3 {
   gap: 0.75rem;
-}
-
-.justify-self-center {
-  justify-self: center;
 }
 
 .overflow-y-auto {
@@ -824,6 +792,10 @@ video {
   padding-bottom: 0.5rem;
 }
 
+.pb-3 {
+  padding-bottom: 0.75rem;
+}
+
 .pb-40 {
   padding-bottom: 10rem;
 }
@@ -832,8 +804,16 @@ video {
   padding-bottom: 1.25rem;
 }
 
+.pb-96 {
+  padding-bottom: 24rem;
+}
+
 .pl-2 {
   padding-left: 0.5rem;
+}
+
+.ps-10 {
+  padding-inline-start: 2.5rem;
 }
 
 .ps-2 {
@@ -866,22 +846,6 @@ video {
 
 .pt-60 {
   padding-top: 15rem;
-}
-
-.ps-10 {
-  padding-inline-start: 2.5rem;
-}
-
-.pb-3 {
-  padding-bottom: 0.75rem;
-}
-
-.pb-52 {
-  padding-bottom: 13rem;
-}
-
-.pb-96 {
-  padding-bottom: 24rem;
 }
 
 .font-mono {
@@ -1059,11 +1023,6 @@ h1 {
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.hover\:text-rose-600:hover {
-  --tw-text-opacity: 1;
-  color: rgb(225 29 72 / var(--tw-text-opacity));
 }
 
 .focus\:outline-none:focus {

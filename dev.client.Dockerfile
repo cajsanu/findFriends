@@ -9,4 +9,4 @@ RUN npm install
 
 COPY src/client/ ./
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "dev", "--", "--host"]

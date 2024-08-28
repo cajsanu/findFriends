@@ -7,19 +7,19 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:5053",
+        target: "http://server:5053",
         changeOrigin: true,
       },
       "/register": {
-        target: "http://localhost:5053",
+        target: "http://server:5053",
         changeOrigin: true,
       },
       "/login": {
-        target: "http://localhost:5053",
+        target: "http://server:5053",
         changeOrigin: true,
       },
       "/chatHub": {
-        target: "http://localhost:5053",
+        target: "http://server:5053",
         changeOrigin: true,
         ws: true,
       },

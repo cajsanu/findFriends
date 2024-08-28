@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    volumes:
+      - database_dev:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  client:
+    image: dog-go-client
+    build:
+      context: .
+      dockerfile: dev.client.Dockerfile
+    ports:
+      - 5173:5173
+    depends_on:
+      - server
+
+  server:
+    image: dog-go-server
+    build:
+      context: .
+      dockerfile: dev.server.Dockerfile
+    environment:
+      ConnectionStrings:DefaultConnection: "Server=postgres;Port=5432;Username=postgres;Password=password;Database=postgres"
+    ports:
+      - 5053:5053
+    depends_on:
+      - postgres
+
+volumes:
+  database_dev:
