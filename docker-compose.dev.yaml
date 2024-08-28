@@ -19,6 +19,9 @@ services:
     build:
       context: .
       dockerfile: dev.client.Dockerfile
+    volumes: 
+      - ./src/client:/client
+      - node_modules:/client/node_modules
     ports:
       - 5173:5173
     depends_on:
@@ -31,6 +34,9 @@ services:
       dockerfile: dev.server.Dockerfile
     environment:
       ConnectionStrings:DefaultConnection: "Server=postgres;Port=5432;Username=postgres;Password=password;Database=postgres"
+    volumes: 
+      - ./src/server:/server
+      - obj:/server/obj
     ports:
       - 5053:5053
     depends_on:
@@ -38,3 +44,5 @@ services:
 
 volumes:
   database_dev:
+  node_modules:
+  obj:
