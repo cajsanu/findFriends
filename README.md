@@ -35,5 +35,14 @@
 
 ### Prerequisites
 
-- **.NET SDK**: Needed to build and run the ASP.NET Core backend.
+- [.NET SDK](https://dotnet.microsoft.com/en-us/download)
+- [Docker](https://docs.docker.com/engine/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
+### Run in development mode
+
+1. 
+```
+docker compose --file docker-compose.dev.yml up --build
+```
+2. Navigate to [http://localhost:5173](http://localhost:5173)
