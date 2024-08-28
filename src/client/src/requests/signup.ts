@@ -1,5 +1,5 @@
 import axios from "axios";
-const URL = "http://localhost:5053/register";
+const URL = "/register";
 
 export const signup = async (email: string, password: string) => {
   try {

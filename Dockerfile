@@ -34,6 +34,4 @@ WORKDIR /app
 COPY --from=build-backend /app/publish .
 COPY --from=build-frontend /app/dist ./wwwroot
 
-EXPOSE 5053
-
 ENTRYPOINT ["dotnet", "findFriends.dll"]
