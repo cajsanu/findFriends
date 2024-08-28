@@ -19,7 +19,7 @@ WORKDIR /app
 
 COPY src/client/package*.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY src/client/ ./
 
