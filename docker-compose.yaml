@@ -22,7 +22,6 @@ services:
     environment:
       ConnectionStrings:DefaultConnection: "Server=postgres;Port=5432;Username=postgres;Password=password;Database=postgres"
     ports:
-      - 5053:5053
       - 8080:8080
     depends_on:
       - postgres
