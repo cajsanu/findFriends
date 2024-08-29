@@ -37,6 +37,7 @@ services:
     volumes: 
       - ./src/server:/server
       - obj:/server/obj
+      - bin:/server/bin
     ports:
       - 5053:5053
     depends_on:
@@ -46,3 +47,4 @@ volumes:
   database_dev:
   node_modules:
   obj:
+  bin:

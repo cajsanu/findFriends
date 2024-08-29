@@ -26,7 +26,7 @@ const Message = ({ message }: MessageProp) => {
     if (message.senderId == currentUser.id) {
       return (
         <div className="p-2 flex justify-end">
-          <p className="bg-pink-600 rounded px-2 py-1.5">{message.message}</p>
+          <div className="bg-pink-600 rounded px-2 py-1.5">{message.message}</div>
         </div>
       );
     }

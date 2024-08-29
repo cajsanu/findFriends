@@ -12,7 +12,7 @@
 - **User Authentication & Authorization**: Secure registration and login using ASP.NET Core Identity.
 - **Location-Based Matching**: Find nearby dog owners based on your preferred location.
 - **Profile Management**: Create and manage user profiles, including details about your dogs.
-- **Manage Your Dogs**: Add and remove dogs as your pack size changes. 
+- **Manage Your Dogs**: Add and remove dogs as your pack size changes.
 
 ## Tech Stack
 
@@ -43,8 +43,9 @@
 
 ### Run in development mode
 
-1. 
-```
-docker compose --file docker-compose.dev.yml up --build
-```
+1. ```
+   docker compose --file docker-compose.dev.yml up --build
+   ```
+
 2. Navigate to [http://localhost:5173](http://localhost:5173)
+

@@ -10,7 +10,6 @@ RUN dotnet restore ./server/findFriends.csproj
 COPY src/server/ ./server/
 
 RUN dotnet publish ./server/findFriends.csproj -c Release -o /app/publish
-RUN ls -al /app/publish
 
 # For building the frontend
 FROM node:20 AS build-frontend
