@@ -1,6 +1,7 @@
 # DogGo
 
-![Users page](src/images/users-page.png)
+<img src="src/images/users-page.png" alt="drawing" width="300"/>
+<img src="src/images/chat.png" alt="drawing" width="300"/>
 
 ## Overview
 
