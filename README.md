@@ -1,7 +1,10 @@
 # DogGo
 
-<img src="src/images/users-page.png" alt="drawing" width="300"/>
-<img src="src/images/chat.png" alt="drawing" width="300"/>
+
+<div style="display: flex; justify-content: space-around;">
+  <img src="src/images/users-page.png" alt="drawing" width="300"/>
+  <img src="src/images/chat.png" alt="drawing" width="300"/>
+</div>
 
 ## Overview
 
@@ -49,4 +52,3 @@
    ```
 
 2. Navigate to [http://localhost:5173](http://localhost:5173)
-
