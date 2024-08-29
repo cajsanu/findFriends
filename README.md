@@ -1,5 +1,7 @@
 # DogGo
 
+![Users page](src/images/users-page.png)
+
 ## Overview
 
 **DogGo** is a platform designed to connect dog owners who live near each other, allowing them to arrange dog walks together. The app helps you find other dog lovers near you and makes it easy to find walking companions for both dogs and their owners.
@@ -29,7 +31,7 @@
 
 ### Database
 
-- **PostgreSQL**: An object-relational database to persist data.
+- **PostgreSQL**: An object-relational database to store data.
 
 ## Getting Started
 
