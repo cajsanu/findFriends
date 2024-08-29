@@ -26,7 +26,12 @@ const Message = ({ message }: MessageProp) => {
     if (message.senderId == currentUser.id) {
       return (
         <div className="p-2 flex justify-end">
-          <div className="bg-pink-600 rounded px-2 py-1.5">{message.message}</div>
+          <p
+            style={{ textAlign: "left" }}
+            className="bg-pink-600 rounded px-2 py-1.5"
+          >
+            {message.message}
+          </p>
         </div>
       );
     }
@@ -34,7 +39,10 @@ const Message = ({ message }: MessageProp) => {
 
   return (
     <div className="p-2 flex justify-start">
-      <p className="bg-rose-300 text-stone-800 rounded px-2 py-1.5">
+      <p
+        style={{ textAlign: "left" }}
+        className="bg-rose-300 text-stone-800 rounded px-2 py-1.5"
+      >
         {message.message}
       </p>
     </div>
@@ -77,7 +85,12 @@ export const Chat = ({ chat }: ChatProps) => {
               : null}
             {outputMessages.map((m) => (
               <div key={m} className="p-2 flex justify-end">
-                <p className="bg-pink-600 rounded px-2 py-1.5">{m}</p>
+                <p
+                  style={{ textAlign: "left" }}
+                  className="bg-pink-600 rounded px-2 py-1.5"
+                >
+                  {m}
+                </p>
               </div>
             ))}
           </div>
