@@ -1,4 +1,3 @@
-import { useState } from "react";
 import userRequests from "../requests/users";
 import { Sex, UserDog } from "../types";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -8,16 +7,16 @@ type AddDogsFormProps = {
   onSuccess: (newDog: UserDog) => void;
 };
 
-type Inputs = {
+type DogFields = {
   name: string;
   breed: string;
   sex: Sex;
 };
 
 export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
-  const { register, handleSubmit } = useForm<Inputs>();
+  const { register, handleSubmit } = useForm<DogFields>();
 
-  const onSubmit: SubmitHandler<Inputs> = async ({ name, breed, sex }) => {
+  const onSubmit: SubmitHandler<DogFields> = async ({ name, breed, sex }) => {
     try {
       const newDog = await userRequests.addUserDog(userId, {
         name,

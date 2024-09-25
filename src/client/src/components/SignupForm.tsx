@@ -1,17 +1,24 @@
-import { useState } from "react";
 import { signup } from "../requests/signup";
 import { useNavigate } from "react-router-dom";
 import { login } from "../requests/login";
 import { getCurrentUser } from "../requests/user";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+type SignupFields = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
 
 export const SignupForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const { register, handleSubmit } = useForm<SignupFields>();
   const navigate = useNavigate();
 
-  const handleSubmit = async (event: React.SyntheticEvent) => {
-    event.preventDefault();
+  const onSubmit: SubmitHandler<SignupFields> = async ({
+    email,
+    password,
+    confirmPassword,
+  }) => {
     if (password !== confirmPassword) {
       window.alert("Passwords do not match");
       return;
@@ -23,9 +30,6 @@ export const SignupForm = () => {
       if (user) {
         navigate(`/home/${user.id}`);
       }
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
     } catch (error) {
       console.log(error);
     }
@@ -37,16 +41,14 @@ export const SignupForm = () => {
         <p className="text-2xl font-bold text-white">Create an account</p>
       </div>
       <div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label className="block text-sm font-medium leading-6 text-white flex justify-right">
               Email:
             </label>
             <input
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              {...register("email")}
               className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
             />
           </div>
@@ -56,9 +58,7 @@ export const SignupForm = () => {
             </label>
             <input
               type="password"
-              value={password}
-              onChange={(p) => setPassword(p.target.value)}
-              required
+              {...register("password")}
               className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-pink-800"
             />
           </div>
@@ -68,9 +68,7 @@ export const SignupForm = () => {
             </label>
             <input
               type="password"
-              value={confirmPassword}
-              onChange={(p) => setConfirmPassword(p.target.value)}
-              required
+              {...register("confirmPassword")}
               className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-pink-800"
             />
           </div>
