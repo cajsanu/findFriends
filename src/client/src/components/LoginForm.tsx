@@ -2,14 +2,18 @@ import { useState } from "react";
 import { login } from "../requests/login";
 import { useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../requests/user";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+type LoginFields = {
+  email: string;
+  password: string;
+};
 
 export const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { register, handleSubmit } = useForm<LoginFields>();
   const navigate = useNavigate();
 
-  const handleSubmit = async (event: React.SyntheticEvent) => {
-    event.preventDefault();
+  const onSubmit: SubmitHandler<LoginFields> = async ({ email, password }) => {
     try {
       await login(email, password);
       const user = await getCurrentUser();
@@ -19,8 +23,6 @@ export const LoginForm = () => {
     } catch (error) {
       console.log(error);
     }
-    setEmail("");
-    setPassword("");
   };
 
   return (
@@ -30,16 +32,14 @@ export const LoginForm = () => {
           Sign in to your account
         </h2>
         <div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label className="block text-sm font-medium leading-6 text-white flex justify-right pt-2">
                 Email:
               </label>
               <input
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
+                {...register("email")}
                 className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-pink-800"
               />
             </div>
@@ -49,9 +49,7 @@ export const LoginForm = () => {
               </label>
               <input
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
+                {...register("password")}
                 className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-pink-800"
               />
             </div>
