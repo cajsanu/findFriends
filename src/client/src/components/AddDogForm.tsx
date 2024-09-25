@@ -1,20 +1,26 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import userRequests from "../requests/users";
-import { Sex, UserDog } from "../types";
+import { UserDog } from "../types";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { z } from "zod";
 
 type AddDogsFormProps = {
   userId: string;
   onSuccess: (newDog: UserDog) => void;
 };
 
-type DogFields = {
-  name: string;
-  breed: string;
-  sex: Sex;
-};
+const schema = z.object({
+  name: z.string(),
+  breed: z.string(),
+  sex: z.enum(["male", "female"]),
+});
+
+type DogFields = z.infer<typeof schema>;
 
 export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
-  const { register, handleSubmit } = useForm<DogFields>();
+  const { register, handleSubmit } = useForm<DogFields>({
+    resolver: zodResolver(schema),
+  });
 
   const onSubmit: SubmitHandler<DogFields> = async ({ name, breed, sex }) => {
     try {
@@ -23,7 +29,7 @@ export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
         breed,
         sex,
       });
-      onSuccess(newDog);
+      newDog && onSuccess(newDog);
     } catch (error) {
       console.log(error);
     }

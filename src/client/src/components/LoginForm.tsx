@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { login } from "../requests/login";
 import { useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../requests/user";
