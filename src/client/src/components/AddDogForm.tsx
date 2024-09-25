@@ -1,22 +1,23 @@
 import { useState } from "react";
 import userRequests from "../requests/users";
 import { Sex, UserDog } from "../types";
+import { useForm, SubmitHandler } from "react-hook-form";
 
-interface AddDogsFormProps {
+type AddDogsFormProps = {
   userId: string;
   onSuccess: (newDog: UserDog) => void;
-}
-export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
-  const [name, setName] = useState("");
-  const [breed, setBreed] = useState("");
-  const [sex, setSex] = useState<Sex>();
+};
 
-  const handleSubmit = async (event: React.SyntheticEvent) => {
-    event.preventDefault();
-    if (!name || !breed || !sex) {
-      console.log("All required fields must be filled in");
-      return;
-    }
+type Inputs = {
+  name: string;
+  breed: string;
+  sex: Sex;
+};
+
+export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
+  const { register, handleSubmit } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = async ({ name, breed, sex }) => {
     try {
       const newDog = await userRequests.addUserDog(userId, {
         name,
@@ -24,9 +25,6 @@ export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
         sex,
       });
       onSuccess(newDog);
-      setName("");
-      setBreed("");
-      setSex(undefined);
     } catch (error) {
       console.log(error);
     }
@@ -38,16 +36,14 @@ export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
         <h2 className="text-2xl font-bold text-white pb-5">
           Please enter your dogs information below
         </h2>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
           <div>
             <label className="block text-m leading-6 text-white flex justify-right">
               Name *
             </label>
             <input
               type="name"
-              value={name}
-              onChange={(n) => setName(n.target.value)}
-              required
+              {...register("name")}
               className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-pink-800"
             />
           </div>
@@ -57,9 +53,7 @@ export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
             </label>
             <input
               type="breed"
-              value={breed}
-              onChange={(b) => setBreed(b.target.value)}
-              required
+              {...register("breed")}
               className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-pink-800"
             />
           </div>
@@ -68,9 +62,7 @@ export const AddDogForm = ({ userId, onSuccess }: AddDogsFormProps) => {
               Sex *
             </label>
             <select
-              required
-              value={sex}
-              onChange={(s) => setSex(s.target.value as Sex)}
+              {...register("sex")}
               className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-pink-800"
             >
               <option value=""></option>
