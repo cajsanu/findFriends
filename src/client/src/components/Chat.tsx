@@ -70,7 +70,7 @@ export const Chat = ({ chat }: ChatProps) => {
         await connection.invoke("SendPrivateMessage", inputMessage, chat.id);
         setInputMessage("");
       } catch (err) {
-        console.error(err.toString());
+        console.error(err);
       }
     }
   };
@@ -81,7 +81,7 @@ export const Chat = ({ chat }: ChatProps) => {
         <div className="h-96 w-full flex flex-col">
           <div className="p-10 flex-1 overflow-y-auto">
             {chat
-              ? chat.messages.map((m) => <Message key={m.id} message={m} />)
+              ? chat.messages?.map((m) => <Message key={m.id} message={m} />)
               : null}
             {outputMessages.map((m) => (
               <div key={m} className="p-2 flex justify-end">

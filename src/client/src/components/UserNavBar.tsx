@@ -21,7 +21,7 @@ export const UserNavBar = () => {
       const user = await getCurrentUser();
       if (user) {
         setUser(user);
-        setDogs(user.dogs);
+        setDogs(user.dogs ? user.dogs : []);
       }
     };
     setUserDogs();
