@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
 import { RequiresAuthentication, Users, UserNavBar } from "../components";
 import { User } from "../types";
-import { useNavigate } from "react-router-dom";
 import userRequests from "../requests/users";
 import TextField from "@mui/material/TextField";
-import { getCurrentUser } from "../requests/user";
 import SearchIcon from "@mui/icons-material/Search";
+import { useCurrentUser } from "../hooks/useCurrentUser";
 
 export const UsersPage = () => {
   const [users, setUsers] = useState<User[] | null>(null);
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const { currentUser } = useCurrentUser();
 
   const [citySearch, setCitySearch] = useState("");
-  const navigate = useNavigate();
 
   useEffect(() => {
     const getUsers = async () => {
@@ -20,12 +18,7 @@ export const UsersPage = () => {
         ? setUsers(await userRequests.getAll(citySearch))
         : setUsers(await userRequests.getAll(""));
     };
-    const getUser = async () => {
-      const user = await getCurrentUser();
-      user ? setCurrentUser(user) : navigate("/");
-    };
     getUsers();
-    getUser();
   }, [citySearch]);
 
   if (!currentUser) {

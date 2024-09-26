@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as signalR from "@microsoft/signalr";
 import { BaseChat, BaseMessage, User } from "../types";
-import { getCurrentUser } from "../requests/user";
 import SendIcon from "@mui/icons-material/Send";
+import { useCurrentUser } from "../hooks/useCurrentUser";
 
 interface ChatProps {
   chat: BaseChat;
@@ -13,14 +13,7 @@ interface MessageProp {
 }
 
 const Message = ({ message }: MessageProp) => {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const getUser = async () => {
-      setCurrentUser(await getCurrentUser());
-    };
-    getUser();
-  }, []);
+  const { currentUser } = useCurrentUser();
 
   if (currentUser) {
     if (message.senderId == currentUser.id) {

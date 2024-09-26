@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User, BaseDog, UserInfo, UserDog, DogWithoutIds } from "../types";
+import { User, UserInfo, UserDog, DogWithoutIds } from "../types";
 const URL = "/api/users";
 
 const getAll = async (search: string) => {

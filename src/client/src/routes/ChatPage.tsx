@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getChatById } from "../requests/chats";
-import { BaseChat, User } from "../types";
+import { BaseChat } from "../types";
 import { Chat, UserNavBar } from "../components";
-import { getCurrentUser } from "../requests/user";
+import { useCurrentUser } from "../hooks/useCurrentUser";
 
 interface OtherUser {
   firstName: string;
@@ -13,9 +13,8 @@ interface OtherUser {
 export const ChatPage = () => {
   const { id } = useParams();
   const [chat, setChat] = useState<BaseChat | null>(null);
-  const [_, setCurrentUser] = useState<User | null>(null);
   const [otherUser, setOtherUser] = useState<OtherUser | null>(null);
-  const navigate = useNavigate();
+  useCurrentUser();
 
   useEffect(() => {
     const getChat = async () => {
@@ -25,11 +24,6 @@ export const ChatPage = () => {
         setOtherUser({ firstName: chatData.firstName, city: chatData.city });
       }
     };
-    const getUser = async () => {
-      const user = await getCurrentUser();
-      user ? setCurrentUser(user) : navigate("/");
-    };
-    getUser();
     getChat();
   }, []);
 

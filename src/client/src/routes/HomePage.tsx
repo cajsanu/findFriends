@@ -5,30 +5,23 @@ import {
   RequiresAuthentication,
   UserNavBar,
 } from "../components";
-import { User } from "../types";
-import { getCurrentUser } from "../requests/user";
-import { useNavigate } from "react-router-dom";
 import { ChatsList } from "../components/ChatsList";
 import userRequests from "../requests/users";
 import { Pets } from "@mui/icons-material";
+import { useCurrentUser } from "../hooks/useCurrentUser";
 
 export const HomePage = () => {
   const [fact, setFact] = useState(null);
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [chats, setChats] = useState([]);
-  const navigate = useNavigate();
+
+  const { currentUser } = useCurrentUser();
 
   useEffect(() => {
     const getDogFact = async () => {
       const res = await axios.get("https://dogapi.dog/api/facts");
       setFact(res.data.facts);
     };
-    const getUser = async () => {
-      const user = await getCurrentUser();
-      user ? setCurrentUser(user) : navigate("/");
-    };
     getDogFact();
-    getUser();
   }, []);
 
   useEffect(() => {
@@ -42,7 +35,7 @@ export const HomePage = () => {
   }, [currentUser]);
 
   const handleSuccessfullInfoUpdate = async () => {
-    setCurrentUser(await getCurrentUser());
+    window.location.reload();
   };
 
   if (!currentUser) {
