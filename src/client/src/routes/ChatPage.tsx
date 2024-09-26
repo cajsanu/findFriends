@@ -12,16 +12,18 @@ interface OtherUser {
 
 export const ChatPage = () => {
   const { id } = useParams();
-  const [chat, setChat] = useState<BaseChat>(null);
-  const [currentUser, setCurrentUser] = useState<User>(null);
-  const [otherUser, setOtherUser] = useState<OtherUser>(null);
+  const [chat, setChat] = useState<BaseChat | null>(null);
+  const [_, setCurrentUser] = useState<User | null>(null);
+  const [otherUser, setOtherUser] = useState<OtherUser | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const getChat = async () => {
-      const chatData = await getChatById(id);
-      setChat(chatData.chat);
-      setOtherUser({ firstName: chatData.firstName, city: chatData.city });
+      if (id) {
+        const chatData = await getChatById(id);
+        setChat(chatData.chat);
+        setOtherUser({ firstName: chatData.firstName, city: chatData.city });
+      }
     };
     const getUser = async () => {
       const user = await getCurrentUser();
@@ -44,10 +46,10 @@ export const ChatPage = () => {
         <div className="bg-rose-100 w-2/4 rounded">
           <div className="p-10">
             <p className="text-rose-900 text-xl flex justify-start font-bold">
-              Chat with {otherUser.firstName}
+              Chat with {otherUser?.firstName}
             </p>
             <p className="text-rose-900 text-sm flex justify-start font-semibold">
-              who lives in {otherUser.city}
+              who lives in {otherUser?.city}
             </p>
           </div>
           <Chat chat={chat} />

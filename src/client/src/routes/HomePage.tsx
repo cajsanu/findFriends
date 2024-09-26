@@ -14,7 +14,7 @@ import { Pets } from "@mui/icons-material";
 
 export const HomePage = () => {
   const [fact, setFact] = useState(null);
-  const [currentUser, setCurrentUser] = useState<User>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [chats, setChats] = useState([]);
   const navigate = useNavigate();
 
