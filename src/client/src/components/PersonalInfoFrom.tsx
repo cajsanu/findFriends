@@ -1,31 +1,31 @@
-import { useState } from "react";
 import userRequests from "../requests/users";
+import { useForm, SubmitHandler } from "react-hook-form";
 
-interface InfoFormProps {
+type InfoFormProps = {
   userId: string;
   onSuccess: () => void;
-}
+};
+
+type InfoFormFileds = {
+  firstName: string;
+  lastName: string;
+  city: string;
+};
 
 export const PersonalInfoForm = ({ userId, onSuccess }: InfoFormProps) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [city, setCity] = useState("");
+  const { register, handleSubmit } = useForm<InfoFormFileds>();
 
-  const handleSubmit = async (event: React.SyntheticEvent) => {
-    event.preventDefault();
-    if (!firstName || !lastName || !city) {
-      console.log("All required fields must be filled in");
-      return;
-    }
+  const onSubmit: SubmitHandler<InfoFormFileds> = async ({
+    firstName,
+    lastName,
+    city,
+  }) => {
     try {
       await userRequests.updateInfo(userId, {
         firstName,
         lastName,
         city,
       });
-      setFirstName("");
-      setLastName("");
-      setCity("");
       onSuccess();
     } catch (error) {
       console.log(error);
@@ -38,16 +38,14 @@ export const PersonalInfoForm = ({ userId, onSuccess }: InfoFormProps) => {
         <h2 className="text-xl font-bold text-white pb-5">
           Please enter your personal information to finish your profile
         </h2>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
           <div>
             <label className="block text-m leading-6 text-white flex justify-right">
               FirstName *
             </label>
             <input
-              type="firstname"
-              value={firstName}
-              onChange={(n) => setFirstName(n.target.value)}
-              required
+              type="text"
+              {...register("firstName")}
               className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
             />
           </div>
@@ -57,9 +55,7 @@ export const PersonalInfoForm = ({ userId, onSuccess }: InfoFormProps) => {
             </label>
             <input
               type="lastname"
-              value={lastName}
-              onChange={(n) => setLastName(n.target.value)}
-              required
+              {...register("lastName")}
               className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
             />
           </div>
@@ -69,9 +65,7 @@ export const PersonalInfoForm = ({ userId, onSuccess }: InfoFormProps) => {
             </label>
             <input
               type="city"
-              value={city}
-              onChange={(c) => setCity(c.target.value)}
-              required
+              {...register("city")}
               className="block w-full rounded-md py-1.5 text-white outline outline-transparent focus:outline-sky-400"
             />
           </div>
