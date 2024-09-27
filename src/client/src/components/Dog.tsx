@@ -4,7 +4,7 @@ import PetsIcon from "@mui/icons-material/Pets";
 import { useState } from "react";
 import { removeDog } from "../requests/dogs";
 
-interface SingleDogProps {
+type SingleDogProps = {
   dog: BaseDog;
 }
 

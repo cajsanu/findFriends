@@ -3,12 +3,12 @@ import { SingleDog } from "../components";
 import { startChat } from "../requests/chats";
 import { useNavigate } from "react-router-dom";
 
-interface UsersProps {
+type UsersProps = {
   users: User[];
   currentUser: User;
 }
 
-interface SingleUserProps {
+type SingleUserProps = {
   user: User;
   currentUser: User;
 }

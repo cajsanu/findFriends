@@ -8,11 +8,11 @@ interface UserChat {
   chatId?: string;
 }
 
-interface ChatsProp {
+type ChatsProp = {
   chats: UserChat[];
 }
 
-interface ChatProp {
+type ChatProp = {
   userChat: UserChat;
 }
 

@@ -1,7 +1,7 @@
 import { UserDog } from "../types";
 import { SingleDog } from "./Dog";
 
-interface MyDogProps {
+type MyDogProps = {
   dogs: UserDog[];
 }
 
